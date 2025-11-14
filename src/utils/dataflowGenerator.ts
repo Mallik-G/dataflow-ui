@@ -31,6 +31,21 @@ export const generateDataflowView = (flowId: string): { nodes: CustomNode[]; edg
         label: 'Name Concatenation',
         expression: "CONCAT(first_name, ' ', last_name) AS full_name",
         functions: ['CONCAT'],
+        llmMetadata: {
+          confidence: 95,
+          explanation: 'Concatenating first and last names to create a full name field for customer display',
+          reasoning: 'Standard practice to combine name fields for readability and reporting',
+          generatedAt: new Date().toISOString(),
+          version: 1,
+        },
+        executionState: {
+          status: 'success',
+          rowCountIn: 1234567,
+          rowCountOut: 1234567,
+          duration: 12,
+          lastRun: new Date(Date.now() - 1000 * 60 * 2).toISOString(),
+          dataQualityScore: 99,
+        },
       },
     });
 
@@ -42,6 +57,32 @@ export const generateDataflowView = (flowId: string): { nodes: CustomNode[]; edg
         label: 'Age Calculation',
         expression: "DATEDIFF(YEAR, dob, CURRENT_DATE()) AS age",
         functions: ['DATEDIFF', 'CURRENT_DATE'],
+        llmMetadata: {
+          confidence: 72,
+          explanation: 'Calculating customer age from date of birth for analytics and segmentation',
+          reasoning: 'Age is a key demographic metric for customer analysis',
+          warnings: ['NULL values in dob column may cause issues', 'Consider handling future dates'],
+          generatedAt: new Date().toISOString(),
+          version: 1,
+        },
+        isUserModified: true,
+        userEdits: [
+          {
+            editedBy: 'john.doe@company.com',
+            editedAt: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(),
+            originalCode: "DATEDIFF(YEAR, dob, NOW()) AS age",
+            modifiedCode: "DATEDIFF(YEAR, dob, CURRENT_DATE()) AS age",
+            reason: 'Changed NOW() to CURRENT_DATE() to avoid time component affecting age calculation',
+          },
+        ],
+        executionState: {
+          status: 'success',
+          rowCountIn: 1234567,
+          rowCountOut: 1198234,
+          duration: 15,
+          lastRun: new Date(Date.now() - 1000 * 60 * 2).toISOString(),
+          dataQualityScore: 97,
+        },
       },
     });
 
@@ -56,6 +97,24 @@ export const generateDataflowView = (flowId: string): { nodes: CustomNode[]; edg
           { name: 'full_name', type: 'string', lineageDetails: 'From first_name + last_name' },
           { name: 'age', type: 'integer', lineageDetails: 'Calculated from dob' },
         ],
+        llmMetadata: {
+          confidence: 88,
+          explanation: 'Gold table containing curated customer master data for analytics',
+          reasoning: 'Combines multiple transformations to create a single source of truth for customer data',
+          generatedAt: new Date().toISOString(),
+          version: 1,
+        },
+        executionState: {
+          status: 'success',
+          rowCountIn: 2432801,
+          rowCountOut: 1198234,
+          duration: 45,
+          lastRun: new Date(Date.now() - 1000 * 60 * 2).toISOString(),
+          dataQualityScore: 98,
+        },
+        approvalState: {
+          status: 'pending_review',
+        },
       },
     });
 

@@ -10,6 +10,15 @@ interface TransformNodeProps {
 const TransformNode = memo(({ data, selected }: TransformNodeProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
+  const confidence = data.llmMetadata?.confidence || 0;
+  const getBorderColor = () => {
+    if (selected) return '#7c3aed';
+    if (data.isUserModified) return '#f59e0b';
+    if (confidence >= 90) return '#10b981';
+    if (confidence >= 70) return '#f59e0b';
+    return '#ef4444';
+  };
+
   return (
     <div
       onMouseEnter={() => setIsHovered(true)}
@@ -17,7 +26,7 @@ const TransformNode = memo(({ data, selected }: TransformNodeProps) => {
       style={{
         padding: '0',
         borderRadius: '12px',
-        border: `2px solid ${selected ? '#7c3aed' : isHovered ? '#a78bfa' : '#ddd6fe'}`,
+        border: `2px solid ${getBorderColor()}`,
         backgroundColor: '#ffffff',
         minWidth: '200px',
         maxWidth: '240px',
@@ -28,6 +37,7 @@ const TransformNode = memo(({ data, selected }: TransformNodeProps) => {
           : '0 2px 8px rgba(0, 0, 0, 0.08)',
         transition: 'all 0.2s ease',
         transform: isHovered ? 'translateY(-2px)' : 'translateY(0)',
+        position: 'relative',
       }}
     >
       <Handle
@@ -41,6 +51,44 @@ const TransformNode = memo(({ data, selected }: TransformNodeProps) => {
           boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
         }}
       />
+
+      {/* Badges */}
+      {(data.llmMetadata || data.isUserModified) && (
+        <div style={{
+          position: 'absolute',
+          top: '-10px',
+          right: '8px',
+          display: 'flex',
+          gap: '4px',
+        }}>
+          {data.isUserModified && (
+            <div style={{
+              padding: '2px 8px',
+              backgroundColor: '#fef3c7',
+              border: '1px solid #fde047',
+              borderRadius: '12px',
+              fontSize: '10px',
+              fontWeight: '600',
+              color: '#92400e',
+            }}>
+              ✏️ MODIFIED
+            </div>
+          )}
+          {data.llmMetadata && (
+            <div style={{
+              padding: '2px 8px',
+              backgroundColor: confidence >= 90 ? '#dcfce7' : confidence >= 70 ? '#fef3c7' : '#fee2e2',
+              border: `1px solid ${confidence >= 90 ? '#86efac' : confidence >= 70 ? '#fde047' : '#fca5a5'}`,
+              borderRadius: '12px',
+              fontSize: '10px',
+              fontWeight: '600',
+              color: confidence >= 90 ? '#166534' : confidence >= 70 ? '#92400e' : '#991b1b',
+            }}>
+              🤖 {confidence}%
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Header */}
       <div style={{

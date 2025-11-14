@@ -21,6 +21,7 @@ import MetadataPanel from './panels/MetadataPanel';
 import Toolbar from './panels/Toolbar';
 import Legend from './panels/Legend';
 import ControlPanel from './panels/ControlPanel';
+import BottomPanel from './panels/BottomPanel';
 import { CustomEdge as CustomEdgeType } from '../types';
 
 const nodeTypes = {
@@ -130,6 +131,9 @@ const CanvasContent = () => {
 
       {/* Right Context Panel */}
       <MetadataPanel />
+
+      {/* Bottom Panel */}
+      <BottomPanel />
     </div>
   );
 };
