@@ -10,11 +10,23 @@ interface GoldEntityNodeProps {
 
 const GoldEntityNode = memo(({ data, selected }: GoldEntityNodeProps) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [showExpandButtons, setShowExpandButtons] = useState(false);
+
+  const handleExpand = (direction: 'upstream' | 'downstream') => {
+    console.log(`Expanding ${direction} from ${data.label}`);
+    alert(`🚀 Expanding ${direction} lineage for ${data.label}\n\nThis will dynamically load connected nodes.`);
+  };
 
   return (
     <div
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={() => {
+        setIsHovered(true);
+        setShowExpandButtons(true);
+      }}
+      onMouseLeave={() => {
+        setIsHovered(false);
+        setShowExpandButtons(false);
+      }}
       style={{
         padding: '0',
         borderRadius: borderRadius.xl,
@@ -158,6 +170,45 @@ const GoldEntityNode = memo(({ data, selected }: GoldEntityNodeProps) => {
           </div>
         )}
       </div>
+
+      {/* Expand Button - Upstream */}
+      {showExpandButtons && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            handleExpand('upstream');
+          }}
+          style={{
+            position: 'absolute',
+            left: '-32px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            width: '24px',
+            height: '24px',
+            borderRadius: borderRadius.full,
+            backgroundColor: colors.primary.main,
+            color: '#ffffff',
+            border: `2px solid ${colors.background.tertiary}`,
+            cursor: 'pointer',
+            fontSize: '14px',
+            fontWeight: 'bold',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: colors.shadow.md,
+            transition: 'all 0.2s ease',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
+          }}
+          title="Expand upstream lineage"
+        >
+          +
+        </button>
+      )}
     </div>
   );
 });
