@@ -18,6 +18,8 @@ import TransformNode from './nodes/TransformNode';
 import CustomEdge from './edges/CustomEdge';
 import MetadataPanel from './panels/MetadataPanel';
 import Toolbar from './panels/Toolbar';
+import Legend from './panels/Legend';
+import ControlPanel from './panels/ControlPanel';
 import { CustomEdge as CustomEdgeType } from '../types';
 
 const nodeTypes = {
@@ -116,6 +118,8 @@ const CanvasContent = () => {
             }}
           />
           <Toolbar />
+          <Legend />
+          <ControlPanel />
         </ReactFlow>
       </div>
       <MetadataPanel />
