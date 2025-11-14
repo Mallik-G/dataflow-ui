@@ -9,6 +9,7 @@ interface CanvasState {
   nodes: CustomNode[];
   edges: CustomEdge[];
   selectedNode: CustomNode | null;
+  selectedEdge: CustomEdge | null;
   validationErrors: ValidationError[];
 
   // New state for browser-driven views
@@ -23,11 +24,13 @@ interface CanvasState {
   onNodesChange: (changes: NodeChange[]) => void;
   onEdgesChange: (changes: EdgeChange[]) => void;
   onNodeClick: (_event: React.MouseEvent, node: CustomNode) => void;
+  onEdgeClick: (_event: React.MouseEvent, edge: CustomEdge) => void;
   addNode: (node: CustomNode) => void;
   addEdge: (edge: CustomEdge) => void;
   removeNode: (nodeId: string) => void;
   removeEdge: (edgeId: string) => void;
   setSelectedNode: (node: CustomNode | null) => void;
+  setSelectedEdge: (edge: CustomEdge | null) => void;
   setValidationErrors: (errors: ValidationError[]) => void;
 
   // New methods
@@ -42,6 +45,7 @@ export const useCanvasStore = create<CanvasState>((set, get) => ({
   nodes: [],
   edges: [],
   selectedNode: null,
+  selectedEdge: null,
   validationErrors: [],
 
   // New state defaults
@@ -67,7 +71,11 @@ export const useCanvasStore = create<CanvasState>((set, get) => ({
   },
 
   onNodeClick: (_event, node) => {
-    set({ selectedNode: node });
+    set({ selectedNode: node, selectedEdge: null });
+  },
+
+  onEdgeClick: (_event, edge) => {
+    set({ selectedEdge: edge, selectedNode: null });
   },
 
   addNode: (node) => {
@@ -90,7 +98,11 @@ export const useCanvasStore = create<CanvasState>((set, get) => ({
   },
 
   setSelectedNode: (node) => {
-    set({ selectedNode: node });
+    set({ selectedNode: node, selectedEdge: null });
+  },
+
+  setSelectedEdge: (edge) => {
+    set({ selectedEdge: edge, selectedNode: null });
   },
 
   setValidationErrors: (errors) => {

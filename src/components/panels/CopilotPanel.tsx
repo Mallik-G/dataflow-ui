@@ -113,31 +113,50 @@ const CopilotPanel = () => {
 
   if (!isOpen) {
     return (
-      <button
-        onClick={() => setIsOpen(true)}
-        title="Open Copilot"
-        style={{
-          position: 'fixed',
-          top: '50%',
-          right: '0',
-          transform: 'translateY(-50%)',
-          backgroundColor: colors.primary.main,
-          color: '#ffffff',
-          border: 'none',
-          borderRadius: `${borderRadius.md} 0 0 ${borderRadius.md}`,
-          padding: '12px 8px',
-          fontSize: '12px',
-          fontWeight: '600',
-          cursor: 'pointer',
-          boxShadow: colors.shadow.lg,
-          zIndex: 999,
-          writingMode: 'vertical-rl',
-          textOrientation: 'mixed',
-          letterSpacing: '1px',
-        }}
-      >
-        AI COPILOT
-      </button>
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        right: 0,
+        width: '60px',
+        height: '100vh',
+        backgroundColor: colors.background.tertiary,
+        borderLeft: `1px solid ${colors.border.main}`,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: '12px 0',
+        gap: '12px',
+        zIndex: 999,
+      }}>
+        <button
+          onClick={() => setIsOpen(true)}
+          title="AI Copilot Assistant"
+          style={{
+            width: '40px',
+            height: '40px',
+            background: `linear-gradient(135deg, ${colors.primary.main} 0%, ${colors.primary.dark} 100%)`,
+            border: `2px solid ${colors.primary.main}`,
+            borderRadius: borderRadius.md,
+            cursor: 'pointer',
+            fontSize: '20px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'all 0.2s ease',
+            boxShadow: colors.shadow.md,
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'scale(1.1)';
+            e.currentTarget.style.boxShadow = colors.shadow.lg;
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'scale(1)';
+            e.currentTarget.style.boxShadow = colors.shadow.md;
+          }}
+        >
+          ✨
+        </button>
+      </div>
     );
   }
 

@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { useCanvasStore } from '../../stores/canvasStore';
+import { colors, borderRadius } from '../../theme/colors';
 import {
   SourceTableNodeData,
   SilverTableNodeData,
@@ -7,49 +9,279 @@ import {
 } from '../../types';
 
 const MetadataPanel = () => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const selectedNode = useCanvasStore(state => state.selectedNode);
+  const selectedEdge = useCanvasStore(state => state.selectedEdge);
+  const nodes = useCanvasStore(state => state.nodes);
 
-  if (!selectedNode) {
+  const hasSelection = selectedNode || selectedEdge;
+
+  if (isCollapsed || !hasSelection) {
+    return (
+      <div style={{
+        width: '60px',
+        height: '100%',
+        backgroundColor: colors.background.tertiary,
+        borderLeft: `1px solid ${colors.border.main}`,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: '12px 0',
+        gap: '12px',
+      }}>
+        <button
+          onClick={() => setIsCollapsed(false)}
+          title={hasSelection ? 'Context Details' : 'Context Panel'}
+          style={{
+            width: '40px',
+            height: '40px',
+            backgroundColor: hasSelection ? colors.primary.lighter : colors.background.secondary,
+            border: hasSelection ? `2px solid ${colors.primary.main}` : `2px solid ${colors.border.main}`,
+            borderRadius: borderRadius.md,
+            cursor: 'pointer',
+            fontSize: '20px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'all 0.2s ease',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = colors.background.hover;
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = hasSelection ? colors.primary.lighter : colors.background.secondary;
+          }}
+        >
+          ⓘ
+        </button>
+      </div>
+    );
+  }
+
+  // Render edge details if edge is selected
+  if (selectedEdge) {
+    const sourceNode = nodes.find(n => n.id === selectedEdge.source);
+    const targetNode = nodes.find(n => n.id === selectedEdge.target);
+
     return (
       <div style={{
         width: '360px',
         height: '100%',
         backgroundColor: '#ffffff',
-        borderLeft: '1px solid #e2e8f0',
-        padding: '24px',
+        borderLeft: `1px solid ${colors.border.main}`,
         overflowY: 'auto',
       }}>
+        {/* Header */}
         <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '100%',
-          color: '#94a3b8',
-          textAlign: 'center',
+          padding: '24px',
+          paddingBottom: '16px',
+          borderBottom: `1px solid ${colors.border.main}`,
+          backgroundColor: colors.background.tertiary,
+          position: 'relative',
         }}>
+          <button
+            onClick={() => setIsCollapsed(true)}
+            title="Collapse context panel"
+            style={{
+              position: 'absolute',
+              top: '16px',
+              right: '16px',
+              padding: '4px 8px',
+              backgroundColor: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+              color: colors.text.muted,
+              fontSize: '16px',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = colors.text.primary;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = colors.text.muted;
+            }}
+          >
+            ▶
+          </button>
           <div style={{
-            width: '64px',
-            height: '64px',
-            borderRadius: '50%',
-            backgroundColor: '#f1f5f9',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginBottom: '16px',
-            fontSize: '32px',
+            display: 'inline-block',
+            padding: '4px 10px',
+            borderRadius: borderRadius.sm,
+            backgroundColor: colors.primary.lighter,
+            border: `1px solid ${colors.primary.main}`,
+            fontSize: '10px',
+            fontWeight: '600',
+            color: colors.primary.dark,
+            textTransform: 'uppercase',
+            letterSpacing: '0.5px',
+            marginBottom: '12px',
           }}>
-            ⓘ
+            LINEAGE CONNECTION
           </div>
-          <div style={{ fontSize: '14px', fontWeight: '500' }}>
-            No selection
+          <div style={{
+            fontSize: '16px',
+            fontWeight: '600',
+            color: colors.text.primary,
+            marginBottom: '4px',
+            paddingRight: '40px',
+          }}>
+            {sourceNode?.data.label} → {targetNode?.data.label}
           </div>
-          <div style={{ fontSize: '12px', marginTop: '8px' }}>
-            Click on a node to view its metadata
+        </div>
+
+        {/* Content */}
+        <div style={{ padding: '24px' }}>
+          <div style={{
+            fontSize: '11px',
+            fontWeight: '600',
+            color: colors.text.secondary,
+            marginBottom: '12px',
+            textTransform: 'uppercase',
+            letterSpacing: '0.5px',
+          }}>
+            Column Mappings
           </div>
+
+          {/* Sample column mappings */}
+          {[
+            { source: 'customer_id', target: 'id', type: 'direct' },
+            { source: 'email', target: 'contact_email', type: 'direct' },
+            { source: 'created_at', target: 'registration_date', type: 'cast' },
+          ].map((mapping, idx) => (
+            <div key={idx} style={{
+              padding: '14px',
+              backgroundColor: colors.background.tertiary,
+              borderRadius: borderRadius.md,
+              marginBottom: '10px',
+              border: `1px solid ${colors.border.main}`,
+            }}>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                marginBottom: '8px',
+              }}>
+                <div style={{
+                  flex: 1,
+                  fontSize: '13px',
+                  fontWeight: '600',
+                  fontFamily: 'monospace',
+                  color: colors.text.primary,
+                }}>
+                  {mapping.source}
+                </div>
+                <div style={{ fontSize: '12px', color: colors.text.muted }}>→</div>
+                <div style={{
+                  flex: 1,
+                  fontSize: '13px',
+                  fontWeight: '600',
+                  fontFamily: 'monospace',
+                  color: colors.text.primary,
+                }}>
+                  {mapping.target}
+                </div>
+              </div>
+              <div style={{
+                fontSize: '10px',
+                color: colors.text.secondary,
+                backgroundColor: colors.background.secondary,
+                padding: '3px 8px',
+                borderRadius: borderRadius.sm,
+                display: 'inline-block',
+                textTransform: 'uppercase',
+                fontWeight: '600',
+              }}>
+                {mapping.type}
+              </div>
+            </div>
+          ))}
+
+          <div style={{
+            marginTop: '24px',
+            fontSize: '11px',
+            fontWeight: '600',
+            color: colors.text.secondary,
+            marginBottom: '12px',
+            textTransform: 'uppercase',
+            letterSpacing: '0.5px',
+          }}>
+            Transformation Logic
+          </div>
+          <div style={{
+            padding: '12px',
+            backgroundColor: '#1e293b',
+            color: '#e2e8f0',
+            borderRadius: borderRadius.md,
+            fontSize: '12px',
+            fontFamily: 'monospace',
+            lineHeight: '1.6',
+          }}>
+            SELECT customer_id AS id,<br />
+            &nbsp;&nbsp;email AS contact_email,<br />
+            &nbsp;&nbsp;CAST(created_at AS DATE) AS registration_date<br />
+            FROM source_table
+          </div>
+
+          {selectedEdge.data?.joins && (
+            <>
+              <div style={{
+                marginTop: '24px',
+                fontSize: '11px',
+                fontWeight: '600',
+                color: colors.text.secondary,
+                marginBottom: '12px',
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px',
+              }}>
+                Join Conditions
+              </div>
+              <div style={{
+                padding: '12px',
+                backgroundColor: colors.background.tertiary,
+                borderRadius: borderRadius.md,
+                border: `1px solid ${colors.border.main}`,
+                fontSize: '12px',
+                fontFamily: 'monospace',
+                color: colors.text.primary,
+              }}>
+                {selectedEdge.data.joins}
+              </div>
+            </>
+          )}
+
+          {selectedEdge.data?.filters && (
+            <>
+              <div style={{
+                marginTop: '24px',
+                fontSize: '11px',
+                fontWeight: '600',
+                color: colors.text.secondary,
+                marginBottom: '12px',
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px',
+              }}>
+                Filters Applied
+              </div>
+              <div style={{
+                padding: '12px',
+                backgroundColor: colors.background.tertiary,
+                borderRadius: borderRadius.md,
+                border: `1px solid ${colors.border.main}`,
+                fontSize: '12px',
+                fontFamily: 'monospace',
+                color: colors.text.primary,
+              }}>
+                {selectedEdge.data.filters}
+              </div>
+            </>
+          )}
         </div>
       </div>
     );
+  }
+
+  // If we reach here, selectedNode must exist (hasSelection is true and selectedEdge is false)
+  if (!selectedNode) {
+    return null;
   }
 
   const renderNodeMetadata = () => {
@@ -297,19 +529,44 @@ const MetadataPanel = () => {
       width: '360px',
       height: '100%',
       backgroundColor: '#ffffff',
-      borderLeft: '1px solid #e2e8f0',
+      borderLeft: `1px solid ${colors.border.main}`,
       overflowY: 'auto',
     }}>
       {/* Header */}
       <div style={{
         padding: '24px',
-        borderBottom: '1px solid #e2e8f0',
-        backgroundColor: '#fafbfc',
+        paddingBottom: '16px',
+        borderBottom: `1px solid ${colors.border.main}`,
+        backgroundColor: colors.background.tertiary,
+        position: 'relative',
       }}>
+        <button
+          onClick={() => setIsCollapsed(true)}
+          title="Collapse context panel"
+          style={{
+            position: 'absolute',
+            top: '16px',
+            right: '16px',
+            padding: '4px 8px',
+            backgroundColor: 'transparent',
+            border: 'none',
+            cursor: 'pointer',
+            color: colors.text.muted,
+            fontSize: '16px',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.color = colors.text.primary;
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.color = colors.text.muted;
+          }}
+        >
+          ▶
+        </button>
         <div style={{
           display: 'inline-block',
           padding: '4px 10px',
-          borderRadius: '6px',
+          borderRadius: borderRadius.sm,
           backgroundColor: typeColor.bg,
           border: `1px solid ${typeColor.border}`,
           fontSize: '10px',
@@ -324,8 +581,9 @@ const MetadataPanel = () => {
         <div style={{
           fontSize: '20px',
           fontWeight: '600',
-          color: '#1e293b',
+          color: colors.text.primary,
           marginBottom: '4px',
+          paddingRight: '40px',
         }}>
           {selectedNode.data.label}
         </div>

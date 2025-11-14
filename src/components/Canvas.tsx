@@ -41,8 +41,17 @@ const CanvasContent = () => {
     onNodesChange,
     onEdgesChange,
     onNodeClick,
+    onEdgeClick,
     setEdges,
+    viewMode,
   } = useCanvasStore();
+
+  // Filter nodes based on view mode
+  // In Catalog/Lineage view: hide Transform nodes, only show table nodes
+  // In Dataflow view: show all nodes including Transform nodes
+  const filteredNodes = viewMode === 'lineage'
+    ? nodes.filter(node => node.type !== 'transform')
+    : nodes;
 
   const onConnect = useCallback(
     (params: Connection) => {
@@ -69,11 +78,12 @@ const CanvasContent = () => {
       {/* Center Canvas */}
       <div style={{ flex: 1, position: 'relative' }}>
         <ReactFlow
-          nodes={nodes as any}
+          nodes={filteredNodes as any}
           edges={edges as any}
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           onNodeClick={onNodeClick as any}
+          onEdgeClick={onEdgeClick as any}
           onConnect={onConnect}
           nodeTypes={nodeTypes}
           edgeTypes={edgeTypes}

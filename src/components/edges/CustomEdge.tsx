@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { EdgeProps, getBezierPath } from 'reactflow';
 import { EdgeType } from '../../types';
 
@@ -15,10 +15,11 @@ const CustomEdge = memo(({
   sourcePosition,
   targetPosition,
   type = 'map',
-  data,
   markerEnd,
 }: CustomEdgeProps) => {
-  const [edgePath, labelX, labelY] = getBezierPath({
+  const [isHovered, setIsHovered] = useState(false);
+
+  const [edgePath] = getBezierPath({
     sourceX,
     sourceY,
     sourcePosition,
@@ -32,29 +33,29 @@ const CustomEdge = memo(({
       case 'llmGenerated':
         return {
           stroke: '#8b5cf6',
-          strokeWidth: 2.5,
+          strokeWidth: isHovered ? 3.5 : 2.5,
           strokeDasharray: '8,4',
-          opacity: 0.8,
+          opacity: isHovered ? 1 : 0.8,
         };
       case 'transform':
         return {
           stroke: '#a78bfa',
-          strokeWidth: 2.5,
-          opacity: 0.9,
+          strokeWidth: isHovered ? 3.5 : 2.5,
+          opacity: isHovered ? 1 : 0.9,
         };
       case 'derived':
         return {
           stroke: '#f59e0b',
-          strokeWidth: 2.5,
-          opacity: 0.9,
+          strokeWidth: isHovered ? 3.5 : 2.5,
+          opacity: isHovered ? 1 : 0.9,
         };
       case 'map':
       case 'custom':
       default:
         return {
           stroke: '#94a3b8',
-          strokeWidth: 2.5,
-          opacity: 0.8,
+          strokeWidth: isHovered ? 3.5 : 2.5,
+          opacity: isHovered ? 1 : 0.8,
         };
     }
   };
@@ -65,10 +66,23 @@ const CustomEdge = memo(({
       <path
         d={edgePath}
         fill="none"
-        strokeWidth={6}
+        strokeWidth={isHovered ? 10 : 6}
         stroke={getEdgeStyle().stroke}
         strokeOpacity={0.1}
       />
+
+      {/* Invisible clickable path */}
+      <path
+        d={edgePath}
+        fill="none"
+        strokeWidth={20}
+        stroke="transparent"
+        style={{ cursor: 'pointer' }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <title>Click to show details</title>
+      </path>
 
       {/* Main path */}
       <path
@@ -79,45 +93,10 @@ const CustomEdge = memo(({
         style={{
           ...getEdgeStyle(),
           fill: 'none',
+          pointerEvents: 'none',
+          transition: 'all 0.2s ease',
         }}
       />
-
-      {data?.transformation && (
-        <g transform={`translate(${labelX}, ${labelY})`}>
-          {/* Shadow */}
-          <rect
-            x={-45}
-            y={-14}
-            width={90}
-            height={28}
-            fill="rgba(0, 0, 0, 0.05)"
-            rx={6}
-          />
-          {/* Background */}
-          <rect
-            x={-45}
-            y={-15}
-            width={90}
-            height={28}
-            fill="#ffffff"
-            stroke="#e2e8f0"
-            strokeWidth={1.5}
-            rx={6}
-            filter="drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))"
-          />
-          <text
-            x={0}
-            y={3}
-            textAnchor="middle"
-            fontSize={11}
-            fontWeight={600}
-            fontFamily="monospace"
-            fill="#334155"
-          >
-            {data.transformation}
-          </text>
-        </g>
-      )}
     </>
   );
 });
