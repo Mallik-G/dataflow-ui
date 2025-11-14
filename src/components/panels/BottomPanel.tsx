@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useCanvasStore } from '../../stores/canvasStore';
 import { TransformNodeData } from '../../types';
+import { colors, borderRadius } from '../../theme/colors';
 
 type TabType = 'sql' | 'metrics' | 'approval' | 'explanation';
 
@@ -17,13 +18,13 @@ const BottomPanel = () => {
 
   const tabStyle = (tab: TabType) => ({
     padding: '8px 16px',
-    backgroundColor: activeTab === tab ? '#ffffff' : 'transparent',
+    backgroundColor: activeTab === tab ? colors.background.tertiary : 'transparent',
     border: 'none',
-    borderBottom: activeTab === tab ? '2px solid #3b82f6' : '2px solid transparent',
+    borderBottom: activeTab === tab ? `2px solid ${colors.primary.main}` : '2px solid transparent',
     cursor: 'pointer',
     fontSize: '12px',
     fontWeight: '600',
-    color: activeTab === tab ? '#1e293b' : '#64748b',
+    color: activeTab === tab ? colors.text.primary : colors.text.secondary,
     transition: 'all 0.2s ease',
   });
 
@@ -52,18 +53,18 @@ FROM source_table;`;
       bottom: 0,
       left: '320px',
       right: '360px',
-      backgroundColor: '#ffffff',
-      borderTop: '1px solid #e2e8f0',
+      backgroundColor: colors.background.tertiary,
+      borderTop: `1px solid ${colors.border.main}`,
       zIndex: 20,
-      boxShadow: '0 -2px 8px rgba(0, 0, 0, 0.05)',
+      boxShadow: colors.shadow.lg,
     }}>
       {/* Collapse/Expand Bar */}
       <div
         onClick={() => setIsExpanded(!isExpanded)}
         style={{
           padding: '8px 16px',
-          backgroundColor: '#fafbfc',
-          borderBottom: '1px solid #e2e8f0',
+          backgroundColor: colors.background.primary,
+          borderBottom: `1px solid ${colors.border.main}`,
           cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
@@ -72,23 +73,23 @@ FROM source_table;`;
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span style={{ fontSize: '14px' }}>{isExpanded ? '▼' : '▲'}</span>
-          <span style={{ fontWeight: '600', fontSize: '13px', color: '#1e293b' }}>
+          <span style={{ fontWeight: '600', fontSize: '13px', color: colors.text.primary }}>
             {selectedNode.data.label}
           </span>
           {transformData?.isUserModified && (
             <span style={{
               fontSize: '10px',
               padding: '2px 8px',
-              backgroundColor: '#fef3c7',
+              backgroundColor: colors.status.warningLight,
               color: '#92400e',
-              borderRadius: '4px',
+              borderRadius: borderRadius.sm,
               fontWeight: '600',
             }}>
               ✏️ USER MODIFIED
             </span>
           )}
         </div>
-        <div style={{ fontSize: '11px', color: '#64748b' }}>
+        <div style={{ fontSize: '11px', color: colors.text.secondary }}>
           {isExpanded ? 'Click to collapse' : 'Click to expand details'}
         </div>
       </div>
@@ -99,8 +100,8 @@ FROM source_table;`;
           {/* Tabs */}
           <div style={{
             display: 'flex',
-            borderBottom: '1px solid #e2e8f0',
-            backgroundColor: '#fafbfc',
+            borderBottom: `1px solid ${colors.border.main}`,
+            backgroundColor: colors.background.primary,
           }}>
             <button style={tabStyle('sql')} onClick={() => setActiveTab('sql')}>
               📝 SQL Code
@@ -125,15 +126,15 @@ FROM source_table;`;
                   justifyContent: 'space-between',
                   marginBottom: '12px',
                 }}>
-                  <div style={{ fontSize: '13px', fontWeight: '600', color: '#1e293b' }}>
+                  <div style={{ fontSize: '13px', fontWeight: '600', color: colors.text.primary }}>
                     Generated SQL
                   </div>
                   <button
                     style={{
                       padding: '6px 12px',
-                      backgroundColor: '#f1f5f9',
-                      border: '1px solid #cbd5e1',
-                      borderRadius: '6px',
+                      backgroundColor: colors.background.secondary,
+                      border: `1px solid ${colors.border.dark}`,
+                      borderRadius: borderRadius.md,
                       fontSize: '12px',
                       cursor: 'pointer',
                     }}
@@ -146,7 +147,7 @@ FROM source_table;`;
                   backgroundColor: '#1e293b',
                   color: '#e2e8f0',
                   padding: '16px',
-                  borderRadius: '8px',
+                  borderRadius: borderRadius.lg,
                   fontSize: '12px',
                   fontFamily: 'Monaco, Consolas, monospace',
                   overflow: 'auto',
@@ -168,9 +169,9 @@ FROM source_table;`;
                     {transformData.userEdits.map((edit, idx) => (
                       <div key={idx} style={{
                         padding: '12px',
-                        backgroundColor: '#fef9c3',
-                        border: '1px solid #fde047',
-                        borderRadius: '6px',
+                        backgroundColor: colors.status.warningLight,
+                        border: `1px solid ${colors.status.warning}`,
+                        borderRadius: borderRadius.md,
                         marginBottom: '8px',
                       }}>
                         <div style={{ fontSize: '11px', color: '#92400e', marginBottom: '4px' }}>
@@ -192,41 +193,41 @@ FROM source_table;`;
               <div>
                 <div style={{
                   padding: '16px',
-                  backgroundColor: '#eff6ff',
-                  border: '1px solid #bfdbfe',
-                  borderRadius: '8px',
+                  backgroundColor: colors.status.infoLight,
+                  border: `1px solid ${colors.status.info}`,
+                  borderRadius: borderRadius.lg,
                   marginBottom: '16px',
                 }}>
                   <div style={{ fontSize: '13px', fontWeight: '600', color: '#1e40af', marginBottom: '8px' }}>
                     💡 Why this transformation?
                   </div>
-                  <div style={{ fontSize: '13px', color: '#1e293b', lineHeight: '1.6' }}>
+                  <div style={{ fontSize: '13px', color: colors.text.primary, lineHeight: '1.6' }}>
                     {transformData?.llmMetadata?.explanation || nodeData.llmMetadata?.explanation ||
                      'This transformation was generated to process data according to business requirements.'}
                   </div>
                 </div>
 
                 <div style={{ marginBottom: '16px' }}>
-                  <div style={{ fontSize: '12px', fontWeight: '600', color: '#64748b', marginBottom: '8px' }}>
+                  <div style={{ fontSize: '12px', fontWeight: '600', color: colors.text.secondary, marginBottom: '8px' }}>
                     Confidence Level
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                     <div style={{
                       flex: 1,
                       height: '8px',
-                      backgroundColor: '#e2e8f0',
-                      borderRadius: '4px',
+                      backgroundColor: colors.border.main,
+                      borderRadius: borderRadius.sm,
                       overflow: 'hidden',
                     }}>
                       <div style={{
                         width: `${transformData?.llmMetadata?.confidence || nodeData.llmMetadata?.confidence || 0}%`,
                         height: '100%',
-                        backgroundColor: (transformData?.llmMetadata?.confidence || nodeData.llmMetadata?.confidence || 0) > 80 ? '#10b981' :
-                                       (transformData?.llmMetadata?.confidence || nodeData.llmMetadata?.confidence || 0) > 60 ? '#f59e0b' : '#ef4444',
+                        backgroundColor: (transformData?.llmMetadata?.confidence || nodeData.llmMetadata?.confidence || 0) > 80 ? colors.status.success :
+                                       (transformData?.llmMetadata?.confidence || nodeData.llmMetadata?.confidence || 0) > 60 ? colors.status.warning : colors.status.error,
                         transition: 'width 0.3s ease',
                       }} />
                     </div>
-                    <div style={{ fontSize: '14px', fontWeight: '600', color: '#1e293b', minWidth: '45px' }}>
+                    <div style={{ fontSize: '14px', fontWeight: '600', color: colors.text.primary, minWidth: '45px' }}>
                       {transformData?.llmMetadata?.confidence || nodeData.llmMetadata?.confidence || 0}%
                     </div>
                   </div>
@@ -235,9 +236,9 @@ FROM source_table;`;
                 {transformData?.llmMetadata?.warnings && transformData.llmMetadata.warnings.length > 0 && (
                   <div style={{
                     padding: '12px',
-                    backgroundColor: '#fef3c7',
-                    border: '1px solid #fde047',
-                    borderRadius: '8px',
+                    backgroundColor: colors.status.warningLight,
+                    border: `1px solid ${colors.status.warning}`,
+                    borderRadius: borderRadius.lg,
                   }}>
                     <div style={{ fontSize: '12px', fontWeight: '600', color: '#92400e', marginBottom: '8px' }}>
                       ⚠️ Warnings
@@ -282,7 +283,7 @@ FROM source_table;`;
                 </div>
 
                 {nodeData.executionState?.lastRun && (
-                  <div style={{ marginTop: '16px', fontSize: '12px', color: '#64748b' }}>
+                  <div style={{ marginTop: '16px', fontSize: '12px', color: colors.text.secondary }}>
                     Last run: {new Date(nodeData.executionState.lastRun).toLocaleString()}
                   </div>
                 )}
@@ -302,13 +303,13 @@ FROM source_table;`;
 const MetricCard = ({ label, value, icon }: { label: string; value: string; icon: string }) => (
   <div style={{
     padding: '16px',
-    backgroundColor: '#f8fafc',
-    border: '1px solid #e2e8f0',
-    borderRadius: '8px',
+    backgroundColor: colors.background.secondary,
+    border: `1px solid ${colors.border.main}`,
+    borderRadius: borderRadius.lg,
   }}>
     <div style={{ fontSize: '24px', marginBottom: '8px' }}>{icon}</div>
-    <div style={{ fontSize: '11px', color: '#64748b', marginBottom: '4px' }}>{label}</div>
-    <div style={{ fontSize: '20px', fontWeight: '600', color: '#1e293b' }}>{value}</div>
+    <div style={{ fontSize: '11px', color: colors.text.secondary, marginBottom: '4px' }}>{label}</div>
+    <div style={{ fontSize: '20px', fontWeight: '600', color: colors.text.primary }}>{value}</div>
   </div>
 );
 
@@ -319,20 +320,20 @@ const ApprovalTab = ({ nodeData }: { nodeData: any }) => {
     <div>
       <div style={{
         padding: '16px',
-        backgroundColor: approvalState?.status === 'approved' ? '#dcfce7' :
-                       approvalState?.status === 'rejected' ? '#fee2e2' :
-                       approvalState?.status === 'changes_requested' ? '#fef3c7' : '#f1f5f9',
-        border: `1px solid ${approvalState?.status === 'approved' ? '#86efac' :
-                              approvalState?.status === 'rejected' ? '#fca5a5' :
-                              approvalState?.status === 'changes_requested' ? '#fde047' : '#cbd5e1'}`,
-        borderRadius: '8px',
+        backgroundColor: approvalState?.status === 'approved' ? colors.status.successLight :
+                       approvalState?.status === 'rejected' ? colors.status.errorLight :
+                       approvalState?.status === 'changes_requested' ? colors.status.warningLight : colors.background.secondary,
+        border: `1px solid ${approvalState?.status === 'approved' ? colors.status.success :
+                              approvalState?.status === 'rejected' ? colors.status.error :
+                              approvalState?.status === 'changes_requested' ? colors.status.warning : colors.border.dark}`,
+        borderRadius: borderRadius.lg,
         marginBottom: '16px',
       }}>
-        <div style={{ fontSize: '13px', fontWeight: '600', color: '#1e293b', marginBottom: '8px' }}>
+        <div style={{ fontSize: '13px', fontWeight: '600', color: colors.text.primary, marginBottom: '8px' }}>
           Review Status: {approvalState?.status?.replace(/_/g, ' ').toUpperCase() || 'PENDING REVIEW'}
         </div>
         {approvalState?.reviewer && (
-          <div style={{ fontSize: '12px', color: '#64748b' }}>
+          <div style={{ fontSize: '12px', color: colors.text.secondary }}>
             Reviewed by {approvalState.reviewer} on {new Date(approvalState.reviewedAt!).toLocaleString()}
           </div>
         )}
@@ -340,7 +341,7 @@ const ApprovalTab = ({ nodeData }: { nodeData: any }) => {
 
       {(!approvalState || approvalState.status === 'pending_review') && (
         <div>
-          <div style={{ fontSize: '13px', fontWeight: '600', color: '#1e293b', marginBottom: '12px' }}>
+          <div style={{ fontSize: '13px', fontWeight: '600', color: colors.text.primary, marginBottom: '12px' }}>
             Review Checklist
           </div>
           <div style={{ marginBottom: '16px' }}>
@@ -352,7 +353,7 @@ const ApprovalTab = ({ nodeData }: { nodeData: any }) => {
                 gap: '8px',
               }}>
                 <input type="checkbox" />
-                <span style={{ fontSize: '13px', color: '#334155' }}>{item}</span>
+                <span style={{ fontSize: '13px', color: colors.text.primary }}>{item}</span>
               </div>
             ))}
           </div>
@@ -361,10 +362,10 @@ const ApprovalTab = ({ nodeData }: { nodeData: any }) => {
             <button style={{
               flex: 1,
               padding: '12px',
-              backgroundColor: '#10b981',
+              backgroundColor: colors.status.success,
               color: '#ffffff',
               border: 'none',
-              borderRadius: '8px',
+              borderRadius: borderRadius.lg,
               fontSize: '13px',
               fontWeight: '600',
               cursor: 'pointer',
@@ -374,10 +375,10 @@ const ApprovalTab = ({ nodeData }: { nodeData: any }) => {
             <button style={{
               flex: 1,
               padding: '12px',
-              backgroundColor: '#f59e0b',
+              backgroundColor: colors.status.warning,
               color: '#ffffff',
               border: 'none',
-              borderRadius: '8px',
+              borderRadius: borderRadius.lg,
               fontSize: '13px',
               fontWeight: '600',
               cursor: 'pointer',
@@ -387,10 +388,10 @@ const ApprovalTab = ({ nodeData }: { nodeData: any }) => {
             <button style={{
               flex: 1,
               padding: '12px',
-              backgroundColor: '#ef4444',
+              backgroundColor: colors.status.error,
               color: '#ffffff',
               border: 'none',
-              borderRadius: '8px',
+              borderRadius: borderRadius.lg,
               fontSize: '13px',
               fontWeight: '600',
               cursor: 'pointer',
@@ -405,14 +406,14 @@ const ApprovalTab = ({ nodeData }: { nodeData: any }) => {
         <div style={{
           marginTop: '16px',
           padding: '12px',
-          backgroundColor: '#f8fafc',
-          border: '1px solid #e2e8f0',
-          borderRadius: '8px',
+          backgroundColor: colors.background.secondary,
+          border: `1px solid ${colors.border.main}`,
+          borderRadius: borderRadius.lg,
         }}>
-          <div style={{ fontSize: '12px', fontWeight: '600', color: '#64748b', marginBottom: '4px' }}>
+          <div style={{ fontSize: '12px', fontWeight: '600', color: colors.text.secondary, marginBottom: '4px' }}>
             Feedback:
           </div>
-          <div style={{ fontSize: '13px', color: '#334155' }}>
+          <div style={{ fontSize: '13px', color: colors.text.primary }}>
             {approvalState.feedback}
           </div>
         </div>

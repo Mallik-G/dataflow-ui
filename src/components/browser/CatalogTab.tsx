@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { catalogData } from '../../data/catalogData';
 import { CatalogObject } from '../../types/catalog';
 import { useCanvasStore } from '../../stores/canvasStore';
+import { colors, borderRadius } from '../../theme/colors';
 
 const CatalogTab = () => {
   const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set(['db-1', 'schema-raw', 'schema-silver', 'schema-gold']));
@@ -62,7 +63,7 @@ const CatalogTab = () => {
               handleObjectClick(obj);
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#f8fafc';
+              e.currentTarget.style.backgroundColor = colors.background.hover;
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.backgroundColor = 'transparent';
@@ -78,7 +79,7 @@ const CatalogTab = () => {
             <span style={{
               fontSize: '13px',
               fontWeight: obj.type === 'table' || obj.type === 'view' ? '500' : '400',
-              color: '#334155',
+              color: colors.text.primary,
               flex: 1,
             }}>
               {obj.name}
@@ -86,10 +87,10 @@ const CatalogTab = () => {
             {(obj.type === 'table' || obj.type === 'view') && (
               <span style={{
                 fontSize: '10px',
-                color: '#94a3b8',
-                backgroundColor: '#f1f5f9',
+                color: colors.text.secondary,
+                backgroundColor: colors.background.secondary,
                 padding: '2px 6px',
-                borderRadius: '4px',
+                borderRadius: borderRadius.sm,
               }}>
                 {obj.type}
               </span>
@@ -111,10 +112,10 @@ const CatalogTab = () => {
         padding: '12px 16px',
         fontSize: '11px',
         fontWeight: '600',
-        color: '#64748b',
+        color: colors.text.secondary,
         textTransform: 'uppercase',
         letterSpacing: '0.5px',
-        borderBottom: '1px solid #f1f5f9',
+        borderBottom: `1px solid ${colors.border.light}`,
       }}>
         Data Catalog
       </div>

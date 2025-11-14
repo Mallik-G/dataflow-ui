@@ -1,6 +1,7 @@
 import { memo, useState } from 'react';
 import { Handle, Position } from 'reactflow';
 import { SilverTableNodeData } from '../../types';
+import { colors, borderRadius } from '../../theme/colors';
 
 interface SilverTableNodeProps {
   data: SilverTableNodeData;
@@ -16,16 +17,16 @@ const SilverTableNode = memo(({ data, selected }: SilverTableNodeProps) => {
       onMouseLeave={() => setIsHovered(false)}
       style={{
         padding: '0',
-        borderRadius: '12px',
-        border: `2px solid ${selected ? '#64748b' : isHovered ? '#94a3b8' : '#e2e8f0'}`,
-        backgroundColor: '#ffffff',
+        borderRadius: borderRadius.xl,
+        border: `2px solid ${selected ? colors.node.silver.main : isHovered ? colors.node.silver.border : colors.node.silver.light}`,
+        backgroundColor: colors.background.tertiary,
         minWidth: '240px',
         maxWidth: '280px',
         boxShadow: selected
-          ? '0 8px 24px rgba(100, 116, 139, 0.25), 0 2px 8px rgba(0, 0, 0, 0.1)'
+          ? `${colors.shadow.xl}, 0 0 0 1px ${colors.node.silver.main}`
           : isHovered
-          ? '0 4px 12px rgba(0, 0, 0, 0.12)'
-          : '0 2px 8px rgba(0, 0, 0, 0.08)',
+          ? colors.shadow.md
+          : colors.shadow.sm,
         transition: 'all 0.2s ease',
         transform: isHovered ? 'translateY(-2px)' : 'translateY(0)',
       }}
@@ -36,17 +37,17 @@ const SilverTableNode = memo(({ data, selected }: SilverTableNodeProps) => {
         style={{
           width: '12px',
           height: '12px',
-          backgroundColor: '#64748b',
-          border: '2px solid #ffffff',
-          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+          backgroundColor: colors.node.silver.main,
+          border: `2px solid ${colors.background.tertiary}`,
+          boxShadow: colors.shadow.md,
         }}
       />
 
       {/* Header */}
       <div style={{
         padding: '14px 16px',
-        borderBottom: '1px solid #e2e8f0',
-        background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)',
+        borderBottom: `1px solid ${colors.node.silver.light}`,
+        background: `linear-gradient(135deg, ${colors.node.silver.light} 0%, ${colors.node.silver.light} 100%)`,
         borderRadius: '10px 10px 0 0',
       }}>
         <div style={{
@@ -57,8 +58,8 @@ const SilverTableNode = memo(({ data, selected }: SilverTableNodeProps) => {
           <div style={{
             width: '24px',
             height: '24px',
-            borderRadius: '6px',
-            background: 'linear-gradient(135deg, #94a3b8 0%, #64748b 100%)',
+            borderRadius: borderRadius.md,
+            background: `linear-gradient(135deg, ${colors.node.silver.main} 0%, ${colors.node.silver.main} 100%)`,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -71,7 +72,7 @@ const SilverTableNode = memo(({ data, selected }: SilverTableNodeProps) => {
           <div style={{
             fontWeight: '600',
             fontSize: '14px',
-            color: '#1e293b',
+            color: colors.text.primary,
             flex: 1,
           }}>
             {data.label}
@@ -87,9 +88,9 @@ const SilverTableNode = memo(({ data, selected }: SilverTableNodeProps) => {
             style={{
               padding: '8px 10px',
               marginBottom: '4px',
-              backgroundColor: '#f8fafc',
-              borderRadius: '6px',
-              border: '1px solid #e2e8f0',
+              backgroundColor: colors.background.secondary,
+              borderRadius: borderRadius.md,
+              border: `1px solid ${colors.border.main}`,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
@@ -97,12 +98,12 @@ const SilverTableNode = memo(({ data, selected }: SilverTableNodeProps) => {
               cursor: 'pointer',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#f1f5f9';
-              e.currentTarget.style.borderColor = '#cbd5e1';
+              e.currentTarget.style.backgroundColor = colors.node.silver.light;
+              e.currentTarget.style.borderColor = colors.node.silver.border;
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#f8fafc';
-              e.currentTarget.style.borderColor = '#e2e8f0';
+              e.currentTarget.style.backgroundColor = colors.background.secondary;
+              e.currentTarget.style.borderColor = colors.border.main;
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -110,22 +111,22 @@ const SilverTableNode = memo(({ data, selected }: SilverTableNodeProps) => {
                 width: '4px',
                 height: '4px',
                 borderRadius: '50%',
-                backgroundColor: '#64748b',
+                backgroundColor: colors.node.silver.main,
               }} />
               <span style={{
                 fontSize: '12px',
                 fontWeight: '500',
-                color: '#334155',
+                color: colors.text.primary,
               }}>
                 {col.name}
               </span>
             </div>
             <span style={{
               fontSize: '10px',
-              color: '#64748b',
-              backgroundColor: '#e2e8f0',
+              color: colors.text.muted,
+              backgroundColor: colors.node.silver.light,
               padding: '2px 8px',
-              borderRadius: '4px',
+              borderRadius: borderRadius.sm,
               fontFamily: 'monospace',
               fontWeight: '500',
             }}>
@@ -136,7 +137,7 @@ const SilverTableNode = memo(({ data, selected }: SilverTableNodeProps) => {
         {data.columns.length > 6 && (
           <div style={{
             fontSize: '11px',
-            color: '#94a3b8',
+            color: colors.text.muted,
             marginTop: '8px',
             textAlign: 'center',
             fontWeight: '500',
@@ -152,9 +153,9 @@ const SilverTableNode = memo(({ data, selected }: SilverTableNodeProps) => {
         style={{
           width: '12px',
           height: '12px',
-          backgroundColor: '#64748b',
-          border: '2px solid #ffffff',
-          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+          backgroundColor: colors.node.silver.main,
+          border: `2px solid ${colors.background.tertiary}`,
+          boxShadow: colors.shadow.md,
         }}
       />
     </div>

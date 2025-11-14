@@ -1,6 +1,7 @@
 import { memo, useState } from 'react';
 import { Handle, Position } from 'reactflow';
 import { GoldEntityNodeData } from '../../types';
+import { colors, borderRadius } from '../../theme/colors';
 
 interface GoldEntityNodeProps {
   data: GoldEntityNodeData;
@@ -16,16 +17,16 @@ const GoldEntityNode = memo(({ data, selected }: GoldEntityNodeProps) => {
       onMouseLeave={() => setIsHovered(false)}
       style={{
         padding: '0',
-        borderRadius: '12px',
-        border: `2px solid ${selected ? '#d97706' : isHovered ? '#fbbf24' : '#fde68a'}`,
-        backgroundColor: '#ffffff',
+        borderRadius: borderRadius.xl,
+        border: `2px solid ${selected ? colors.node.gold.main : isHovered ? colors.node.gold.border : colors.node.gold.light}`,
+        backgroundColor: colors.background.tertiary,
         minWidth: '240px',
         maxWidth: '280px',
         boxShadow: selected
-          ? '0 8px 24px rgba(217, 119, 6, 0.25), 0 2px 8px rgba(0, 0, 0, 0.1)'
+          ? `${colors.shadow.xl}, 0 0 0 1px ${colors.node.gold.main}`
           : isHovered
-          ? '0 4px 12px rgba(0, 0, 0, 0.12)'
-          : '0 2px 8px rgba(0, 0, 0, 0.08)',
+          ? colors.shadow.md
+          : colors.shadow.sm,
         transition: 'all 0.2s ease',
         transform: isHovered ? 'translateY(-2px)' : 'translateY(0)',
       }}
@@ -36,17 +37,17 @@ const GoldEntityNode = memo(({ data, selected }: GoldEntityNodeProps) => {
         style={{
           width: '12px',
           height: '12px',
-          backgroundColor: '#f59e0b',
-          border: '2px solid #ffffff',
-          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+          backgroundColor: colors.node.gold.main,
+          border: `2px solid ${colors.background.tertiary}`,
+          boxShadow: colors.shadow.md,
         }}
       />
 
       {/* Header */}
       <div style={{
         padding: '14px 16px',
-        borderBottom: '1px solid #fde68a',
-        background: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)',
+        borderBottom: `1px solid ${colors.node.gold.light}`,
+        background: `linear-gradient(135deg, ${colors.node.gold.light} 0%, ${colors.node.gold.light} 100%)`,
         borderRadius: '10px 10px 0 0',
       }}>
         <div style={{
@@ -57,8 +58,8 @@ const GoldEntityNode = memo(({ data, selected }: GoldEntityNodeProps) => {
           <div style={{
             width: '24px',
             height: '24px',
-            borderRadius: '6px',
-            background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)',
+            borderRadius: borderRadius.md,
+            background: `linear-gradient(135deg, ${colors.node.gold.main} 0%, ${colors.node.gold.main} 100%)`,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -71,7 +72,7 @@ const GoldEntityNode = memo(({ data, selected }: GoldEntityNodeProps) => {
           <div style={{
             fontWeight: '600',
             fontSize: '14px',
-            color: '#1e293b',
+            color: colors.text.primary,
             flex: 1,
           }}>
             {data.label}
@@ -87,9 +88,9 @@ const GoldEntityNode = memo(({ data, selected }: GoldEntityNodeProps) => {
             style={{
               padding: '8px 10px',
               marginBottom: '4px',
-              backgroundColor: '#fefce8',
-              borderRadius: '6px',
-              border: '1px solid #fef08a',
+              backgroundColor: colors.node.gold.light,
+              borderRadius: borderRadius.md,
+              border: `1px solid ${colors.node.gold.border}`,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
@@ -97,12 +98,12 @@ const GoldEntityNode = memo(({ data, selected }: GoldEntityNodeProps) => {
               cursor: 'pointer',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#fef9c3';
-              e.currentTarget.style.borderColor = '#fde047';
+              e.currentTarget.style.backgroundColor = colors.status.warningLight;
+              e.currentTarget.style.borderColor = colors.node.gold.border;
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#fefce8';
-              e.currentTarget.style.borderColor = '#fef08a';
+              e.currentTarget.style.backgroundColor = colors.node.gold.light;
+              e.currentTarget.style.borderColor = colors.node.gold.border;
             }}
           >
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', flex: 1 }}>
@@ -111,12 +112,12 @@ const GoldEntityNode = memo(({ data, selected }: GoldEntityNodeProps) => {
                   width: '4px',
                   height: '4px',
                   borderRadius: '50%',
-                  backgroundColor: '#f59e0b',
+                  backgroundColor: colors.node.gold.main,
                 }} />
                 <span style={{
                   fontSize: '12px',
                   fontWeight: '500',
-                  color: '#334155',
+                  color: colors.text.primary,
                 }}>
                   {attr.name}
                 </span>
@@ -135,9 +136,9 @@ const GoldEntityNode = memo(({ data, selected }: GoldEntityNodeProps) => {
             <span style={{
               fontSize: '10px',
               color: '#92400e',
-              backgroundColor: '#fef3c7',
+              backgroundColor: colors.status.warningLight,
               padding: '2px 8px',
-              borderRadius: '4px',
+              borderRadius: borderRadius.sm,
               fontFamily: 'monospace',
               fontWeight: '500',
             }}>
@@ -148,7 +149,7 @@ const GoldEntityNode = memo(({ data, selected }: GoldEntityNodeProps) => {
         {data.attributes.length > 6 && (
           <div style={{
             fontSize: '11px',
-            color: '#b45309',
+            color: colors.text.muted,
             marginTop: '8px',
             textAlign: 'center',
             fontWeight: '500',

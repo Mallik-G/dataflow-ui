@@ -1,6 +1,7 @@
 import { memo, useState } from 'react';
 import { Handle, Position } from 'reactflow';
 import { SourceTableNodeData } from '../../types';
+import { colors, borderRadius } from '../../theme/colors';
 
 interface SourceTableNodeProps {
   data: SourceTableNodeData;
@@ -16,16 +17,16 @@ const SourceTableNode = memo(({ data, selected }: SourceTableNodeProps) => {
       onMouseLeave={() => setIsHovered(false)}
       style={{
         padding: '0',
-        borderRadius: '12px',
-        border: `2px solid ${selected ? '#2563eb' : isHovered ? '#60a5fa' : '#e0e7ff'}`,
-        backgroundColor: '#ffffff',
+        borderRadius: borderRadius.xl,
+        border: `2px solid ${selected ? colors.node.source.main : isHovered ? colors.node.source.border : colors.node.source.light}`,
+        backgroundColor: colors.background.tertiary,
         minWidth: '240px',
         maxWidth: '280px',
         boxShadow: selected
-          ? '0 8px 24px rgba(37, 99, 235, 0.25), 0 2px 8px rgba(0, 0, 0, 0.1)'
+          ? `${colors.shadow.xl}, 0 0 0 1px ${colors.node.source.main}`
           : isHovered
-          ? '0 4px 12px rgba(0, 0, 0, 0.12)'
-          : '0 2px 8px rgba(0, 0, 0, 0.08)',
+          ? colors.shadow.md
+          : colors.shadow.sm,
         transition: 'all 0.2s ease',
         transform: isHovered ? 'translateY(-2px)' : 'translateY(0)',
       }}
@@ -33,8 +34,8 @@ const SourceTableNode = memo(({ data, selected }: SourceTableNodeProps) => {
       {/* Header */}
       <div style={{
         padding: '14px 16px',
-        borderBottom: '1px solid #e0e7ff',
-        background: 'linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%)',
+        borderBottom: `1px solid ${colors.node.source.light}`,
+        background: `linear-gradient(135deg, ${colors.node.source.light} 0%, ${colors.node.source.light} 100%)`,
         borderRadius: '10px 10px 0 0',
       }}>
         <div style={{
@@ -46,8 +47,8 @@ const SourceTableNode = memo(({ data, selected }: SourceTableNodeProps) => {
           <div style={{
             width: '24px',
             height: '24px',
-            borderRadius: '6px',
-            background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
+            borderRadius: borderRadius.md,
+            background: `linear-gradient(135deg, ${colors.node.source.main} 0%, ${colors.node.source.main} 100%)`,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -60,7 +61,7 @@ const SourceTableNode = memo(({ data, selected }: SourceTableNodeProps) => {
           <div style={{
             fontWeight: '600',
             fontSize: '14px',
-            color: '#1e293b',
+            color: colors.text.primary,
             flex: 1,
           }}>
             {data.label}
@@ -68,7 +69,7 @@ const SourceTableNode = memo(({ data, selected }: SourceTableNodeProps) => {
         </div>
         <div style={{
           fontSize: '11px',
-          color: '#64748b',
+          color: colors.text.secondary,
           fontFamily: 'monospace',
           marginLeft: '32px',
         }}>
@@ -84,9 +85,9 @@ const SourceTableNode = memo(({ data, selected }: SourceTableNodeProps) => {
             style={{
               padding: '8px 10px',
               marginBottom: '4px',
-              backgroundColor: '#f8fafc',
-              borderRadius: '6px',
-              border: '1px solid #e2e8f0',
+              backgroundColor: colors.background.secondary,
+              borderRadius: borderRadius.md,
+              border: `1px solid ${colors.border.main}`,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
@@ -94,12 +95,12 @@ const SourceTableNode = memo(({ data, selected }: SourceTableNodeProps) => {
               cursor: 'pointer',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#eff6ff';
-              e.currentTarget.style.borderColor = '#bfdbfe';
+              e.currentTarget.style.backgroundColor = colors.node.source.light;
+              e.currentTarget.style.borderColor = colors.node.source.border;
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#f8fafc';
-              e.currentTarget.style.borderColor = '#e2e8f0';
+              e.currentTarget.style.backgroundColor = colors.background.secondary;
+              e.currentTarget.style.borderColor = colors.border.main;
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -107,22 +108,22 @@ const SourceTableNode = memo(({ data, selected }: SourceTableNodeProps) => {
                 width: '4px',
                 height: '4px',
                 borderRadius: '50%',
-                backgroundColor: '#3b82f6',
+                backgroundColor: colors.node.source.main,
               }} />
               <span style={{
                 fontSize: '12px',
                 fontWeight: '500',
-                color: '#334155',
+                color: colors.text.primary,
               }}>
                 {col.name}
               </span>
             </div>
             <span style={{
               fontSize: '10px',
-              color: '#94a3b8',
-              backgroundColor: '#e0e7ff',
+              color: colors.text.muted,
+              backgroundColor: colors.node.source.light,
               padding: '2px 8px',
-              borderRadius: '4px',
+              borderRadius: borderRadius.sm,
               fontFamily: 'monospace',
               fontWeight: '500',
             }}>
@@ -133,7 +134,7 @@ const SourceTableNode = memo(({ data, selected }: SourceTableNodeProps) => {
         {data.columns.length > 6 && (
           <div style={{
             fontSize: '11px',
-            color: '#94a3b8',
+            color: colors.text.muted,
             marginTop: '8px',
             textAlign: 'center',
             fontWeight: '500',
@@ -149,9 +150,9 @@ const SourceTableNode = memo(({ data, selected }: SourceTableNodeProps) => {
         style={{
           width: '12px',
           height: '12px',
-          backgroundColor: '#3b82f6',
-          border: '2px solid #ffffff',
-          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+          backgroundColor: colors.node.source.main,
+          border: `2px solid ${colors.background.tertiary}`,
+          boxShadow: colors.shadow.md,
         }}
       />
     </div>

@@ -1,5 +1,6 @@
 import { useReactFlow } from 'reactflow';
 import { useState } from 'react';
+import { colors, borderRadius } from '../../theme/colors';
 
 const Toolbar = () => {
   const { zoomIn, zoomOut, fitView } = useReactFlow();
@@ -7,18 +8,18 @@ const Toolbar = () => {
 
   const buttonStyle = (buttonName: string) => ({
     padding: '10px 18px',
-    backgroundColor: hoveredButton === buttonName ? '#f1f5f9' : '#ffffff',
-    border: '1px solid #e2e8f0',
-    borderRadius: '8px',
+    backgroundColor: hoveredButton === buttonName ? colors.background.secondary : colors.background.tertiary,
+    border: `1px solid ${colors.border.main}`,
+    borderRadius: borderRadius.lg,
     cursor: 'pointer',
     fontSize: '13px',
     fontWeight: '600',
-    color: hoveredButton === buttonName ? '#1e293b' : '#475569',
+    color: hoveredButton === buttonName ? colors.text.primary : colors.text.secondary,
     transition: 'all 0.2s ease',
     display: 'flex',
     alignItems: 'center',
     gap: '6px',
-    boxShadow: hoveredButton === buttonName ? '0 2px 4px rgba(0, 0, 0, 0.1)' : 'none',
+    boxShadow: hoveredButton === buttonName ? colors.shadow.sm : 'none',
   });
 
   return (
@@ -27,14 +28,14 @@ const Toolbar = () => {
       top: '20px',
       left: '50%',
       transform: 'translateX(-50%)',
-      backgroundColor: '#ffffff',
+      backgroundColor: colors.background.tertiary,
       padding: '8px',
-      borderRadius: '12px',
-      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04)',
+      borderRadius: borderRadius.xl,
+      boxShadow: colors.shadow.md,
       display: 'flex',
       gap: '4px',
       zIndex: 10,
-      border: '1px solid #e2e8f0',
+      border: `1px solid ${colors.border.main}`,
     }}>
       <button
         style={buttonStyle('zoomIn')}
@@ -48,7 +49,7 @@ const Toolbar = () => {
       <div style={{
         width: '1px',
         height: '24px',
-        backgroundColor: '#e2e8f0',
+        backgroundColor: colors.border.main,
         margin: '6px 4px',
       }} />
       <button
@@ -63,7 +64,7 @@ const Toolbar = () => {
       <div style={{
         width: '1px',
         height: '24px',
-        backgroundColor: '#e2e8f0',
+        backgroundColor: colors.border.main,
         margin: '6px 4px',
       }} />
       <button

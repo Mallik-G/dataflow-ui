@@ -1,6 +1,7 @@
 import { memo, useState } from 'react';
 import { Handle, Position } from 'reactflow';
 import { TransformNodeData } from '../../types';
+import { colors, borderRadius } from '../../theme/colors';
 
 interface TransformNodeProps {
   data: TransformNodeData;
@@ -12,11 +13,11 @@ const TransformNode = memo(({ data, selected }: TransformNodeProps) => {
 
   const confidence = data.llmMetadata?.confidence || 0;
   const getBorderColor = () => {
-    if (selected) return '#7c3aed';
-    if (data.isUserModified) return '#f59e0b';
-    if (confidence >= 90) return '#10b981';
-    if (confidence >= 70) return '#f59e0b';
-    return '#ef4444';
+    if (selected) return colors.primary.main;
+    if (data.isUserModified) return colors.status.warning;
+    if (confidence >= 90) return colors.status.success;
+    if (confidence >= 70) return colors.status.warning;
+    return colors.status.error;
   };
 
   return (
@@ -25,16 +26,16 @@ const TransformNode = memo(({ data, selected }: TransformNodeProps) => {
       onMouseLeave={() => setIsHovered(false)}
       style={{
         padding: '0',
-        borderRadius: '12px',
+        borderRadius: borderRadius.xl,
         border: `2px solid ${getBorderColor()}`,
-        backgroundColor: '#ffffff',
+        backgroundColor: colors.background.tertiary,
         minWidth: '200px',
         maxWidth: '240px',
         boxShadow: selected
-          ? '0 8px 24px rgba(124, 58, 237, 0.25), 0 2px 8px rgba(0, 0, 0, 0.1)'
+          ? `${colors.shadow.xl}, 0 0 0 1px ${colors.primary.main}`
           : isHovered
-          ? '0 4px 12px rgba(0, 0, 0, 0.12)'
-          : '0 2px 8px rgba(0, 0, 0, 0.08)',
+          ? colors.shadow.md
+          : colors.shadow.sm,
         transition: 'all 0.2s ease',
         transform: isHovered ? 'translateY(-2px)' : 'translateY(0)',
         position: 'relative',
@@ -46,9 +47,9 @@ const TransformNode = memo(({ data, selected }: TransformNodeProps) => {
         style={{
           width: '12px',
           height: '12px',
-          backgroundColor: '#8b5cf6',
-          border: '2px solid #ffffff',
-          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+          backgroundColor: colors.node.transform.main,
+          border: `2px solid ${colors.background.tertiary}`,
+          boxShadow: colors.shadow.md,
         }}
       />
 
@@ -64,9 +65,9 @@ const TransformNode = memo(({ data, selected }: TransformNodeProps) => {
           {data.isUserModified && (
             <div style={{
               padding: '2px 8px',
-              backgroundColor: '#fef3c7',
-              border: '1px solid #fde047',
-              borderRadius: '12px',
+              backgroundColor: colors.status.warningLight,
+              border: `1px solid ${colors.status.warning}`,
+              borderRadius: borderRadius.xl,
               fontSize: '10px',
               fontWeight: '600',
               color: '#92400e',
@@ -77,9 +78,9 @@ const TransformNode = memo(({ data, selected }: TransformNodeProps) => {
           {data.llmMetadata && (
             <div style={{
               padding: '2px 8px',
-              backgroundColor: confidence >= 90 ? '#dcfce7' : confidence >= 70 ? '#fef3c7' : '#fee2e2',
-              border: `1px solid ${confidence >= 90 ? '#86efac' : confidence >= 70 ? '#fde047' : '#fca5a5'}`,
-              borderRadius: '12px',
+              backgroundColor: confidence >= 90 ? colors.status.successLight : confidence >= 70 ? colors.status.warningLight : colors.status.errorLight,
+              border: `1px solid ${confidence >= 90 ? colors.status.success : confidence >= 70 ? colors.status.warning : colors.status.error}`,
+              borderRadius: borderRadius.xl,
               fontSize: '10px',
               fontWeight: '600',
               color: confidence >= 90 ? '#166534' : confidence >= 70 ? '#92400e' : '#991b1b',
@@ -93,8 +94,8 @@ const TransformNode = memo(({ data, selected }: TransformNodeProps) => {
       {/* Header */}
       <div style={{
         padding: '14px 16px',
-        borderBottom: '1px solid #ddd6fe',
-        background: 'linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%)',
+        borderBottom: `1px solid ${colors.node.transform.light}`,
+        background: `linear-gradient(135deg, ${colors.node.transform.light} 0%, ${colors.primary.lighter} 100%)`,
         borderRadius: '10px 10px 0 0',
       }}>
         <div style={{
@@ -105,8 +106,8 @@ const TransformNode = memo(({ data, selected }: TransformNodeProps) => {
           <div style={{
             width: '24px',
             height: '24px',
-            borderRadius: '6px',
-            background: 'linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%)',
+            borderRadius: borderRadius.md,
+            background: `linear-gradient(135deg, ${colors.primary.light} 0%, ${colors.primary.main} 100%)`,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -119,7 +120,7 @@ const TransformNode = memo(({ data, selected }: TransformNodeProps) => {
           <div style={{
             fontWeight: '600',
             fontSize: '13px',
-            color: '#1e293b',
+            color: colors.text.primary,
             flex: 1,
             textTransform: 'uppercase',
             letterSpacing: '0.5px',
@@ -135,14 +136,14 @@ const TransformNode = memo(({ data, selected }: TransformNodeProps) => {
           style={{
             fontSize: '11px',
             fontFamily: 'Monaco, Consolas, "Courier New", monospace',
-            backgroundColor: '#f8fafc',
-            border: '1px solid #e0e7ff',
+            backgroundColor: colors.background.secondary,
+            border: `1px solid ${colors.node.transform.light}`,
             padding: '10px',
-            borderRadius: '6px',
+            borderRadius: borderRadius.md,
             marginBottom: '10px',
             wordBreak: 'break-all',
             lineHeight: '1.5',
-            color: '#334155',
+            color: colors.text.primary,
           }}
         >
           {data.expression}
@@ -154,7 +155,7 @@ const TransformNode = memo(({ data, selected }: TransformNodeProps) => {
             <div style={{
               fontSize: '10px',
               fontWeight: '600',
-              color: '#64748b',
+              color: colors.text.secondary,
               marginBottom: '6px',
               textTransform: 'uppercase',
               letterSpacing: '0.5px',
@@ -167,13 +168,13 @@ const TransformNode = memo(({ data, selected }: TransformNodeProps) => {
                   key={idx}
                   style={{
                     padding: '4px 8px',
-                    backgroundColor: '#f5f3ff',
-                    color: '#7c3aed',
-                    borderRadius: '4px',
+                    backgroundColor: colors.node.transform.light,
+                    color: colors.primary.main,
+                    borderRadius: borderRadius.sm,
                     fontSize: '10px',
                     fontWeight: '500',
                     fontFamily: 'monospace',
-                    border: '1px solid #ddd6fe',
+                    border: `1px solid ${colors.node.transform.border}`,
                   }}
                 >
                   {fn}
@@ -190,9 +191,9 @@ const TransformNode = memo(({ data, selected }: TransformNodeProps) => {
         style={{
           width: '12px',
           height: '12px',
-          backgroundColor: '#8b5cf6',
-          border: '2px solid #ffffff',
-          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+          backgroundColor: colors.node.transform.main,
+          border: `2px solid ${colors.background.tertiary}`,
+          boxShadow: colors.shadow.md,
         }}
       />
     </div>
