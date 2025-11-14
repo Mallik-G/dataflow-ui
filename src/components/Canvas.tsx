@@ -22,6 +22,7 @@ import Toolbar from './panels/Toolbar';
 import Legend from './panels/Legend';
 import ControlPanel from './panels/ControlPanel';
 import BottomPanel from './panels/BottomPanel';
+import ChatPanel from './panels/ChatPanel';
 import { CustomEdge as CustomEdgeType } from '../types';
 
 const nodeTypes = {
@@ -134,6 +135,9 @@ const CanvasContent = () => {
 
       {/* Bottom Panel */}
       <BottomPanel />
+
+      {/* Chat Panel */}
+      <ChatPanel />
     </div>
   );
 };
