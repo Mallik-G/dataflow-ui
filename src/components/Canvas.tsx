@@ -11,6 +11,7 @@ import ReactFlow, {
 import 'reactflow/dist/style.css';
 
 import { useCanvasStore } from '../stores/canvasStore';
+import BrowserPanel from './browser/BrowserPanel';
 import SourceTableNode from './nodes/SourceTableNode';
 import SilverTableNode from './nodes/SilverTableNode';
 import GoldEntityNode from './nodes/GoldEntityNode';
@@ -62,6 +63,10 @@ const CanvasContent = () => {
 
   return (
     <div style={{ width: '100vw', height: '100vh', display: 'flex', backgroundColor: '#fafbfc' }}>
+      {/* Left Browser Panel */}
+      <BrowserPanel />
+
+      {/* Center Canvas */}
       <div style={{ flex: 1, position: 'relative' }}>
         <ReactFlow
           nodes={nodes as any}
@@ -122,6 +127,8 @@ const CanvasContent = () => {
           <ControlPanel />
         </ReactFlow>
       </div>
+
+      {/* Right Context Panel */}
       <MetadataPanel />
     </div>
   );

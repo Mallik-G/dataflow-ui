@@ -1,12 +1,22 @@
 import { create } from 'zustand';
 import { applyNodeChanges, applyEdgeChanges, NodeChange, EdgeChange } from 'reactflow';
 import { CustomNode, CustomEdge, ValidationError } from '../types';
+import { CatalogObject } from '../types/catalog';
+
+type ViewMode = 'lineage' | 'dataflow' | 'none';
 
 interface CanvasState {
   nodes: CustomNode[];
   edges: CustomEdge[];
   selectedNode: CustomNode | null;
   validationErrors: ValidationError[];
+
+  // New state for browser-driven views
+  viewMode: ViewMode;
+  selectedCatalogObject: CatalogObject | null;
+  selectedDataFlowId: string | null;
+  upstreamLevels: number;
+  downstreamLevels: number;
 
   setNodes: (nodes: CustomNode[]) => void;
   setEdges: (edges: CustomEdge[]) => void;
@@ -19,6 +29,13 @@ interface CanvasState {
   removeEdge: (edgeId: string) => void;
   setSelectedNode: (node: CustomNode | null) => void;
   setValidationErrors: (errors: ValidationError[]) => void;
+
+  // New methods
+  setViewMode: (mode: ViewMode) => void;
+  setSelectedCatalogObject: (obj: CatalogObject | null) => void;
+  setSelectedDataFlow: (flowId: string | null) => void;
+  setUpstreamLevels: (levels: number) => void;
+  setDownstreamLevels: (levels: number) => void;
 }
 
 export const useCanvasStore = create<CanvasState>((set, get) => ({
@@ -26,6 +43,13 @@ export const useCanvasStore = create<CanvasState>((set, get) => ({
   edges: [],
   selectedNode: null,
   validationErrors: [],
+
+  // New state defaults
+  viewMode: 'none',
+  selectedCatalogObject: null,
+  selectedDataFlowId: null,
+  upstreamLevels: 2,
+  downstreamLevels: 2,
 
   setNodes: (nodes) => set({ nodes }),
   setEdges: (edges) => set({ edges }),
@@ -72,4 +96,24 @@ export const useCanvasStore = create<CanvasState>((set, get) => ({
   setValidationErrors: (errors) => {
     set({ validationErrors: errors });
   },
+
+  // New methods
+  setViewMode: (mode) => set({ viewMode: mode }),
+
+  setSelectedCatalogObject: (obj) => {
+    set({
+      selectedCatalogObject: obj,
+      selectedDataFlowId: null,
+    });
+  },
+
+  setSelectedDataFlow: (flowId) => {
+    set({
+      selectedDataFlowId: flowId,
+      selectedCatalogObject: null,
+    });
+  },
+
+  setUpstreamLevels: (levels) => set({ upstreamLevels: levels }),
+  setDownstreamLevels: (levels) => set({ downstreamLevels: levels }),
 }));

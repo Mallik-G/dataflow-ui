@@ -1,9 +1,14 @@
 import { useState } from 'react';
+import { useCanvasStore } from '../../stores/canvasStore';
 
 const ControlPanel = () => {
   const [showColumns, setShowColumns] = useState(true);
-  const [upstreamLevels, setUpstreamLevels] = useState(2);
-  const [downstreamLevels, setDownstreamLevels] = useState(2);
+  const {
+    upstreamLevels,
+    downstreamLevels,
+    setUpstreamLevels,
+    setDownstreamLevels,
+  } = useCanvasStore();
 
   return (
     <div style={{
