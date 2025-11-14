@@ -59,7 +59,7 @@ const CanvasContent = () => {
   );
 
   return (
-    <div style={{ width: '100vw', height: '100vh', display: 'flex' }}>
+    <div style={{ width: '100vw', height: '100vh', display: 'flex', backgroundColor: '#fafbfc' }}>
       <div style={{ flex: 1, position: 'relative' }}>
         <ReactFlow
           nodes={nodes as any}
@@ -73,23 +73,46 @@ const CanvasContent = () => {
           fitView
           minZoom={0.1}
           maxZoom={2}
+          defaultEdgeOptions={{
+            type: 'custom',
+            animated: false,
+          }}
         >
-          <Background />
-          <Controls />
+          <Background
+            gap={16}
+            size={1}
+            color="#e2e8f0"
+            style={{ backgroundColor: '#fafbfc' }}
+          />
+          <Controls
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '4px',
+            }}
+            showInteractive={false}
+          />
           <MiniMap
             nodeColor={(node) => {
               switch (node.type) {
                 case 'source':
                   return '#3b82f6';
                 case 'silver':
-                  return '#94a3b8';
+                  return '#64748b';
                 case 'gold':
-                  return '#eab308';
+                  return '#f59e0b';
                 case 'transform':
-                  return '#a78bfa';
+                  return '#8b5cf6';
                 default:
                   return '#64748b';
               }
+            }}
+            maskColor="rgba(248, 250, 252, 0.8)"
+            style={{
+              backgroundColor: '#ffffff',
+              border: '1px solid #e2e8f0',
+              borderRadius: '8px',
+              overflow: 'hidden',
             }}
           />
           <Toolbar />

@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { Handle, Position } from 'reactflow';
 import { SourceTableNodeData } from '../../types';
 
@@ -8,47 +8,152 @@ interface SourceTableNodeProps {
 }
 
 const SourceTableNode = memo(({ data, selected }: SourceTableNodeProps) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       style={{
-        padding: '12px',
-        borderRadius: '8px',
-        border: `2px solid ${selected ? '#1e40af' : '#3b82f6'}`,
-        backgroundColor: '#dbeafe',
-        minWidth: '200px',
-        boxShadow: selected ? '0 4px 6px rgba(0, 0, 0, 0.1)' : '0 1px 3px rgba(0, 0, 0, 0.1)',
+        padding: '0',
+        borderRadius: '12px',
+        border: `2px solid ${selected ? '#2563eb' : isHovered ? '#60a5fa' : '#e0e7ff'}`,
+        backgroundColor: '#ffffff',
+        minWidth: '240px',
+        maxWidth: '280px',
+        boxShadow: selected
+          ? '0 8px 24px rgba(37, 99, 235, 0.25), 0 2px 8px rgba(0, 0, 0, 0.1)'
+          : isHovered
+          ? '0 4px 12px rgba(0, 0, 0, 0.12)'
+          : '0 2px 8px rgba(0, 0, 0, 0.08)',
+        transition: 'all 0.2s ease',
+        transform: isHovered ? 'translateY(-2px)' : 'translateY(0)',
       }}
     >
-      <div style={{ fontWeight: 'bold', marginBottom: '8px', color: '#1e40af' }}>
-        {data.label}
+      {/* Header */}
+      <div style={{
+        padding: '14px 16px',
+        borderBottom: '1px solid #e0e7ff',
+        background: 'linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%)',
+        borderRadius: '10px 10px 0 0',
+      }}>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          marginBottom: '6px'
+        }}>
+          <div style={{
+            width: '24px',
+            height: '24px',
+            borderRadius: '6px',
+            background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '12px',
+            color: '#fff',
+            fontWeight: 'bold',
+          }}>
+            S
+          </div>
+          <div style={{
+            fontWeight: '600',
+            fontSize: '14px',
+            color: '#1e293b',
+            flex: 1,
+          }}>
+            {data.label}
+          </div>
+        </div>
+        <div style={{
+          fontSize: '11px',
+          color: '#64748b',
+          fontFamily: 'monospace',
+          marginLeft: '32px',
+        }}>
+          {data.schema}
+        </div>
       </div>
-      <div style={{ fontSize: '12px', color: '#64748b', marginBottom: '8px' }}>
-        Schema: {data.schema}
-      </div>
-      <div style={{ fontSize: '12px' }}>
-        {data.columns.slice(0, 5).map((col, idx) => (
+
+      {/* Columns */}
+      <div style={{ padding: '12px' }}>
+        {data.columns.slice(0, 6).map((col, idx) => (
           <div
             key={idx}
             style={{
-              padding: '4px',
-              marginBottom: '2px',
-              backgroundColor: '#fff',
-              borderRadius: '4px',
+              padding: '8px 10px',
+              marginBottom: '4px',
+              backgroundColor: '#f8fafc',
+              borderRadius: '6px',
+              border: '1px solid #e2e8f0',
               display: 'flex',
+              alignItems: 'center',
               justifyContent: 'space-between',
+              transition: 'all 0.15s ease',
+              cursor: 'pointer',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#eff6ff';
+              e.currentTarget.style.borderColor = '#bfdbfe';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#f8fafc';
+              e.currentTarget.style.borderColor = '#e2e8f0';
             }}
           >
-            <span>{col.name}</span>
-            <span style={{ color: '#64748b', fontSize: '10px' }}>{col.type}</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <div style={{
+                width: '4px',
+                height: '4px',
+                borderRadius: '50%',
+                backgroundColor: '#3b82f6',
+              }} />
+              <span style={{
+                fontSize: '12px',
+                fontWeight: '500',
+                color: '#334155',
+              }}>
+                {col.name}
+              </span>
+            </div>
+            <span style={{
+              fontSize: '10px',
+              color: '#94a3b8',
+              backgroundColor: '#e0e7ff',
+              padding: '2px 8px',
+              borderRadius: '4px',
+              fontFamily: 'monospace',
+              fontWeight: '500',
+            }}>
+              {col.type}
+            </span>
           </div>
         ))}
-        {data.columns.length > 5 && (
-          <div style={{ fontSize: '10px', color: '#64748b', marginTop: '4px' }}>
-            +{data.columns.length - 5} more...
+        {data.columns.length > 6 && (
+          <div style={{
+            fontSize: '11px',
+            color: '#94a3b8',
+            marginTop: '8px',
+            textAlign: 'center',
+            fontWeight: '500',
+          }}>
+            +{data.columns.length - 6} more columns
           </div>
         )}
       </div>
-      <Handle type="source" position={Position.Right} />
+
+      <Handle
+        type="source"
+        position={Position.Right}
+        style={{
+          width: '12px',
+          height: '12px',
+          backgroundColor: '#3b82f6',
+          border: '2px solid #ffffff',
+          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+        }}
+      />
     </div>
   );
 });
