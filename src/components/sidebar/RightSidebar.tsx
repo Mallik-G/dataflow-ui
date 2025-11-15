@@ -18,25 +18,60 @@ const RightSidebar = () => {
       id: 'nexa-ai' as PanelType,
       icon: '🤖',
       label: 'Nexa AI',
-      tooltip: 'AI Assistant'
+      tooltip: 'AI Assistant',
+      width: 400
     },
     {
       id: 'context' as PanelType,
       icon: '📋',
       label: 'Context',
-      tooltip: 'Context Window'
+      tooltip: 'Context Window',
+      width: 360
     },
     {
       id: 'codeview' as PanelType,
       icon: '💻',
       label: 'Code',
-      tooltip: 'Code View'
+      tooltip: 'Code View',
+      width: 600
     }
   ];
 
+  // Calculate total width: icon bar (56px) + panel width if active
+  const activeButton = sidebarButtons.find(b => b.id === activePanel);
+  const sidebarWidth = activePanel ? 56 + activeButton!.width : 56;
+
   return (
-    <>
-      {/* Icon Bar - Always Visible */}
+    <div
+      style={{
+        width: `${sidebarWidth}px`,
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        transition: 'width 0.3s ease-out',
+        flexShrink: 0,
+      }}
+    >
+      {/* Panel Content - Renders First (on the left side of the sidebar) */}
+      {activePanel === 'nexa-ai' && (
+        <div style={{ width: '400px', height: '100%', borderLeft: `1px solid ${colors.border.main}` }}>
+          <CopilotPanel isOpen={true} onClose={() => setActivePanel(null)} />
+        </div>
+      )}
+
+      {activePanel === 'context' && (
+        <div style={{ width: '360px', height: '100%', borderLeft: `1px solid ${colors.border.main}` }}>
+          <MetadataPanel isOpen={true} onClose={() => setActivePanel(null)} />
+        </div>
+      )}
+
+      {activePanel === 'codeview' && (
+        <div style={{ width: '600px', height: '100%', borderLeft: `1px solid ${colors.border.main}` }}>
+          <CodeViewPanel isOpen={true} onClose={() => setActivePanel(null)} />
+        </div>
+      )}
+
+      {/* Icon Bar - Always Visible (on the right edge) */}
       <div
         style={{
           width: '56px',
@@ -48,7 +83,7 @@ const RightSidebar = () => {
           alignItems: 'center',
           paddingTop: '16px',
           gap: '8px',
-          zIndex: 1000,
+          flexShrink: 0,
         }}
       >
         {sidebarButtons.map((button) => (
@@ -86,76 +121,7 @@ const RightSidebar = () => {
           </button>
         ))}
       </div>
-
-      {/* Sliding Panels */}
-      {activePanel === 'nexa-ai' && (
-        <div
-          style={{
-            position: 'absolute',
-            right: '56px',
-            top: 0,
-            bottom: 0,
-            width: '400px',
-            backgroundColor: colors.background.primary,
-            borderLeft: `1px solid ${colors.border.main}`,
-            zIndex: 999,
-            animation: 'slideInFromRight 0.3s ease-out',
-          }}
-        >
-          <CopilotPanel isOpen={true} onClose={() => setActivePanel(null)} />
-        </div>
-      )}
-
-      {activePanel === 'context' && (
-        <div
-          style={{
-            position: 'absolute',
-            right: '56px',
-            top: 0,
-            bottom: 0,
-            width: '360px',
-            backgroundColor: colors.background.primary,
-            borderLeft: `1px solid ${colors.border.main}`,
-            zIndex: 999,
-            animation: 'slideInFromRight 0.3s ease-out',
-          }}
-        >
-          <MetadataPanel isOpen={true} onClose={() => setActivePanel(null)} />
-        </div>
-      )}
-
-      {activePanel === 'codeview' && (
-        <div
-          style={{
-            position: 'absolute',
-            right: '56px',
-            top: 0,
-            bottom: 0,
-            width: '600px',
-            backgroundColor: colors.background.primary,
-            borderLeft: `1px solid ${colors.border.main}`,
-            zIndex: 999,
-            animation: 'slideInFromRight 0.3s ease-out',
-          }}
-        >
-          <CodeViewPanel isOpen={true} onClose={() => setActivePanel(null)} />
-        </div>
-      )}
-
-      {/* CSS Animation */}
-      <style>{`
-        @keyframes slideInFromRight {
-          from {
-            transform: translateX(100%);
-            opacity: 0;
-          }
-          to {
-            transform: translateX(0);
-            opacity: 1;
-          }
-        }
-      `}</style>
-    </>
+    </div>
   );
 };
 
