@@ -1,52 +1,26 @@
-import { useEffect } from 'react';
-import Canvas from './components/Canvas';
-import { useCanvasStore } from './stores/canvasStore';
-import { generateLineageView } from './utils/lineageGenerator';
-import { generateDataflowView } from './utils/dataflowGenerator';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Layout from './components/layout/Layout';
+import Dashboard from './pages/Dashboard';
+import Canvas from './pages/Canvas';
+import Observe from './pages/Observe';
+import Deploy from './pages/Deploy';
+import Glossary from './pages/Glossary';
+import Settings from './pages/Settings';
 
 function App() {
-  const {
-    setNodes,
-    setEdges,
-    viewMode,
-    selectedCatalogObject,
-    selectedDataFlowId,
-    upstreamLevels,
-    downstreamLevels,
-  } = useCanvasStore();
-
-  useEffect(() => {
-    if (viewMode === 'lineage' && selectedCatalogObject) {
-      const { nodes, edges } = generateLineageView(
-        selectedCatalogObject,
-        upstreamLevels,
-        downstreamLevels
-      );
-      setNodes(nodes);
-      setEdges(edges);
-    } else if (viewMode === 'dataflow' && selectedDataFlowId) {
-      const { nodes, edges } = generateDataflowView(selectedDataFlowId);
-      setNodes(nodes);
-      setEdges(edges);
-    } else {
-      // Clear canvas when nothing is selected
-      setNodes([]);
-      setEdges([]);
-    }
-  }, [
-    viewMode,
-    selectedCatalogObject,
-    selectedDataFlowId,
-    upstreamLevels,
-    downstreamLevels,
-    setNodes,
-    setEdges,
-  ]);
-
   return (
-    <div style={{ width: '100vw', height: '100vh' }}>
-      <Canvas />
-    </div>
+    <Router>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/canvas" element={<Canvas />} />
+          <Route path="/observe" element={<Observe />} />
+          <Route path="/deploy" element={<Deploy />} />
+          <Route path="/glossary" element={<Glossary />} />
+          <Route path="/settings" element={<Settings />} />
+        </Routes>
+      </Layout>
+    </Router>
   );
 }
 
