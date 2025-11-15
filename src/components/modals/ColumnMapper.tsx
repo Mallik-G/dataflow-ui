@@ -6,6 +6,8 @@ import {
   TransformationType,
 } from '../../types/columnMapping';
 import { AIColumnMapper } from '../../services/aiColumnMapper';
+import { LLMColumnMapper } from '../../services/llmColumnMapper';
+import FeedbackModal from './FeedbackModal';
 
 interface ColumnMapperProps {
   sourceProfile: DataProfile;
@@ -29,12 +31,16 @@ const ColumnMapper = ({
   const [isLoading, setIsLoading] = useState(false);
   const [aiSuggestions, setAiSuggestions] = useState<string[]>([]);
   const [warnings, setWarnings] = useState<string[]>([]);
+  const [llmReasoning, setLlmReasoning] = useState<string>('');
+  const [llmYaml, setLlmYaml] = useState<string>('');
+  const [showFeedbackModal, setShowFeedbackModal] = useState(false);
+  const [showYamlView, setShowYamlView] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  // Auto-map columns using AI on mount
+  // Auto-map columns using LLM on mount
   useEffect(() => {
     if (initialMappings.length === 0) {
-      handleAutoMap();
+      handleLLMMap();
     }
   }, []);
 
@@ -42,6 +48,32 @@ const ColumnMapper = ({
   useEffect(() => {
     drawConnections();
   }, [mappings, selectedMapping]);
+
+  const handleLLMMap = async (previousFeedback?: string) => {
+    setIsLoading(true);
+    try {
+      const result = await LLMColumnMapper.generateMappings({
+        sourceTable: sourceProfile,
+        targetTable: targetProfile,
+        context: previousFeedback
+          ? {
+              previousFeedback,
+            }
+          : undefined,
+      });
+
+      setMappings(result.mappings);
+      setLlmReasoning(result.reasoning);
+      setLlmYaml(result.yaml);
+      onMappingsChange(result.mappings);
+    } catch (error) {
+      console.error('LLM mapping failed:', error);
+      // Fallback to basic AI mapper
+      await handleAutoMap();
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleAutoMap = async () => {
     setIsLoading(true);
@@ -56,6 +88,24 @@ const ColumnMapper = ({
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleAcceptAll = () => {
+    const approvedMappings = mappings.map((m) => ({
+      ...m,
+      isApproved: true,
+    }));
+    setMappings(approvedMappings);
+    onMappingsChange(approvedMappings);
+  };
+
+  const handleRejectAll = () => {
+    setShowFeedbackModal(true);
+  };
+
+  const handleFeedbackSubmit = async (feedback: string) => {
+    setShowFeedbackModal(false);
+    await handleLLMMap(feedback);
   };
 
   const drawConnections = () => {
@@ -234,7 +284,26 @@ const ColumnMapper = ({
           </div>
           <div style={{ display: 'flex', gap: '12px' }}>
             <button
-              onClick={handleAutoMap}
+              onClick={() => setShowYamlView(!showYamlView)}
+              disabled={!llmYaml}
+              style={{
+                padding: '10px 18px',
+                fontSize: '13px',
+                fontWeight: '600',
+                border: `1px solid ${colors.border.main}`,
+                borderRadius: borderRadius.md,
+                backgroundColor: showYamlView
+                  ? colors.primary.lighter
+                  : colors.background.secondary,
+                color: showYamlView ? colors.primary.dark : colors.text.primary,
+                cursor: llmYaml ? 'pointer' : 'not-allowed',
+                transition: 'all 0.2s ease',
+              }}
+            >
+              📄 {showYamlView ? 'Hide YAML' : 'View YAML'}
+            </button>
+            <button
+              onClick={() => handleLLMMap()}
               disabled={isLoading}
               style={{
                 padding: '10px 18px',
@@ -248,10 +317,133 @@ const ColumnMapper = ({
                 transition: 'all 0.2s ease',
               }}
             >
-              {isLoading ? '⏳ Analyzing...' : '✨ Auto-Map'}
+              {isLoading ? '⏳ Generating...' : '🔄 Regenerate'}
             </button>
           </div>
         </div>
+
+        {/* AI Review Panel */}
+        {llmReasoning && (
+          <div
+            style={{
+              padding: '16px 24px',
+              backgroundColor: '#eff6ff',
+              borderBottom: `1px solid #3b82f6`,
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                justifyContent: 'space-between',
+                gap: '16px',
+              }}
+            >
+              <div style={{ flex: 1 }}>
+                <div
+                  style={{
+                    fontSize: '12px',
+                    fontWeight: '600',
+                    color: '#1e40af',
+                    marginBottom: '8px',
+                  }}
+                >
+                  🤖 AI Reasoning
+                </div>
+                <div
+                  style={{
+                    fontSize: '11px',
+                    color: '#1e3a8a',
+                    whiteSpace: 'pre-line',
+                    lineHeight: '1.5',
+                  }}
+                >
+                  {llmReasoning}
+                </div>
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  gap: '8px',
+                  alignItems: 'flex-start',
+                }}
+              >
+                <button
+                  onClick={handleAcceptAll}
+                  disabled={mappings.length === 0}
+                  style={{
+                    padding: '8px 16px',
+                    fontSize: '12px',
+                    fontWeight: '600',
+                    border: 'none',
+                    borderRadius: borderRadius.md,
+                    backgroundColor: '#10b981',
+                    color: '#ffffff',
+                    cursor: mappings.length > 0 ? 'pointer' : 'not-allowed',
+                    transition: 'all 0.2s ease',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  ✓ Accept All
+                </button>
+                <button
+                  onClick={handleRejectAll}
+                  disabled={mappings.length === 0}
+                  style={{
+                    padding: '8px 16px',
+                    fontSize: '12px',
+                    fontWeight: '600',
+                    border: 'none',
+                    borderRadius: borderRadius.md,
+                    backgroundColor: '#f59e0b',
+                    color: '#ffffff',
+                    cursor: mappings.length > 0 ? 'pointer' : 'not-allowed',
+                    transition: 'all 0.2s ease',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  💭 Provide Feedback
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* YAML View */}
+        {showYamlView && llmYaml && (
+          <div
+            style={{
+              padding: '16px 24px',
+              backgroundColor: colors.background.tertiary,
+              borderBottom: `1px solid ${colors.border.main}`,
+              maxHeight: '300px',
+              overflowY: 'auto',
+            }}
+          >
+            <div
+              style={{
+                fontSize: '12px',
+                fontWeight: '600',
+                color: colors.text.secondary,
+                marginBottom: '8px',
+              }}
+            >
+              Generated YAML Configuration
+            </div>
+            <pre
+              style={{
+                margin: 0,
+                fontSize: '11px',
+                fontFamily: 'monospace',
+                color: colors.text.primary,
+                whiteSpace: 'pre-wrap',
+                wordBreak: 'break-word',
+              }}
+            >
+              {llmYaml}
+            </pre>
+          </div>
+        )}
 
         {/* Alerts */}
         {warnings.length > 0 && (
@@ -640,6 +832,14 @@ const ColumnMapper = ({
           </div>
         </div>
       </div>
+
+      {/* Feedback Modal */}
+      {showFeedbackModal && (
+        <FeedbackModal
+          onSubmit={handleFeedbackSubmit}
+          onCancel={() => setShowFeedbackModal(false)}
+        />
+      )}
     </div>
   );
 };
