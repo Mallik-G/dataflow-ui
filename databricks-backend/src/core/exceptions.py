@@ -176,6 +176,95 @@ class DeploymentTimeoutError(NexaHTTPException):
         )
 
 
+# DAB (Databricks Asset Bundle) Exceptions
+class DABCLIError(NexaBaseException):
+    """Base exception for DAB CLI errors."""
+
+    pass
+
+
+class DABValidationError(DeploymentError):
+    """Raised when DAB bundle validation fails."""
+
+    def __init__(
+        self,
+        message: str,
+        deployment_id: Optional[str] = None,
+        validation_errors: Optional[list[str]] = None,
+    ):
+        details = {}
+        if validation_errors:
+            details["validation_errors"] = validation_errors
+
+        super().__init__(
+            message=f"Bundle validation failed: {message}",
+            deployment_id=deployment_id,
+            details=details,
+        )
+
+
+class DABDeploymentError(DeploymentError):
+    """Raised when DAB bundle deployment fails."""
+
+    def __init__(
+        self,
+        message: str,
+        deployment_id: Optional[str] = None,
+        details: Optional[dict[str, Any]] = None,
+    ):
+        super().__init__(
+            message=f"Bundle deployment failed: {message}",
+            deployment_id=deployment_id,
+            details=details,
+        )
+
+
+class DABDestroyError(DeploymentError):
+    """Raised when DAB bundle destroy fails."""
+
+    def __init__(
+        self,
+        message: str,
+        deployment_id: Optional[str] = None,
+        details: Optional[dict[str, Any]] = None,
+    ):
+        super().__init__(
+            message=f"Bundle destroy failed: {message}",
+            deployment_id=deployment_id,
+            details=details,
+        )
+
+
+class DABRunError(DeploymentError):
+    """Raised when DAB bundle run fails."""
+
+    def __init__(
+        self,
+        message: str,
+        deployment_id: Optional[str] = None,
+        run_id: Optional[str] = None,
+    ):
+        details = {}
+        if run_id:
+            details["run_id"] = run_id
+
+        super().__init__(
+            message=f"Bundle run failed: {message}",
+            deployment_id=deployment_id,
+            details=details,
+        )
+
+
+class DABCLINotInstalledError(ServiceUnavailableError):
+    """Raised when Databricks CLI is not installed."""
+
+    def __init__(self):
+        super().__init__(
+            service_name="Databricks CLI",
+            details={"installation_url": "https://docs.databricks.com/dev-tools/cli/"},
+        )
+
+
 # Databricks Integration Exceptions
 class DatabricksAPIError(NexaHTTPException):
     """Raised when Databricks API calls fail."""

@@ -125,8 +125,18 @@ class Settings(BaseSettings):
     enforce_branch_policies: bool = False
 
     # Databricks Deployment Configuration
+    deployment_engine: str = Field(
+        "dab",
+        alias="DEPLOYMENT_ENGINE",
+        description="Deployment engine: 'dab' (Databricks Asset Bundles) or 'imperative' (direct API calls)"
+    )
     deployment_job_name: str = "nexa-deployment-job"
     deployment_workspace_path: str = "/Workspace/nexa_deployments"
+    deployment_bundle_storage_path: str = Field(
+        "/tmp/nexa_bundles",
+        alias="DEPLOYMENT_BUNDLE_STORAGE_PATH",
+        description="Local path for storing DAB bundle configurations"
+    )
     deployment_retry_attempts: int = 3
     deployment_retry_delay_seconds: int = 60
     deployment_mode: str = "serverless"

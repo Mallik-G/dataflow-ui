@@ -5,6 +5,10 @@ Clean implementation of deployment orchestration with three deployment types:
 1. DEPLOY - Fresh deployment (compares last successful SHA to current HEAD)
 2. RESUME - Retry failed deployment including smart detect git changes
 
+Supports two deployment engines:
+1. DAB (Databricks Asset Bundles) - Declarative, recommended
+2. Imperative - Direct API calls, legacy
+
 All secrets stored in Databricks secret scope.
 """
 
@@ -13,16 +17,25 @@ import re
 import uuid
 from dataclasses import dataclass
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any, Dict, List, Optional, Set
 
 from sqlalchemy.orm import Session
+import yaml
 
 from ..core.config import settings
+from ..core.exceptions import (
+    DABValidationError,
+    DABDeploymentError,
+    DABDestroyError,
+)
 from ..models.db import Deployment, DeploymentDetail, Environment
 from ..providers.git_provider_interface import GitProviderFactory, GitProviderInterface
 from ..utils.secrets import SecretManager
 from .databricks.databricks_jobs_api import DatabricksJobsAPI
 from .databricks.databricks_repos_api import DatabricksReposAPI
+from .dab_bundle_generator import DABBundleGenerator
+from .dab_cli_service import DABCLIService
 
 logger = logging.getLogger(__name__)
 
@@ -296,6 +309,8 @@ class DeploymentOrchestrator:
     def __init__(self, db: Session):
         self.db = db
         self._secret_managers: Dict[str, SecretManager] = {}
+        self.bundle_generator = DABBundleGenerator()
+        self.dab_cli_service: Optional[DABCLIService] = None
 
     # -------------------------------------------------------------------------
     # Public API
@@ -306,6 +321,27 @@ class DeploymentOrchestrator:
     ) -> Deployment:
         """
         Create and execute a new deployment.
+
+        Routes to either DAB or imperative deployment based on configuration.
+
+        Args:
+            environment_id: Target environment ID
+            git_branch: Optional branch override
+
+        Returns:
+            Deployment record
+        """
+        # Route to appropriate deployment engine
+        if settings.deployment_engine == "dab":
+            return await self._deploy_dab(environment_id, git_branch)
+        else:
+            return await self._deploy_imperative(environment_id, git_branch)
+
+    async def _deploy_imperative(
+        self, environment_id: str, git_branch: Optional[str] = None
+    ) -> Deployment:
+        """
+        Create and execute a new deployment using imperative approach.
 
         Flow:
         1. Get environment config
@@ -323,7 +359,7 @@ class DeploymentOrchestrator:
             Deployment record
         """
         logger.info(
-            f"=== DEPLOY: Starting new deployment for environment {environment_id} ==="
+            f"=== IMPERATIVE DEPLOY: Starting new deployment for environment {environment_id} ==="
         )
 
         # Get environment configuration
@@ -404,9 +440,174 @@ class DeploymentOrchestrator:
         self.db.commit()
 
         logger.info(
-            f"=== DEPLOY: Job triggered. Deployment ID: {deployment.id}, Run ID: {run_id} ==="
+            f"=== IMPERATIVE DEPLOY: Job triggered. Deployment ID: {deployment.id}, Run ID: {run_id} ==="
         )
         return deployment
+
+    async def _deploy_dab(
+        self, environment_id: str, git_branch: Optional[str] = None
+    ) -> Deployment:
+        """
+        Create and execute a new deployment using DAB (Databricks Asset Bundles).
+
+        Flow:
+        1. Get environment config
+        2. Find last successful deployment SHA
+        3. Compare last SHA to current HEAD using git provider API
+        4. Create deployment record
+        5. Generate DAB bundle configuration (databricks.yml)
+        6. Write bundle to disk
+        7. Sync source files to bundle directory
+        8. Validate bundle
+        9. Deploy bundle
+        10. Track results in database
+
+        Args:
+            environment_id: Target environment ID
+            git_branch: Optional branch override
+
+        Returns:
+            Deployment record
+        """
+        logger.info(
+            f"=== DAB DEPLOY: Starting new deployment for environment {environment_id} ==="
+        )
+
+        # Steps 1-3: Get config, git diff (same as imperative)
+        env = self._get_environment(environment_id)
+        config = self._build_deployment_config(env, git_branch)
+        git_provider = self._create_git_provider(config)
+        git_service = GitService(git_provider)
+        current_head = git_service.get_branch_head_sha(config.git_branch)
+        last_success = self._get_last_successful_deployment(environment_id)
+        last_sha = last_success.git_commit_sha if last_success else None
+
+        # Calculate changes
+        if last_sha:
+            logger.info(
+                f"Comparing from last success {last_sha[:8]} to {current_head[:8]}"
+            )
+            changes = git_service.compare_commits(last_sha, current_head)
+        else:
+            logger.info(f"First deployment - getting all files at {current_head[:8]}")
+            changes = self._get_all_files_from_branch(git_provider, config.git_branch)
+
+        if not changes:
+            logger.warning("No changes detected!")
+            raise ValueError("No changes to deploy")
+
+        deployment_metadata = {
+            "git_branch": config.git_branch,
+            "databricks_host": config.databricks_host,
+            "deployment_method": "dab",
+        }
+
+        # Step 4: Create deployment record
+        deployment = self._create_deployment_record(
+            environment_id=environment_id,
+            git_branch=config.git_branch,
+            git_commit_sha=current_head,
+            deployment_config=deployment_metadata,
+        )
+
+        config.deployment_id = deployment.id
+        self._populate_deployment_details(deployment.id, changes)
+
+        # DAB workflow starts here
+        try:
+            # Get deployment details for bundle generation
+            details = self.db.query(DeploymentDetail).filter_by(
+                deployment_id=deployment.id
+            ).all()
+
+            # Step 5: Generate DAB bundle configuration
+            bundle_config_dict = {
+                "databricks_host": config.databricks_host,
+                "warehouse_id": config.warehouse_id,
+                "catalog": config.catalog,
+                "environment_id": environment_id,
+                "git_branch": config.git_branch,
+                "deployment_id": deployment.id,
+            }
+            bundle_config = self.bundle_generator.generate_bundle(
+                deployment, details, bundle_config_dict
+            )
+
+            # Step 6: Create bundle directory
+            bundle_dir = Path(settings.deployment_bundle_storage_path) / deployment.id
+            bundle_dir.mkdir(parents=True, exist_ok=True)
+
+            # Step 7: Write databricks.yml
+            bundle_yml_path = bundle_dir / "databricks.yml"
+            with open(bundle_yml_path, "w") as f:
+                yaml.dump(
+                    bundle_config,
+                    f,
+                    default_flow_style=False,
+                    sort_keys=False,
+                    allow_unicode=True,
+                )
+            logger.info(f"Wrote bundle configuration to {bundle_yml_path}")
+
+            # Step 8: Sync source files to bundle directory
+            await self._sync_source_files_to_bundle(
+                git_provider, config.git_branch, details, bundle_dir
+            )
+
+            # Step 9: Initialize DAB CLI service
+            self.dab_cli_service = DABCLIService(
+                databricks_host=config.databricks_host,
+                client_id=config.databricks_client_id,
+                client_secret=config.databricks_client_secret,
+            )
+
+            # Step 10: Validate bundle
+            logger.info(f"Validating DAB bundle at {bundle_dir}")
+            validation_result = await self.dab_cli_service.validate_bundle(
+                bundle_dir=bundle_dir,
+                target=environment_id,
+            )
+            logger.info("Bundle validation passed")
+
+            # Step 11: Deploy bundle
+            logger.info(f"Deploying DAB bundle to {config.databricks_host}")
+            deployment_result = await self.dab_cli_service.deploy_bundle(
+                bundle_dir=bundle_dir,
+                target=environment_id,
+                auto_approve=True,
+            )
+            logger.info(
+                f"Bundle deployed successfully: {deployment_result.get('resources', {})}"
+            )
+
+            # Step 12: Update deployment status
+            deployment.status = "success"
+            deployment.completed_at = datetime.now(timezone.utc)
+
+            # Update deployment details with deployed resource IDs
+            self._update_details_with_resource_ids(
+                deployment.id, deployment_result.get("resources", {})
+            )
+
+            self.db.commit()
+
+            logger.info(f"=== DAB DEPLOY: Completed successfully ===")
+            return deployment
+
+        except (DABValidationError, DABDeploymentError) as e:
+            logger.error(f"DAB deployment failed: {e}")
+            deployment.status = "failed"
+            deployment.error_message = str(e)
+            deployment.completed_at = datetime.now(timezone.utc)
+            self.db.commit()
+            raise
+        except Exception as e:
+            logger.error(f"Unexpected error during DAB deployment: {e}", exc_info=True)
+            deployment.status = "failed"
+            deployment.error_message = f"Unexpected error: {str(e)}"
+            deployment.completed_at = datetime.now(timezone.utc)
+            self.db.commit()
+            raise
 
     async def resume(self, deployment_id: str) -> Deployment:
         """
@@ -950,3 +1151,103 @@ class DeploymentOrchestrator:
                     return file_type
 
         return "other"
+
+    # -------------------------------------------------------------------------
+    # DAB-Specific Helper Methods
+    # -------------------------------------------------------------------------
+
+    async def _sync_source_files_to_bundle(
+        self,
+        git_provider: GitProviderInterface,
+        branch: str,
+        details: List[DeploymentDetail],
+        bundle_dir: Path,
+    ) -> None:
+        """
+        Download source files from git and copy to bundle directory.
+
+        Creates directory structure matching repository:
+        - ddl/customers.sql
+        - pipelines/bronze_ingestion.py
+
+        Args:
+            git_provider: Git provider instance
+            branch: Git branch
+            details: List of deployment details
+            bundle_dir: Bundle directory path
+        """
+        logger.info(f"Syncing {len(details)} source files to bundle directory")
+
+        for detail in details:
+            try:
+                # Get file content from git
+                file_content = git_provider.get_file_content(
+                    path=detail.file_path, ref=branch
+                )
+
+                # Decode if base64 encoded (GitHub returns base64)
+                if isinstance(file_content, dict) and file_content.get("encoding") == "base64":
+                    import base64
+                    file_content = base64.b64decode(file_content.get("content", "")).decode("utf-8")
+                elif isinstance(file_content, dict):
+                    file_content = file_content.get("content", "")
+
+                # Write to bundle directory
+                target_path = bundle_dir / detail.file_path
+                target_path.parent.mkdir(parents=True, exist_ok=True)
+
+                with open(target_path, "w") as f:
+                    f.write(file_content)
+
+                logger.debug(f"Copied {detail.file_path} to bundle")
+
+            except Exception as e:
+                logger.error(f"Failed to sync file {detail.file_path}: {e}")
+                raise
+
+        logger.info(f"Successfully synced all source files to {bundle_dir}")
+
+    def _update_details_with_resource_ids(
+        self, deployment_id: str, resources: Dict[str, List[str]]
+    ) -> None:
+        """
+        Update deployment_details with deployed resource IDs.
+
+        Args:
+            deployment_id: Deployment ID
+            resources: Dict mapping resource types to lists of IDs
+                      e.g., {"jobs": ["123"], "pipelines": ["abc-def"]}
+        """
+        if not resources:
+            logger.warning("No resources returned from deployment")
+            return
+
+        logger.info(f"Updating deployment details with resource IDs: {resources}")
+
+        # Get all details for this deployment
+        details = self.db.query(DeploymentDetail).filter_by(
+            deployment_id=deployment_id
+        ).all()
+
+        # Update details with resource IDs (simple mapping for now)
+        # In production, you'd want more sophisticated matching logic
+        job_ids = resources.get("jobs", [])
+        pipeline_ids = resources.get("pipelines", [])
+
+        job_index = 0
+        pipeline_index = 0
+
+        for detail in details:
+            if detail.file_type == "ddl" and job_index < len(job_ids):
+                detail.platform_object_id = job_ids[job_index]
+                detail.deployment_status = "success"
+                detail.deployed_at = datetime.now(timezone.utc)
+                job_index += 1
+            elif detail.file_type == "pipeline" and pipeline_index < len(pipeline_ids):
+                detail.platform_object_id = pipeline_ids[pipeline_index]
+                detail.deployment_status = "success"
+                detail.deployed_at = datetime.now(timezone.utc)
+                pipeline_index += 1
+
+        self.db.commit()
+        logger.info(f"Updated {len(details)} deployment details with resource IDs")
