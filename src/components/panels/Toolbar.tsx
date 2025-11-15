@@ -1,10 +1,12 @@
 import { useReactFlow } from 'reactflow';
 import { useState } from 'react';
 import { colors, borderRadius } from '../../theme/colors';
+import CodeViewModal from './CodeViewModal';
 
 const Toolbar = () => {
   const { zoomIn, zoomOut, fitView } = useReactFlow();
   const [hoveredButton, setHoveredButton] = useState<string | null>(null);
+  const [isCodeViewOpen, setIsCodeViewOpen] = useState(false);
 
   const buttonStyle = (buttonName: string) => ({
     padding: '10px 18px',
@@ -76,6 +78,25 @@ const Toolbar = () => {
         <span style={{ fontSize: '16px' }}>⤢</span>
         <span>Fit to Screen</span>
       </button>
+      <div style={{
+        width: '1px',
+        height: '24px',
+        backgroundColor: colors.border.main,
+        margin: '6px 4px',
+      }} />
+      <button
+        style={buttonStyle('code')}
+        onClick={() => setIsCodeViewOpen(true)}
+        onMouseEnter={() => setHoveredButton('code')}
+        onMouseLeave={() => setHoveredButton(null)}
+      >
+        <span style={{ fontSize: '16px' }}>&lt;/&gt;</span>
+        <span>Code View</span>
+      </button>
+      <CodeViewModal
+        isOpen={isCodeViewOpen}
+        onClose={() => setIsCodeViewOpen(false)}
+      />
     </div>
   );
 };
