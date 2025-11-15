@@ -5,6 +5,7 @@ import { useCanvasStore } from '../../stores/canvasStore';
 import { colors, borderRadius } from '../../theme/colors';
 import ContextMenu, { ContextMenuItem } from '../common/ContextMenu';
 import CreateFlowModal, { FlowConfig } from '../modals/CreateFlowModal';
+import GenerateArtifactsModal from '../modals/GenerateArtifactsModal';
 
 interface ContextMenuState {
   x: number;
@@ -16,7 +17,10 @@ const CatalogTab = () => {
   const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set(['db-1', 'schema-raw', 'schema-silver', 'schema-gold']));
   const [contextMenu, setContextMenu] = useState<ContextMenuState | null>(null);
   const [isCreateFlowModalOpen, setIsCreateFlowModalOpen] = useState(false);
+  const [isGenerateArtifactsModalOpen, setIsGenerateArtifactsModalOpen] = useState(false);
   const [selectedTable, setSelectedTable] = useState<CatalogObject | null>(null);
+  const [createdFlows, setCreatedFlows] = useState<Map<string, FlowConfig>>(new Map());
+  const [selectedFlowForGeneration, setSelectedFlowForGeneration] = useState<FlowConfig | null>(null);
   const { setViewMode, setSelectedCatalogObject } = useCanvasStore();
 
   const toggleNode = (id: string) => {
@@ -38,10 +42,22 @@ const CatalogTab = () => {
 
   const handleCreateFlow = (config: FlowConfig) => {
     console.log('Creating flow:', config);
-    // This will be connected to canvas store in next task
-    alert(`✨ Flow created!\n\nSource: ${config.source.fullPath}\nTarget: ${config.target.fullPath}\nPlatform: ${config.platform}`);
+
+    // Store the flow
+    const newFlows = new Map(createdFlows);
+    newFlows.set(config.source.fullPath, config);
+    setCreatedFlows(newFlows);
+
+    // Show success message with option to generate artifacts
+    const shouldGenerate = confirm(`✨ Flow created!\n\nSource: ${config.source.fullPath}\nTarget: ${config.target.fullPath}\nPlatform: ${config.platform}\n\nDo you want to generate artifacts now?`);
+
     setIsCreateFlowModalOpen(false);
     setSelectedTable(null);
+
+    if (shouldGenerate) {
+      setSelectedFlowForGeneration(config);
+      setIsGenerateArtifactsModalOpen(true);
+    }
   };
 
   const handleContextMenu = (e: React.MouseEvent, obj: CatalogObject) => {
@@ -58,10 +74,11 @@ const CatalogTab = () => {
   };
 
   const getContextMenuItems = (obj: CatalogObject): ContextMenuItem[] => {
-    // Check if flow exists (for now, always allow creation)
-    const hasExistingFlow = false;
+    // Check if flow exists for this table
+    const existingFlow = createdFlows.get(obj.fullyQualifiedName);
+    const hasExistingFlow = !!existingFlow;
 
-    return [
+    const items: ContextMenuItem[] = [
       {
         id: 'view-lineage',
         label: 'View Lineage',
@@ -80,7 +97,22 @@ const CatalogTab = () => {
           setIsCreateFlowModalOpen(true);
         },
       },
-      {
+    ];
+
+    // Add "Generate Artifacts" if flow exists
+    if (hasExistingFlow) {
+      items.push({
+        id: 'generate-artifacts',
+        label: 'Generate Artifacts',
+        icon: '⚡',
+        onClick: () => {
+          setSelectedFlowForGeneration(existingFlow);
+          setIsGenerateArtifactsModalOpen(true);
+        },
+        divider: true,
+      });
+    } else {
+      items.push({
         id: 'add-to-flow',
         label: 'Add to Current Flow',
         icon: '🔗',
@@ -89,7 +121,10 @@ const CatalogTab = () => {
         },
         disabled: true, // Enable when there's an active flow
         divider: true,
-      },
+      });
+    }
+
+    items.push(
       {
         id: 'copy-path',
         label: 'Copy Table Path',
@@ -106,7 +141,7 @@ const CatalogTab = () => {
         onClick: () => {
           alert(`Profile data for ${obj.name}`);
         },
-        disabled: true, // Will implement in Phase 2
+        disabled: true,
       },
       {
         id: 'docs',
@@ -116,8 +151,10 @@ const CatalogTab = () => {
           alert(`View docs for ${obj.name}`);
         },
         disabled: true,
-      },
-    ];
+      }
+    );
+
+    return items;
   };
 
   const getIcon = (type: string) => {
@@ -238,6 +275,17 @@ const CatalogTab = () => {
             setSelectedTable(null);
           }}
           onCreateFlow={handleCreateFlow}
+        />
+      )}
+
+      {/* Generate Artifacts Modal */}
+      {isGenerateArtifactsModalOpen && selectedFlowForGeneration && (
+        <GenerateArtifactsModal
+          flow={selectedFlowForGeneration}
+          onClose={() => {
+            setIsGenerateArtifactsModalOpen(false);
+            setSelectedFlowForGeneration(null);
+          }}
         />
       )}
     </>
