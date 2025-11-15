@@ -1,0 +1,115 @@
+version: '3.8'
+
+services:
+  # PostgreSQL for state tracking and RAG
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: dataflow-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: nexa_state
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Snowflake Backend
+  snowflake-backend:
+    build:
+      context: ./snowflake-backend
+      dockerfile: Dockerfile
+    container_name: snowflake-backend
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - NODE_ENV=production
+      - CORS_ORIGIN=http://localhost:5173
+    env_file:
+      - ./snowflake-backend/.env
+    volumes:
+      - ./snowflake-backend/logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Databricks Backend
+  databricks-backend:
+    build:
+      context: ./databricks-backend
+      dockerfile: Dockerfile
+    container_name: databricks-backend
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT=3002
+      - NODE_ENV=production
+      - CORS_ORIGIN=http://localhost:5173
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=nexa_state
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+    env_file:
+      - ./databricks-backend/.env
+    volumes:
+      - ./databricks-backend/logs:/app/logs
+      - ./nexa-state:/app/nexa-state
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3002/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # LLM Backend
+  llm-backend:
+    build:
+      context: ./llm-backend
+      dockerfile: Dockerfile
+    container_name: llm-backend
+    ports:
+      - "3003:3003"
+    environment:
+      - PORT=3003
+      - NODE_ENV=production
+      - CORS_ORIGIN=http://localhost:5173
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=nexa_rag
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+    env_file:
+      - ./llm-backend/.env
+    volumes:
+      - ./llm-backend/logs:/app/logs
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3003/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  default:
+    name: dataflow-network
