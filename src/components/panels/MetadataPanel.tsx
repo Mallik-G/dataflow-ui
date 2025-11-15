@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useCanvasStore } from '../../stores/canvasStore';
 import { colors, borderRadius } from '../../theme/colors';
 import {
@@ -8,55 +7,17 @@ import {
   TransformNodeData
 } from '../../types';
 
-const MetadataPanel = () => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+interface MetadataPanelProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const MetadataPanel = ({ isOpen, onClose }: MetadataPanelProps) => {
   const selectedNode = useCanvasStore(state => state.selectedNode);
   const selectedEdge = useCanvasStore(state => state.selectedEdge);
   const nodes = useCanvasStore(state => state.nodes);
 
-  const hasSelection = selectedNode || selectedEdge;
-
-  if (isCollapsed || !hasSelection) {
-    return (
-      <div style={{
-        width: '60px',
-        height: '100%',
-        backgroundColor: colors.background.tertiary,
-        borderLeft: `1px solid ${colors.border.main}`,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: '12px 0',
-        gap: '12px',
-      }}>
-        <button
-          onClick={() => setIsCollapsed(false)}
-          title={hasSelection ? 'Context Details' : 'Context Panel'}
-          style={{
-            width: '40px',
-            height: '40px',
-            backgroundColor: hasSelection ? colors.primary.lighter : colors.background.secondary,
-            border: hasSelection ? `2px solid ${colors.primary.main}` : `2px solid ${colors.border.main}`,
-            borderRadius: borderRadius.md,
-            cursor: 'pointer',
-            fontSize: '20px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            transition: 'all 0.2s ease',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = colors.background.hover;
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = hasSelection ? colors.primary.lighter : colors.background.secondary;
-          }}
-        >
-          ⓘ
-        </button>
-      </div>
-    );
-  }
+  if (!isOpen) return null;
 
   // Render edge details if edge is selected
   if (selectedEdge) {
@@ -65,10 +26,9 @@ const MetadataPanel = () => {
 
     return (
       <div style={{
-        width: '360px',
+        width: '100%',
         height: '100%',
         backgroundColor: '#ffffff',
-        borderLeft: `1px solid ${colors.border.main}`,
         overflowY: 'auto',
       }}>
         {/* Header */}
@@ -80,8 +40,8 @@ const MetadataPanel = () => {
           position: 'relative',
         }}>
           <button
-            onClick={() => setIsCollapsed(true)}
-            title="Collapse context panel"
+            onClick={onClose}
+            title="Close context panel"
             style={{
               position: 'absolute',
               top: '16px',
@@ -526,10 +486,9 @@ const MetadataPanel = () => {
 
   return (
     <div style={{
-      width: '360px',
+      width: '100%',
       height: '100%',
       backgroundColor: '#ffffff',
-      borderLeft: `1px solid ${colors.border.main}`,
       overflowY: 'auto',
     }}>
       {/* Header */}
@@ -541,8 +500,8 @@ const MetadataPanel = () => {
         position: 'relative',
       }}>
         <button
-          onClick={() => setIsCollapsed(true)}
-          title="Collapse context panel"
+          onClick={onClose}
+          title="Close context panel"
           style={{
             position: 'absolute',
             top: '16px',

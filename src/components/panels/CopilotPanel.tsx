@@ -13,8 +13,12 @@ interface Message {
   };
 }
 
-const CopilotPanel = () => {
-  const [isOpen, setIsOpen] = useState(true);
+interface CopilotPanelProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const CopilotPanel = ({ isOpen, onClose }: CopilotPanelProps) => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -111,68 +115,15 @@ const CopilotPanel = () => {
     return 'I can help you:\n• Explore node lineage (click ➕ on nodes)\n• Understand transformations\n• Review LLM confidence scores\n• Analyze data quality\n\nTry: "Explain the selected node" or "How do I expand lineage?"';
   };
 
-  if (!isOpen) {
-    return (
-      <div style={{
-        position: 'fixed',
-        top: 0,
-        right: 0,
-        width: '60px',
-        height: '100vh',
-        backgroundColor: colors.background.tertiary,
-        borderLeft: `1px solid ${colors.border.main}`,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: '12px 0',
-        gap: '12px',
-        zIndex: 999,
-      }}>
-        <button
-          onClick={() => setIsOpen(true)}
-          title="AI Copilot Assistant"
-          style={{
-            width: '40px',
-            height: '40px',
-            background: `linear-gradient(135deg, ${colors.primary.main} 0%, ${colors.primary.dark} 100%)`,
-            border: `2px solid ${colors.primary.main}`,
-            borderRadius: borderRadius.md,
-            cursor: 'pointer',
-            fontSize: '20px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            transition: 'all 0.2s ease',
-            boxShadow: colors.shadow.md,
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'scale(1.1)';
-            e.currentTarget.style.boxShadow = colors.shadow.lg;
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'scale(1)';
-            e.currentTarget.style.boxShadow = colors.shadow.md;
-          }}
-        >
-          ✨
-        </button>
-      </div>
-    );
-  }
+  if (!isOpen) return null;
 
   return (
     <div style={{
-      position: 'fixed',
-      top: 0,
-      right: 0,
-      width: '420px',
-      height: '100vh',
+      width: '100%',
+      height: '100%',
       backgroundColor: colors.background.tertiary,
-      borderLeft: `1px solid ${colors.border.main}`,
       display: 'flex',
       flexDirection: 'column',
-      zIndex: 999,
-      boxShadow: colors.shadow.xl,
     }}>
       {/* Header */}
       <div style={{
@@ -206,7 +157,7 @@ const CopilotPanel = () => {
           </div>
         </div>
         <button
-          onClick={() => setIsOpen(false)}
+          onClick={onClose}
           style={{
             backgroundColor: 'transparent',
             border: 'none',

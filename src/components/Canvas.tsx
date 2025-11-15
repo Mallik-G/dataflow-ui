@@ -17,10 +17,9 @@ import SilverTableNode from './nodes/SilverTableNode';
 import GoldEntityNode from './nodes/GoldEntityNode';
 import TransformNode from './nodes/TransformNode';
 import CustomEdge from './edges/CustomEdge';
-import MetadataPanel from './panels/MetadataPanel';
+import RightSidebar from './sidebar/RightSidebar';
 import Toolbar from './panels/Toolbar';
 import BottomPanel from './panels/BottomPanel';
-import CopilotPanel from './panels/CopilotPanel';
 import { CustomEdge as CustomEdgeType } from '../types';
 
 const nodeTypes = {
@@ -71,12 +70,12 @@ const CanvasContent = () => {
   );
 
   return (
-    <div style={{ width: '100vw', height: '100vh', display: 'flex', backgroundColor: '#fafbfc' }}>
+    <div style={{ width: '100vw', height: '100vh', display: 'flex', backgroundColor: '#fafbfc', position: 'relative' }}>
       {/* Left Browser Panel */}
       <BrowserPanel />
 
       {/* Center Canvas */}
-      <div style={{ flex: 1, position: 'relative' }}>
+      <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
         <ReactFlow
           nodes={filteredNodes as any}
           edges={edges as any}
@@ -134,16 +133,13 @@ const CanvasContent = () => {
           />
           <Toolbar />
         </ReactFlow>
+
+        {/* Bottom Panel */}
+        <BottomPanel />
       </div>
 
-      {/* Right Context Panel */}
-      <MetadataPanel />
-
-      {/* Bottom Panel */}
-      <BottomPanel />
-
-      {/* Copilot Panel */}
-      <CopilotPanel />
+      {/* Right Sidebar with all panels */}
+      <RightSidebar />
     </div>
   );
 };
