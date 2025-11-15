@@ -1,0 +1,79 @@
+{'tableInfo': {'name': 'total_loan_balances', 'catalog_name': 'dev', 'schema_name': 'bronze', 'table_type': 'MATERIALIZED_VIEW', 'lineage_timestamp': '2025-10-15 13: 29: 58.0'
+    }, 'pipelineInfos': [
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': '7466e09d-f846-4398-82b0-ac3f8e31b240', 'lineage_timestamp': '2025-10-15 13: 29: 58.0'
+        },
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': '8624ed07-314c-4bb4-b76f-4d0b66d0d223', 'lineage_timestamp': '2025-10-15 12: 52: 32.0'
+        },
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': '412f9f4f-ae4c-44e5-8573-3ab92ee49f57', 'lineage_timestamp': '2025-10-13 09: 06: 52.0'
+        },
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': 'c0b62393-4983-4c70-a951-7a4bfdbaf354', 'lineage_timestamp': '2025-10-12 08: 18: 34.0'
+        },
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': 'e95c3827-5b60-44e8-9590-bd6cd9a0918a', 'lineage_timestamp': '2025-10-12 08: 05: 48.0'
+        },
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': '39c34a0e-e6e6-4c8a-beba-d5809058d271', 'lineage_timestamp': '2025-10-12 07: 53: 44.0'
+        },
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': 'e946543b-4b0b-4227-b54b-d6885708e374', 'lineage_timestamp': '2025-10-12 07: 49: 44.0'
+        }
+    ]
+},
+{'pipelineInfos': [
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': '7466e09d-f846-4398-82b0-ac3f8e31b240', 'lineage_timestamp': '2025-10-15 13: 29: 56.0'
+        },
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': '8624ed07-314c-4bb4-b76f-4d0b66d0d223', 'lineage_timestamp': '2025-10-15 12: 56: 21.0'
+        },
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': '412f9f4f-ae4c-44e5-8573-3ab92ee49f57', 'lineage_timestamp': '2025-10-14 08: 43: 53.0'
+        },
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': 'c0b62393-4983-4c70-a951-7a4bfdbaf354', 'lineage_timestamp': '2025-10-12 08: 18: 34.0'
+        },
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': 'e95c3827-5b60-44e8-9590-bd6cd9a0918a', 'lineage_timestamp': '2025-10-12 08: 05: 39.0'
+        },
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': '39c34a0e-e6e6-4c8a-beba-d5809058d271', 'lineage_timestamp': '2025-10-12 07: 53: 33.0'
+        },
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': 'e946543b-4b0b-4227-b54b-d6885708e374', 'lineage_timestamp': '2025-10-12 07: 49: 40.0'
+        }
+    ]
+},
+{'tableInfo': {'name': 'new_loan_balances_by_cost_center', 'catalog_name': 'dev', 'schema_name': 'bronze', 'table_type': 'MATERIALIZED_VIEW', 'lineage_timestamp': '2025-10-15 13: 29: 55.0'
+    }, 'pipelineInfos': [
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': '7466e09d-f846-4398-82b0-ac3f8e31b240', 'lineage_timestamp': '2025-10-15 13: 29: 55.0'
+        },
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': '8624ed07-314c-4bb4-b76f-4d0b66d0d223', 'lineage_timestamp': '2025-10-15 12: 52: 28.0'
+        },
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': '412f9f4f-ae4c-44e5-8573-3ab92ee49f57', 'lineage_timestamp': '2025-10-13 08: 02: 00.0'
+        },
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': 'c0b62393-4983-4c70-a951-7a4bfdbaf354', 'lineage_timestamp': '2025-10-12 08: 07: 21.0'
+        },
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': 'e95c3827-5b60-44e8-9590-bd6cd9a0918a', 'lineage_timestamp': '2025-10-12 08: 05: 50.0'
+        },
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': '39c34a0e-e6e6-4c8a-beba-d5809058d271', 'lineage_timestamp': '2025-10-12 07: 53: 46.0'
+        },
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': 'e946543b-4b0b-4227-b54b-d6885708e374', 'lineage_timestamp': '2025-10-12 07: 49: 41.0'
+        }
+    ]
+},
+{'tableInfo': {'name': 'new_loan_balances_by_country', 'catalog_name': 'dev', 'schema_name': 'bronze', 'table_type': 'MATERIALIZED_VIEW', 'lineage_timestamp': '2025-10-15 13: 29: 55.0'
+    }, 'pipelineInfos': [
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': '7466e09d-f846-4398-82b0-ac3f8e31b240', 'lineage_timestamp': '2025-10-15 13: 29: 55.0'
+        },
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': '8624ed07-314c-4bb4-b76f-4d0b66d0d223', 'lineage_timestamp': '2025-10-15 12: 52: 28.0'
+        },
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': '412f9f4f-ae4c-44e5-8573-3ab92ee49f57', 'lineage_timestamp': '2025-10-13 08: 02: 00.0'
+        },
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': 'c0b62393-4983-4c70-a951-7a4bfdbaf354', 'lineage_timestamp': '2025-10-12 08: 07: 21.0'
+        },
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': 'e95c3827-5b60-44e8-9590-bd6cd9a0918a', 'lineage_timestamp': '2025-10-12 08: 05: 50.0'
+        },
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': '39c34a0e-e6e6-4c8a-beba-d5809058d271', 'lineage_timestamp': '2025-10-12 07: 53: 46.0'
+        },
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': 'e946543b-4b0b-4227-b54b-d6885708e374', 'lineage_timestamp': '2025-10-12 07: 49: 41.0'
+        }
+    ]
+},
+{'tableInfo': {'name': 'cleaned_new_txs', 'catalog_name': 'dev', 'schema_name': 'bronze', 'table_type': 'STREAMING_TABLE', 'lineage_timestamp': '2025-10-13 08: 12: 14.0'
+    }, 'pipelineInfos': [
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': '412f9f4f-ae4c-44e5-8573-3ab92ee49f57', 'lineage_timestamp': '2025-10-13 08: 12: 14.0'
+        },
+        {'pipeline_id': '2e738f1e-a894-436d-893a-77ab44feaa09', 'update_id': 'c0b62393-4983-4c70-a951-7a4bfdbaf354', 'lineage_timestamp': '2025-10-12 08: 18: 29.0'
+        }
+    ]
+}
