@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { colors, borderRadius } from '../../theme/colors';
 import { CatalogObject } from '../../types/catalog';
+import { ColumnMapping, DataProfile, DataType } from '../../types/columnMapping';
+import ColumnMapper from './ColumnMapper';
 
 interface CreateFlowModalProps {
   sourceTable: CatalogObject;
@@ -23,6 +25,7 @@ export interface FlowConfig {
   };
   description: string;
   platform: 'snowflake' | 'databricks' | 'bigquery' | 'postgres';
+  columnMappings?: ColumnMapping[];
 }
 
 const CreateFlowModal = ({ sourceTable, onClose, onCreateFlow }: CreateFlowModalProps) => {
@@ -54,32 +57,85 @@ const CreateFlowModal = ({ sourceTable, onClose, onCreateFlow }: CreateFlowModal
     return 'processed';
   };
 
+  const [step, setStep] = useState<'config' | 'mapping'>('config');
   const [flowName, setFlowName] = useState(`${sourceTable.name}_transformation`);
   const [targetSchema, setTargetSchema] = useState(suggestTargetSchema());
   const [targetTable, setTargetTable] = useState(suggestTargetTable());
   const [description, setDescription] = useState(`Transform ${sourceTable.name} from ${sourceSchema} to ${suggestTargetSchema()}`);
   const [platform, setPlatform] = useState<'snowflake' | 'databricks' | 'bigquery' | 'postgres'>('snowflake');
+  const [columnMappings, setColumnMappings] = useState<ColumnMapping[]>([]);
+
+  // Generate mock data profiles for AI mapping
+  const generateMockProfile = (schema: string, table: string, isSource: boolean): DataProfile => {
+    // Mock column data - in production, this would come from actual table metadata
+    const mockColumns = isSource
+      ? [
+          { name: 'customer_id', type: 'number' as DataType, nullable: false },
+          { name: 'email', type: 'string' as DataType, nullable: false },
+          { name: 'first_name', type: 'string' as DataType, nullable: true },
+          { name: 'last_name', type: 'string' as DataType, nullable: true },
+          { name: 'created_at', type: 'timestamp' as DataType, nullable: false },
+          { name: 'phone_number', type: 'string' as DataType, nullable: true },
+          { name: 'address', type: 'string' as DataType, nullable: true },
+        ]
+      : [
+          { name: 'id', type: 'number' as DataType, nullable: false },
+          { name: 'contact_email', type: 'string' as DataType, nullable: false },
+          { name: 'full_name', type: 'string' as DataType, nullable: false },
+          { name: 'registration_date', type: 'date' as DataType, nullable: false },
+          { name: 'phone', type: 'string' as DataType, nullable: true },
+        ];
+
+    return {
+      tableName: `${schema}.${table}`,
+      columns: mockColumns,
+      rowCount: 1000,
+    };
+  };
 
   const handleNext = () => {
-    const config: FlowConfig = {
-      id: `flow-${Date.now()}`,
-      name: flowName,
-      source: {
-        schema: sourceSchema,
-        table: sourceTable.name,
-        fullPath: `${sourceSchema}.${sourceTable.name}`,
-      },
-      target: {
-        schema: targetSchema,
-        table: targetTable,
-        fullPath: `${targetSchema}.${targetTable}`,
-      },
-      description,
-      platform,
-    };
+    if (step === 'config') {
+      setStep('mapping');
+    } else {
+      // Create flow with column mappings
+      const config: FlowConfig = {
+        id: `flow-${Date.now()}`,
+        name: flowName,
+        source: {
+          schema: sourceSchema,
+          table: sourceTable.name,
+          fullPath: `${sourceSchema}.${sourceTable.name}`,
+        },
+        target: {
+          schema: targetSchema,
+          table: targetTable,
+          fullPath: `${targetSchema}.${targetTable}`,
+        },
+        description,
+        platform,
+        columnMappings,
+      };
 
-    onCreateFlow(config);
+      onCreateFlow(config);
+    }
   };
+
+  // Render column mapping step
+  if (step === 'mapping') {
+    const sourceProfile = generateMockProfile(sourceSchema, sourceTable.name, true);
+    const targetProfile = generateMockProfile(targetSchema, targetTable, false);
+
+    return (
+      <ColumnMapper
+        sourceProfile={sourceProfile}
+        targetProfile={targetProfile}
+        initialMappings={columnMappings}
+        onMappingsChange={setColumnMappings}
+        onBack={() => setStep('config')}
+        onNext={handleNext}
+      />
+    );
+  }
 
   return (
     <div style={{
