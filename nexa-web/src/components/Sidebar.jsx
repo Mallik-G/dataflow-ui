@@ -22,6 +22,7 @@ import {
   BiRocket,
   BiTransfer,
   BiShow,
+  BiGitMerge,
 } from "react-icons/bi";
 
 const Sidebar = () => {
@@ -169,6 +170,15 @@ const Sidebar = () => {
                 <BiShow />
               </span>
               <span className="nav-link-text">Observe</span>
+            </Link>
+            <Link
+              to="/pipelines"
+              className={`nav-link ${isActive("/pipelines") ? "active" : ""}`}
+            >
+              <span className="nav-link-icon">
+                <BiGitMerge />
+              </span>
+              <span className="nav-link-text">Pipelines</span>
             </Link>
 
             <Link

@@ -34,6 +34,7 @@ import GoldLandingPage from "./screens/GoldLandingPage";
 import HomePage from "./screens/HomePage";
 import Jobs from "./screens/Jobs";
 import Observe from "./screens/Observe";
+import Pipelines from "./screens/Pipelines";
 import Projections from "./screens/Projections";
 import Promotions from "./screens/Promotions";
 import RegisterPage from "./screens/RegisterPage";
@@ -319,6 +320,16 @@ function App() {
             <ProtectedRoute isAuthenticated={isAuthenticated}>
               <Layout setIsAuthenticated={setIsAuthenticated}>
                 <Observe />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/pipelines"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <Layout setIsAuthenticated={setIsAuthenticated}>
+                <Pipelines />
               </Layout>
             </ProtectedRoute>
           }

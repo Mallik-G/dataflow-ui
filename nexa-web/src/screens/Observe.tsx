@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { colors, borderRadius } from '../theme/colors';
 
 interface JobStats {
@@ -25,9 +26,10 @@ interface KPICardProps {
   icon: string;
   trend?: 'up' | 'down' | 'neutral';
   status?: 'success' | 'warning' | 'error' | 'info';
+  onClick?: () => void;
 }
 
-const KPICard = ({ title, value, subtitle, icon, trend, status = 'info' }: KPICardProps) => {
+const KPICard = ({ title, value, subtitle, icon, trend, status = 'info', onClick }: KPICardProps) => {
   const getStatusColor = () => {
     switch (status) {
       case 'success':
@@ -50,6 +52,7 @@ const KPICard = ({ title, value, subtitle, icon, trend, status = 'info' }: KPICa
 
   return (
     <div
+      onClick={onClick}
       style={{
         backgroundColor: colors.background.secondary,
         border: `1px solid ${colors.border.main}`,
@@ -59,7 +62,7 @@ const KPICard = ({ title, value, subtitle, icon, trend, status = 'info' }: KPICa
         flexDirection: 'column',
         gap: '12px',
         transition: 'all 0.2s ease',
-        cursor: 'default',
+        cursor: onClick ? 'pointer' : 'default',
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = 'translateY(-2px)';
@@ -122,6 +125,7 @@ const KPICard = ({ title, value, subtitle, icon, trend, status = 'info' }: KPICa
 };
 
 const Observe = () => {
+  const navigate = useNavigate();
   const [jobStats, setJobStats] = useState<JobStats | null>(null);
   const [pipelineStats, setPipelineStats] = useState<PipelineStats | null>(null);
   const [loading, setLoading] = useState(true);
@@ -315,6 +319,7 @@ const Observe = () => {
               value={jobStats?.total_jobs || 0}
               icon="📦"
               status="info"
+              onClick={() => navigate('/jobs')}
             />
             <KPICard
               title="Running"
@@ -322,6 +327,7 @@ const Observe = () => {
               subtitle="Currently executing"
               icon="▶️"
               status="info"
+              onClick={() => navigate('/jobs?status=running')}
             />
             <KPICard
               title="Succeeded"
@@ -329,6 +335,7 @@ const Observe = () => {
               subtitle="Last run successful"
               icon="✅"
               status="success"
+              onClick={() => navigate('/jobs?status=succeeded')}
             />
             <KPICard
               title="Failed"
@@ -336,6 +343,7 @@ const Observe = () => {
               subtitle="Consecutive failures"
               icon="❌"
               status={(jobStats?.failed_jobs || 0) > 0 ? 'error' : 'success'}
+              onClick={() => navigate('/jobs?status=failed')}
             />
             <KPICard
               title="Overdue"
@@ -343,6 +351,7 @@ const Observe = () => {
               subtitle="Past expected run time"
               icon="⏰"
               status={(jobStats?.overdue_jobs || 0) > 0 ? 'warning' : 'success'}
+              onClick={() => navigate('/jobs?status=overdue')}
             />
           </div>
         </div>
@@ -365,6 +374,7 @@ const Observe = () => {
               value={pipelineStats?.total_pipelines || 0}
               icon="🔄"
               status="info"
+              onClick={() => navigate('/pipelines')}
             />
             <KPICard
               title="Healthy"
@@ -372,6 +382,7 @@ const Observe = () => {
               subtitle="Operating normally"
               icon="💚"
               status="success"
+              onClick={() => navigate('/pipelines?health=HEALTHY')}
             />
             <KPICard
               title="Unhealthy"
@@ -379,6 +390,7 @@ const Observe = () => {
               subtitle="Needs attention"
               icon="🔴"
               status={(pipelineStats?.unhealthy_pipelines || 0) > 0 ? 'error' : 'success'}
+              onClick={() => navigate('/pipelines?health=UNHEALTHY')}
             />
             <KPICard
               title="Running"
@@ -386,6 +398,7 @@ const Observe = () => {
               subtitle="Currently processing"
               icon="⚡"
               status="info"
+              onClick={() => navigate('/pipelines?state=RUNNING')}
             />
             <KPICard
               title="Failed"
@@ -393,6 +406,7 @@ const Observe = () => {
               subtitle="Pipeline failures"
               icon="💥"
               status={(pipelineStats?.failed_pipelines || 0) > 0 ? 'error' : 'success'}
+              onClick={() => navigate('/pipelines?state=FAILED')}
             />
           </div>
         </div>
