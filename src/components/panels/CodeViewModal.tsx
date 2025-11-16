@@ -299,23 +299,6 @@ const CodeViewModal = ({ isOpen, onClose }: CodeViewModalProps) => {
             }}
           />
         </div>
-
-        {/* Footer */}
-        <div style={{
-          padding: '16px 24px',
-          borderTop: `1px solid ${colors.border.main}`,
-          backgroundColor: colors.background.tertiary,
-          fontSize: '12px',
-          color: colors.text.secondary,
-          display: 'flex',
-          alignItems: 'center',
-          gap: '16px',
-        }}>
-          <span>💡 Tip: Change YAML and click "Apply Changes" to update the canvas</span>
-          <span style={{ marginLeft: 'auto' }}>
-            {nodes.length} nodes, {edges.length} edges
-          </span>
-        </div>
       </div>
     </div>
   );
