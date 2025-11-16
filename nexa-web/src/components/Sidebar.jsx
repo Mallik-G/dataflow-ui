@@ -19,6 +19,9 @@ import {
   BiSun,
   BiBarChartSquare,
   BiMoon,
+  BiRocket,
+  BiTransfer,
+  BiShow,
 } from "react-icons/bi";
 
 const Sidebar = () => {
@@ -139,6 +142,33 @@ const Sidebar = () => {
                 <BiBarChartSquare />
               </span>
               <span className="nav-link-text">Projections</span>
+            </Link>
+            <Link
+              to="/deploy"
+              className={`nav-link ${isActive("/deploy") ? "active" : ""}`}
+            >
+              <span className="nav-link-icon">
+                <BiRocket />
+              </span>
+              <span className="nav-link-text">Deploy</span>
+            </Link>
+            <Link
+              to="/promotions"
+              className={`nav-link ${isActive("/promotions") ? "active" : ""}`}
+            >
+              <span className="nav-link-icon">
+                <BiTransfer />
+              </span>
+              <span className="nav-link-text">Promotions</span>
+            </Link>
+            <Link
+              to="/observe"
+              className={`nav-link ${isActive("/observe") ? "active" : ""}`}
+            >
+              <span className="nav-link-icon">
+                <BiShow />
+              </span>
+              <span className="nav-link-text">Observe</span>
             </Link>
 
             <Link

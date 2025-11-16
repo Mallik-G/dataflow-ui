@@ -24,14 +24,18 @@ import BusinessGlossary from "./screens/BusinessGlossary";
 import CanvasPage from "./screens/CanvasPage";
 import CanvasPageGold from "./screens/CanvasPageGold";
 import Connectors from "./screens/Connectors";
+import Connections from "./screens/Connections";
 import CuratedLandingZonePage from "./screens/CuratedLandingZonePage";
 import DataFlow from "./screens/DataFlow";
+import Deploy from "./screens/Deploy";
 import EditEntityMappingsPage from "./screens/EditEntityMappingsPage";
 import EditGoldEntityMappingsPage from "./screens/EditGoldEntityMappingsPage";
 import GoldLandingPage from "./screens/GoldLandingPage";
 import HomePage from "./screens/HomePage";
 import Jobs from "./screens/Jobs";
+import Observe from "./screens/Observe";
 import Projections from "./screens/Projections";
+import Promotions from "./screens/Promotions";
 import RegisterPage from "./screens/RegisterPage";
 import Settings from "./screens/Settings";
 import UsageCosts from "./screens/UsageCosts";
@@ -279,25 +283,65 @@ function App() {
             </ProtectedRoute>
           } 
         />
-        <Route 
-          path="/projections" 
+        <Route
+          path="/projections"
           element={
             <ProtectedRoute isAuthenticated={isAuthenticated}>
               <Layout setIsAuthenticated={setIsAuthenticated}>
                 <Projections />
               </Layout>
             </ProtectedRoute>
-          } 
+          }
         />
-        <Route 
-          path="/register" 
+        <Route
+          path="/deploy"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <Layout setIsAuthenticated={setIsAuthenticated}>
+                <Deploy />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/promotions"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <Layout setIsAuthenticated={setIsAuthenticated}>
+                <Promotions />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/observe"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <Layout setIsAuthenticated={setIsAuthenticated}>
+                <Observe />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/connections"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <Layout setIsAuthenticated={setIsAuthenticated}>
+                <Connections />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/register"
           element={
             <ProtectedRoute isAuthenticated={isAuthenticated}>
               <Layout setIsAuthenticated={setIsAuthenticated}>
                 <RegisterPage />
               </Layout>
             </ProtectedRoute>
-          } 
+          }
         />
         <Route 
           path="/settings" 
