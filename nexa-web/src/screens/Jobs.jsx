@@ -20,7 +20,7 @@ import {
 import axios from "axios";
 import Chatbot from "../components/Chatbot";
 import aiLogo from "../assets/ai-icon.svg";
-import JobOffcanvas from "../components/JobOffcanvas";
+import JobOffcanvasEnhanced from "../components/JobOffcanvasEnhanced";
 
 function Jobs() {
   const [data, setData] = useState([]);
@@ -333,6 +333,9 @@ function Jobs() {
               <th className="ps-0">Job ID</th>
               <th>Job Name</th>
               <th>Job Type</th>
+              <th>Tasks</th>
+              <th>Health</th>
+              <th>Failures</th>
               <th>Status</th>
               <th>Actions</th>
               <th>Last Run</th>
@@ -341,7 +344,7 @@ function Jobs() {
           <tbody>
             {isLoading ? (
               <tr>
-                <td colSpan="6" className="text-center py-4">
+                <td colSpan="9" className="text-center py-4">
                   <div className="d-flex justify-content-center align-items-center">
                     <div
                       className="spinner-border spinner-border-sm me-2"
@@ -355,51 +358,68 @@ function Jobs() {
               </tr>
             ) : data.length === 0 ? (
               <tr>
-                <td colSpan="6" className="text-center py-4 text-muted">
+                <td colSpan="9" className="text-center py-4 text-muted">
                   No jobs found
                 </td>
               </tr>
             ) : (
-              data.map((item) => (
-                <tr key={item.job_id}>
-                  <td className="text-muted fw-medium ps-0">{item.job_id}</td>
-                  <td
-                    onClick={() =>
-                      handleShowSidebar(
-                        item.job_id,
-                        item?.last_failed_run > item?.last_successful_run
-                      )
-                    }
-                    className={`text-nowrap ${
-                      item?.last_failed_run > item?.last_successful_run
-                        ? "text-danger"
-                        : "text-primary"
-                    }`}
-                  >
-                    {item.job_name}
-                  </td>
-                  <td
-                    className={`text-nowrap ${
-                      item?.last_failed_run > item?.last_successful_run
-                        ? "text-danger"
-                        : "text-muted"
-                    }`}
-                  >
-                    <div className="text-desc">{item.job_type}</div>
-                  </td>
-                  <td>
-                    <StatusBadge
-                      status={
-                        item?.last_failed_run > item?.last_successful_run
-                          ? "failed"
-                          : "success"
-                      }
-                      // reason={item.statusReason}
-                    />
-                  </td>
-                  <td>
-                    {item?.last_failed_run > item?.last_successful_run && (
-                      <>
+              data.map((item) => {
+                const taskCount = item?.settings?.tasks?.length ||
+                                 (item?.settings?.notebook_task || item?.settings?.spark_jar_task ? 1 : 0);
+                const healthScore = item?.health?.health_score
+                  ? Math.round(item.health.health_score * 100)
+                  : null;
+                const consecutiveFailures = item?.health?.consecutive_failures || 0;
+                const isFailed = item?.last_failed_run > item?.last_successful_run;
+
+                return (
+                  <tr key={item.job_id}>
+                    <td className="text-muted fw-medium ps-0">{item.job_id}</td>
+                    <td
+                      onClick={() => handleShowSidebar(item.job_id, isFailed)}
+                      className={`text-nowrap cursor-pointer ${
+                        isFailed ? "text-danger" : "text-primary"
+                      }`}
+                      style={{ cursor: "pointer" }}
+                    >
+                      {item.job_name}
+                    </td>
+                    <td className={`text-nowrap ${isFailed ? "text-danger" : "text-muted"}`}>
+                      <div className="text-desc">{item.job_type}</div>
+                    </td>
+                    <td className="text-center">
+                      <Badge bg="secondary" pill>
+                        {taskCount}
+                      </Badge>
+                    </td>
+                    <td className="text-center">
+                      {healthScore !== null ? (
+                        <Badge
+                          bg={healthScore >= 70 ? "success" : healthScore >= 40 ? "warning" : "danger"}
+                          pill
+                        >
+                          {healthScore}%
+                        </Badge>
+                      ) : (
+                        <span className="text-muted">N/A</span>
+                      )}
+                    </td>
+                    <td className="text-center">
+                      {consecutiveFailures > 0 ? (
+                        <Badge bg="danger" pill>
+                          {consecutiveFailures}
+                        </Badge>
+                      ) : (
+                        <span className="text-muted">0</span>
+                      )}
+                    </td>
+                    <td>
+                      <StatusBadge
+                        status={isFailed ? "failed" : "success"}
+                      />
+                    </td>
+                    <td>
+                      {isFailed && (
                         <Button variant="default">
                           <span className="circle" role="img" aria-label="chat">
                             <Image src={aiLogo} alt="" />
@@ -408,25 +428,18 @@ function Jobs() {
                             Fix with Nexa
                           </span>
                         </Button>
-                      </>
-                    )}
-                  </td>
-
-                  <td
-                    className={`text-nowrap ${
-                      item?.last_failed_run > item?.last_successful_run
-                        ? "text-danger"
-                        : "text-muted"
-                    }`}
-                  >
-                    {timeAgo(
-                      item?.health?.last_successful_run ||
-                        item?.health?.last_failed_run
-                    )}{" "}
-                    ago
-                  </td>
-                </tr>
-              ))
+                      )}
+                    </td>
+                    <td className={`text-nowrap ${isFailed ? "text-danger" : "text-muted"}`}>
+                      {timeAgo(
+                        item?.health?.last_successful_run ||
+                          item?.health?.last_failed_run
+                      )}{" "}
+                      ago
+                    </td>
+                  </tr>
+                );
+              })
             )}
           </tbody>
         </Table>
@@ -522,7 +535,7 @@ function Jobs() {
       )}
 
       {selectedJobId != null || selectedJobId != undefined ? (
-        <JobOffcanvas
+        <JobOffcanvasEnhanced
           show={showAddJob}
           handleClose={handleCloseSidebar}
           jobId={selectedJobId}
