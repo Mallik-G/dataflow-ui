@@ -32,7 +32,8 @@ import ReactFlow, {
   useEdgesState,
   Handle,
   Position,
-} from "react-flow-renderer";
+} from "reactflow";
+import "reactflow/dist/style.css";
 
 const spinnerStyles = `
   @keyframes spin {

@@ -9,7 +9,8 @@ import ReactFlow, {
   useEdgesState,
   Handle,
   Position,
-} from "react-flow-renderer";
+} from "reactflow";
+import "reactflow/dist/style.css";
 
 import PresenceIndicator from "../components/PresenceIndicator";
 import CollaborationBanner from "../components/CollaborationBanner";

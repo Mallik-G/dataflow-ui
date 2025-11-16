@@ -10,7 +10,8 @@ import ReactFlow, {
   useEdgesState,
   Handle,
   Position,
-} from "react-flow-renderer";
+} from "reactflow";
+import "reactflow/dist/style.css";
 import { Button } from "react-bootstrap";
 import { BiPlus, BiCategory, BiBarChartAlt2 } from "react-icons/bi";
 import PresenceIndicator from "../components/PresenceIndicator";

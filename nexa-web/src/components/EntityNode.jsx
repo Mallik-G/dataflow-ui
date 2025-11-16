@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Handle, Position } from "react-flow-renderer";
+import { Handle, Position } from "reactflow";
 
 function EntityNode({ id, data, selected, isConnectable }) {
   const [editing, setEditing] = useState(false);
