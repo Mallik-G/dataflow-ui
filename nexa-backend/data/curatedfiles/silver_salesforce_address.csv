@@ -1,0 +1,11 @@
+address_id,customer_id,street,city,state,postcode,country,addresstype,effective_start_date,effective_end_date,is_current,source_system,ingestion_timestamp
+sample_0,CUST000,sample_0,sample_0,sample_0,sample_0,sample_0,Personal,2024-01-01,,True,salesforce,2025-07-13
+sample_1,CUST001,sample_1,sample_1,sample_1,sample_1,sample_1,Personal,2024-01-01,,True,salesforce,2025-07-13
+sample_2,CUST002,sample_2,sample_2,sample_2,sample_2,sample_2,Prepaid,2024-01-01,,True,salesforce,2025-07-13
+sample_3,CUST003,sample_3,sample_3,sample_3,sample_3,sample_3,Personal,2024-01-01,,True,salesforce,2025-07-13
+sample_4,CUST004,sample_4,sample_4,sample_4,sample_4,sample_4,Business,2024-01-01,,True,salesforce,2025-07-13
+sample_5,CUST005,sample_5,sample_5,sample_5,sample_5,sample_5,Prepaid,2024-01-01,,True,salesforce,2025-07-13
+sample_6,CUST006,sample_6,sample_6,sample_6,sample_6,sample_6,Personal,2024-01-01,,True,salesforce,2025-07-13
+sample_7,CUST007,sample_7,sample_7,sample_7,sample_7,sample_7,Personal,2024-01-01,,True,salesforce,2025-07-13
+sample_8,CUST008,sample_8,sample_8,sample_8,sample_8,sample_8,Prepaid,2024-01-01,,True,salesforce,2025-07-13
+sample_9,CUST009,sample_9,sample_9,sample_9,sample_9,sample_9,Personal,2024-01-01,,True,salesforce,2025-07-13

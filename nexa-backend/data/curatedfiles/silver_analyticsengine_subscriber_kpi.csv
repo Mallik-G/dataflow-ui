@@ -1,0 +1,11 @@
+subscriber_id,avg_data,avg_voice,drop_rate,sms,region,last_updated,effective_start_date,effective_end_date,is_current,source_system,ingestion_timestamp
+SUB000,sample_0,sample_0,0.06,169,Mannberg,2025-01-16,2024-01-01,,True,analyticsengine,2025-07-13
+SUB001,sample_1,sample_1,0.79,115,West Casey,2025-06-12,2024-01-01,,True,analyticsengine,2025-07-13
+SUB002,sample_2,sample_2,0.14,8,Scottmouth,2025-03-01,2024-01-01,,True,analyticsengine,2025-07-13
+SUB003,sample_3,sample_3,0.22,143,Port Megan,2025-03-24,2024-01-01,,True,analyticsengine,2025-07-13
+SUB004,sample_4,sample_4,0.55,101,South Derrick,2025-07-01,2024-01-01,,True,analyticsengine,2025-07-13
+SUB005,sample_5,sample_5,0.98,127,Karlastad,2025-04-17,2024-01-01,,True,analyticsengine,2025-07-13
+SUB006,sample_6,sample_6,0.28,153,North Amandaburgh,2025-04-22,2024-01-01,,True,analyticsengine,2025-07-13
+SUB007,sample_7,sample_7,0.39,24,South Troy,2025-03-26,2024-01-01,,True,analyticsengine,2025-07-13
+SUB008,sample_8,sample_8,0.38,147,Andersenfurt,2025-04-07,2024-01-01,,True,analyticsengine,2025-07-13
+SUB009,sample_9,sample_9,0.61,147,New Elizabethmouth,2025-06-14,2024-01-01,,True,analyticsengine,2025-07-13

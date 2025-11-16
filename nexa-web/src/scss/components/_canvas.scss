@@ -1,0 +1,142 @@
+.canvas-view {
+  width: 100%;
+  height: calc(100vh - 50px);
+  overflow: hidden;
+  position: relative;
+}
+
+.canvas {
+  &-collapse {
+    background-color: $white;
+    min-height: 280px;
+    max-height: 280px;
+    border-bottom: solid 1px #e5e7eb;
+    display: flex;
+    &_sidebar {
+      width: 36px;
+      border-right: solid 1px #e5e7eb;
+      & .nav {
+        &-link {
+          color: #555;
+          &.active {
+            color: #1f1f1f;
+          }
+        }
+      }
+    }
+    &_body {
+      flex: 1 1 auto;
+    }
+    &_workspace {
+      width: 25%;
+      flex: 0 0 auto;
+      border-right: solid 1px #e5e7eb;
+    }
+    &_bottom {
+      border-bottom: solid 1px #e5e7eb;
+      background-color: $white;
+      padding-left: 36px;
+      font-size: 0.8rem;
+      & .title {
+        padding: 0.5rem;
+        border-bottom: solid 1px $primary;
+        font-weight: 500;
+        user-select: none;
+      }
+      & .full-screen-btn {
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        display: inline-flex;
+        gap: 0.25rem;
+        align-items: center;
+      }
+    }
+  }
+  &-records {
+    display: flex;
+    flex-direction: column;
+    & .table {
+      & thead {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+
+        & th {
+          position: relative;
+        }
+      }
+      font-size: 0.75rem;
+      & th {
+        font-weight: 600;
+        padding: 0.35rem 1.25rem;
+      }
+      & td {
+        padding: 0.35rem 1.25rem;
+      }
+    }
+    &_body {
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+  }
+}
+
+.workspace {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  &-header {
+    & .filters-search {
+      & .form-control {
+        border: none;
+        padding-left: 1.5rem;
+      }
+      & .btn {
+        text-align: left;
+        width: auto;
+        font-size: 1rem;
+      }
+    }
+  }
+  &-body {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  &-list {
+    & .nav {
+      &-item {
+        width: 100%;
+      }
+      &-link {
+        color: $black;
+        display: flex;
+        align-items: center;
+        font-size: 0.75rem;
+        &.active {
+          background-color: lighten($primary, 43%);
+        }
+      }
+    }
+  }
+  &-textarea {
+    border-top: solid 1px #e5e7eb;
+    padding: 0.5rem 0;
+    & .icon {
+      width: 2.5rem;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      & img {
+        width: 1rem;
+      }
+    }
+    & .form-control {
+      border-radius: 0;
+      border: none;
+      box-shadow: none;
+      padding: 0 0.5rem;
+      border-left: solid 1px $primary;
+      height: auto;
+    }
+  }
+}

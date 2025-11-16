@@ -1,0 +1,11 @@
+contact_point_id,customer_id,contacttype,value,preferred,verified,lastupdated,effective_start_date,effective_end_date,is_current,source_system,ingestion_timestamp
+sample_0,CUST000,Personal,sample_0,sample_0,sample_0,2025-07-03,2024-01-01,,True,salesforce,2025-07-13
+sample_1,CUST001,Business,sample_1,sample_1,sample_1,2025-03-23,2024-01-01,,True,salesforce,2025-07-13
+sample_2,CUST002,Prepaid,sample_2,sample_2,sample_2,2025-01-31,2024-01-01,,True,salesforce,2025-07-13
+sample_3,CUST003,Prepaid,sample_3,sample_3,sample_3,2025-04-22,2024-01-01,,True,salesforce,2025-07-13
+sample_4,CUST004,Personal,sample_4,sample_4,sample_4,2025-02-26,2024-01-01,,True,salesforce,2025-07-13
+sample_5,CUST005,Prepaid,sample_5,sample_5,sample_5,2025-03-15,2024-01-01,,True,salesforce,2025-07-13
+sample_6,CUST006,Prepaid,sample_6,sample_6,sample_6,2025-06-29,2024-01-01,,True,salesforce,2025-07-13
+sample_7,CUST007,Prepaid,sample_7,sample_7,sample_7,2025-02-04,2024-01-01,,True,salesforce,2025-07-13
+sample_8,CUST008,Personal,sample_8,sample_8,sample_8,2025-05-09,2024-01-01,,True,salesforce,2025-07-13
+sample_9,CUST009,Personal,sample_9,sample_9,sample_9,2025-03-14,2024-01-01,,True,salesforce,2025-07-13

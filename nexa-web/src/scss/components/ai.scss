@@ -1,0 +1,134 @@
+.ai {
+  & .app {
+    padding: 0;
+    &-header {
+      display: none !important;
+    }
+    &-sidebar {
+      display: none !important;
+    }
+    &-container {
+      padding: 0;
+    }
+  }
+  &-app {
+    height: 100vh;
+  }
+
+  &-sidebar {
+    width: 260px;
+    border-right: 1px solid lighten($black, 75%);
+    &-header {
+      border-bottom: 1px solid lighten($black, 75%);
+    }
+    &-logo {
+      & img {
+        height: 25px;
+        width: auto;
+      }
+    }
+  }
+  &-header {
+    border-bottom: 1px solid lighten($black, 75%);
+    padding: 0.5rem 1rem;
+    & .active-user {
+      & .btn {
+        padding: 0;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background-color: #ccc;
+        color: $default;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        overflow: hidden;
+        position: relative;
+        & img {
+          @include cover;
+        }
+        &:after {
+          display: none;
+        }
+      }
+    }
+  }
+  &-chat {
+    &-nav {
+      overflow: auto;
+      & .title {
+        padding: 1rem;
+      }
+      & .list-group {
+        overflow-x: hidden;
+        overflow-y: auto;
+        flex-grow: 1;
+        display: block;
+        &-item {
+          cursor: pointer;
+          background: none;
+          border: none;
+          padding: 0.5rem 2.5rem 0.5rem 1.5rem;
+          font-size: 0.8rem;
+          position: relative;
+          & .dropdown {
+            position: absolute;
+            top: 0;
+            right: 0;
+            opacity: 0;
+            visibility: hidden;
+            transition-duration: 0.3s;
+            & button {
+              border: none;
+              &:after {
+                display: none;
+              }
+            }
+          }
+          &:hover {
+            background-color: lighten($black, 80%);
+            & .dropdown {
+              opacity: 1;
+              visibility: visible;
+            }
+          }
+          &.active {
+            background-color: lighten($primary, 35%);
+            color: $black;
+          }
+        }
+      }
+    }
+  }
+  &-composer {
+    &-group {
+      background: #f3f4f6;
+      height: 75px;
+      border: solid 1px #e5e7eb;
+      flex: 1 1 auto;
+      max-width: 960px;
+      border-radius: 1rem;
+    }
+    &-send {
+      & .btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+        padding: 0;
+        font-size: 1.25rem;
+        & svg {
+          transform: rotate(-35deg);
+          margin: -0.25rem 0 0 0.1rem;
+        }
+      }
+    }
+    &-input {
+      & .form-control {
+        border: none;
+        background: none;
+        height: 73px;
+        box-shadow: none;
+        padding: 0;
+      }
+    }
+  }
+}

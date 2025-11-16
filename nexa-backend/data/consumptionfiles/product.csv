@@ -1,0 +1,11 @@
+ProductID,ServiceID,ProductName,ProductType,BundleID,PricePlan,Discount
+PROD001,SERV001,Plan 0,Bundle,BNDL001,Premium,20%
+PROD002,SERV002,Plan 1,Data,BNDL002,Premium,20%
+PROD003,SERV003,Plan 2,Bundle,BNDL003,Unlimited,None
+PROD004,SERV004,Plan 3,Voice,BNDL004,Basic,None
+PROD005,SERV005,Plan 4,Voice,BNDL005,Basic,None
+PROD006,SERV006,Plan 5,Voice,BNDL006,Basic,None
+PROD007,SERV007,Plan 6,Voice,BNDL007,Unlimited,10%
+PROD008,SERV008,Plan 7,Bundle,BNDL008,Premium,None
+PROD009,SERV009,Plan 8,Voice,BNDL009,Premium,20%
+PROD010,SERV010,Plan 9,Data,BNDL010,Basic,10%

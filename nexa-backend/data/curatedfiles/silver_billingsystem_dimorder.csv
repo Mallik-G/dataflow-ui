@@ -1,0 +1,11 @@
+order_id,custom,date,status,type,origin,value,updated,effective_start_date,effective_end_date,is_current,source_system,ingestion_timestamp
+ORD000,sample_0,2025-03-05,Pending,Prepaid,sample_0,sample_0,2025-02-06,2024-01-01,,True,billingsystem,2025-07-13
+ORD001,sample_1,2025-03-08,Pending,Postpaid,sample_1,sample_1,2025-05-14,2024-01-01,,True,billingsystem,2025-07-13
+ORD002,sample_2,2025-01-12,Inactive,Business,sample_2,sample_2,2025-05-15,2024-01-01,,True,billingsystem,2025-07-13
+ORD003,sample_3,2025-03-20,Pending,Business,sample_3,sample_3,2025-01-12,2024-01-01,,True,billingsystem,2025-07-13
+ORD004,sample_4,2025-06-28,Inactive,Postpaid,sample_4,sample_4,2025-01-21,2024-01-01,,True,billingsystem,2025-07-13
+ORD005,sample_5,2025-04-09,Inactive,Personal,sample_5,sample_5,2025-01-05,2024-01-01,,True,billingsystem,2025-07-13
+ORD006,sample_6,2025-01-01,Active,Postpaid,sample_6,sample_6,2025-03-04,2024-01-01,,True,billingsystem,2025-07-13
+ORD007,sample_7,2025-06-01,Pending,Personal,sample_7,sample_7,2025-05-23,2024-01-01,,True,billingsystem,2025-07-13
+ORD008,sample_8,2025-07-08,Pending,Prepaid,sample_8,sample_8,2025-01-28,2024-01-01,,True,billingsystem,2025-07-13
+ORD009,sample_9,2025-04-09,Inactive,Business,sample_9,sample_9,2025-04-23,2024-01-01,,True,billingsystem,2025-07-13

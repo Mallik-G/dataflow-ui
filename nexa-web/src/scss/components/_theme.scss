@@ -1,0 +1,127 @@
+:root {
+  --white: #ffffff;
+  --bg-color: #f4f6f8;
+  --sidebar-bg: #ffffff;
+  --header-bg: #ffffff;
+  --default: #111827;
+}
+[data-theme="dark"] {
+  --white: #121212;
+  --bg-color: #121214;
+  --sidebar-bg: #121214;
+  --header-bg: #121214;
+  --bs-body-bg: #1e1e22;
+  --bs-border-color-translucent: #1e1e22;
+  --default: #ffffff;
+  --bs-body-color: #a1a1aa;
+  --bs-border-color: #4d5154;
+}
+[data-theme="dark"] {
+  body {
+    color: #a1a1aa;
+  }
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: $white;
+  }
+  .app {
+    &-sidebar {
+      border-color: #252529;
+      &-theme {
+        border-color: #252529;
+        & .text,
+        .icon {
+          color: #a1a1aa;
+        }
+      }
+      &-nav {
+        & .nav-link {
+          color: #a1a1aa;
+          &.active {
+            color: $white;
+            background-color: rgba(37, 99, 235, 0.2);
+          }
+        }
+      }
+    }
+    &-header {
+      border-color: #252529;
+      &-auth svg {
+        color: $white;
+      }
+    }
+    &-collapse-btn,
+    &-collapse-btn:focus,
+    &-collapse-btn:hover {
+      color: $white !important;
+      background-color: transparent;
+      border-color: $white;
+    }
+  }
+  .card {
+    border-color: var(--bs-border-color-translucent);
+    &-view-header {
+      background: #121214;
+    }
+  }
+  .bg {
+    &-white {
+      background: var(--bs-border-color-translucent) !important;
+      border-color: var(--bs-border-color-translucent) !important;
+    }
+    &-light {
+      background-color: #252529 !important;
+    }
+  }
+  .sticky-btns {
+    background: #121214;
+    border-color: #252529;
+  }
+  .dash {
+    &-nexa {
+      background-image: linear-gradient(#1e1e22, #1e1e22),
+        linear-gradient(90deg, #2563eb, #ec4899);
+    }
+  }
+  .text {
+    &-black {
+      color: #a1a1aa !important;
+    }
+    &-muted {
+      color: #a1a1aa;
+    }
+  }
+  .btn {
+    &-icon {
+      color: #a1a1aa;
+    }
+  }
+  .table {
+    &-view .table tbody td,
+    &-view .table thead th {
+      border-color: var(--bs-border-color);
+      color: var(--default);
+    }
+  }
+  .form-control,
+  .form-select {
+    border-color: var(--bs-border-color);
+    color: $white;
+    &:focus {
+      box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.1);
+    }
+  }
+  ::placeholder {
+    color: #a1a1aa;
+  }
+}

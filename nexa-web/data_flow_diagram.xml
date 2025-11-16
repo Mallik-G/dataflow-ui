@@ -1,0 +1,287 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="DR.ai Data Flow Diagram" id="completeDataFlow">
+    <mxGraphModel dx="1200" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        
+        <!-- External User -->
+        <mxCell id="2" value="External User" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="120" height="40" as="geometry"/>
+        </mxCell>
+        
+        <!-- Login Page -->
+        <mxCell id="3" value="Login Page&#xa;(Email: admin@gmail.com)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;" vertex="1" parent="1">
+          <mxGeometry x="220" y="40" width="160" height="60" as="geometry"/>
+        </mxCell>
+        
+        <!-- Dashboard -->
+        <mxCell id="4" value="Dashboard&#xa;(Data Flow Overview)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;" vertex="1" parent="1">
+          <mxGeometry x="220" y="140" width="160" height="60" as="geometry"/>
+        </mxCell>
+        
+        <!-- Welcome Demo Page -->
+        <mxCell id="5" value="Welcome Demo Page&#xa;(File Upload Interface)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;" vertex="1" parent="1">
+          <mxGeometry x="220" y="240" width="160" height="60" as="geometry"/>
+        </mxCell>
+        
+        <!-- API Server -->
+        <mxCell id="6" value="API Server&#xa;(Node.js Backend)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;" vertex="1" parent="1">
+          <mxGeometry x="440" y="140" width="140" height="80" as="geometry"/>
+        </mxCell>
+        
+        <!-- Edit Entity Mappings -->
+        <mxCell id="7" value="Edit Entity Mappings&#xa;(Raw → Curated)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;" vertex="1" parent="1">
+          <mxGeometry x="220" y="340" width="160" height="60" as="geometry"/>
+        </mxCell>
+        
+        <!-- Curated Landing Zone -->
+        <mxCell id="8" value="Curated Landing Zone&#xa;(Curated Files View)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;" vertex="1" parent="1">
+          <mxGeometry x="220" y="440" width="160" height="60" as="geometry"/>
+        </mxCell>
+        
+        <!-- Gold Landing Page -->
+        <mxCell id="9" value="Gold Landing Page&#xa;(Consumption Files)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;" vertex="1" parent="1">
+          <mxGeometry x="220" y="540" width="160" height="60" as="geometry"/>
+        </mxCell>
+        
+        <!-- Edit Gold Entity Mappings -->
+        <mxCell id="10" value="Edit Gold Entity Mappings&#xa;(Curated → Consumption)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;" vertex="1" parent="1">
+          <mxGeometry x="220" y="640" width="160" height="60" as="geometry"/>
+        </mxCell>
+        
+        <!-- AWS S3 Storage -->
+        <mxCell id="11" value="AWS S3 Storage&#xa;(Raw Files)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="1">
+          <mxGeometry x="640" y="240" width="120" height="60" as="geometry"/>
+        </mxCell>
+        
+        <!-- Database -->
+        <mxCell id="12" value="Database&#xa;(Transformation Metadata)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;" vertex="1" parent="1">
+          <mxGeometry x="640" y="340" width="120" height="60" as="geometry"/>
+        </mxCell>
+        
+        <!-- S3 Curated Files -->
+        <mxCell id="13" value="S3 Curated Files&#xa;(curated/ folder)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="1">
+          <mxGeometry x="640" y="440" width="120" height="60" as="geometry"/>
+        </mxCell>
+        
+        <!-- S3 Consumption Files -->
+        <mxCell id="14" value="S3 Consumption Files&#xa;(consumption/ folder)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="1">
+          <mxGeometry x="640" y="640" width="120" height="60" as="geometry"/>
+        </mxCell>
+        
+        <!-- API Endpoints Labels -->
+        <mxCell id="15" value="API Endpoints:" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="230" width="140" height="20" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="16" value="• /api/upload" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="440" y="250" width="140" height="15" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="17" value="• /api/transformations/save" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="440" y="265" width="140" height="15" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="18" value="• /api/curated/generate" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="440" y="280" width="140" height="15" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="19" value="• /api/consumption/generate" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="440" y="295" width="140" height="15" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="20" value="• /api/ai-consumption-files" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="440" y="310" width="140" height="15" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="21" value="• /api/documents/" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="440" y="325" width="140" height="15" as="geometry"/>
+        </mxCell>
+        
+        <!-- Arrows - User Flow -->
+        <mxCell id="22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" edge="1" parent="1" source="2" target="3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" edge="1" parent="1" source="3" target="4">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" edge="1" parent="1" source="4" target="5">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" edge="1" parent="1" source="5" target="7">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" edge="1" parent="1" source="7" target="8">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" edge="1" parent="1" source="8" target="9">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" edge="1" parent="1" source="9" target="10">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- API Calls to Server -->
+        <mxCell id="29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#ff6b6b;" edge="1" parent="1" source="5" target="6">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#ff6b6b;" edge="1" parent="1" source="7" target="6">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#ff6b6b;" edge="1" parent="1" source="8" target="6">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#ff6b6b;" edge="1" parent="1" source="9" target="6">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#ff6b6b;" edge="1" parent="1" source="10" target="6">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- API Server to Storage -->
+        <mxCell id="34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#4caf50;" edge="1" parent="1" source="6" target="11">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#4caf50;" edge="1" parent="1" source="6" target="12">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#4caf50;" edge="1" parent="1" source="6" target="13">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#4caf50;" edge="1" parent="1" source="6" target="14">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Storage to API Server (for reads) -->
+        <mxCell id="38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#2196f3;" edge="1" parent="1" source="11" target="6">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#2196f3;" edge="1" parent="1" source="12" target="6">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#2196f3;" edge="1" parent="1" source="13" target="6">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="41" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#2196f3;" edge="1" parent="1" source="14" target="6">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Labels -->
+        <mxCell id="42" value="1. Login" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="180" y="50" width="40" height="20" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="43" value="2. Dashboard" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="180" y="150" width="40" height="20" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="44" value="3. Upload Files" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="180" y="250" width="40" height="20" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="45" value="4. Map Raw to Curated" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="180" y="350" width="40" height="20" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="46" value="5. Generate Curated Files" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="180" y="450" width="40" height="20" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="47" value="6. Map Curated to Consumption" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="180" y="550" width="40" height="20" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="48" value="7. Generate Consumption Files" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="180" y="650" width="40" height="20" as="geometry"/>
+        </mxCell>
+        
+        <!-- API Call Labels -->
+        <mxCell id="49" value="API Calls" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="390" y="100" width="50" height="20" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="50" value="Data Storage" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="590" y="100" width="50" height="20" as="geometry"/>
+        </mxCell>
+        
+        <!-- Data Flow Labels -->
+        <mxCell id="51" value="File Upload&#xa;(CSV, JSON, TSV)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="390" y="250" width="50" height="40" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="52" value="Raw Data&#xa;Storage" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="590" y="250" width="50" height="40" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="53" value="Transformation&#xa;Metadata" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="590" y="350" width="50" height="40" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="54" value="Curated Files&#xa;(Transformed Data)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="590" y="450" width="50" height="40" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="55" value="Consumption Files&#xa;(Business Ready)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="590" y="650" width="50" height="40" as="geometry"/>
+        </mxCell>
+        
+        <!-- Transformation Details -->
+        <mxCell id="56" value="NLP Transformations&#xa;Data Quality Checks&#xa;Column Mappings&#xa;Operator Rules&#xa;Concatenation Rules" style="text;html=1;strokeColor=none;fillColor=#e1d5e7;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="800" y="340" width="200" height="100" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="57" value="Control Columns&#xa;Entity Metadata&#xa;Data Lineage&#xa;Version Tracking" style="text;html=1;strokeColor=none;fillColor=#e1d5e7;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="800" y="640" width="200" height="100" as="geometry"/>
+        </mxCell>
+        
+        <!-- Connection to transformation details -->
+        <mxCell id="58" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" edge="1" parent="1" source="6" target="56">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="59" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" edge="1" parent="1" source="6" target="57">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Legend -->
+        <mxCell id="60" value="Legend:" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="800" y="40" width="200" height="20" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="61" value="🔴 API Calls (Frontend → Backend)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="800" y="60" width="200" height="15" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="62" value="🟢 Data Writes (Backend → Storage)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="800" y="75" width="200" height="15" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="63" value="🔵 Data Reads (Storage → Backend)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="800" y="90" width="200" height="15" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="64" value="⚫ User Navigation Flow" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="800" y="105" width="200" height="15" as="geometry"/>
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile> 

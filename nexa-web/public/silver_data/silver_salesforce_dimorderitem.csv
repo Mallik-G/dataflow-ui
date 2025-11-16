@@ -1,0 +1,11 @@
+orderitemid,order_id,product_id,quantity,unitprice,lineamount,status,effective_start_date,effective_end_date,is_current,source_system,ingestion_timestamp
+sample_0,ORD000,PROD000,sample_0,sample_0,sample_0,Inactive,2024-01-01,,True,salesforce,2025-07-13
+sample_1,ORD001,PROD001,sample_1,sample_1,sample_1,Inactive,2024-01-01,,True,salesforce,2025-07-13
+sample_2,ORD002,PROD002,sample_2,sample_2,sample_2,Active,2024-01-01,,True,salesforce,2025-07-13
+sample_3,ORD003,PROD003,sample_3,sample_3,sample_3,Inactive,2024-01-01,,True,salesforce,2025-07-13
+sample_4,ORD004,PROD004,sample_4,sample_4,sample_4,Pending,2024-01-01,,True,salesforce,2025-07-13
+sample_5,ORD005,PROD005,sample_5,sample_5,sample_5,Inactive,2024-01-01,,True,salesforce,2025-07-13
+sample_6,ORD006,PROD006,sample_6,sample_6,sample_6,Active,2024-01-01,,True,salesforce,2025-07-13
+sample_7,ORD007,PROD007,sample_7,sample_7,sample_7,Pending,2024-01-01,,True,salesforce,2025-07-13
+sample_8,ORD008,PROD008,sample_8,sample_8,sample_8,Pending,2024-01-01,,True,salesforce,2025-07-13
+sample_9,ORD009,PROD009,sample_9,sample_9,sample_9,Active,2024-01-01,,True,salesforce,2025-07-13

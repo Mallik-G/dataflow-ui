@@ -1,0 +1,11 @@
+LifecycleEventID,CustomerID,EventType,EventDate,ReasonCode,Channel,Notes
+CLEVC001,CUST001,Terminated,2023-09-29,NR,Online,Initial record
+CLEVC002,CUST002,Terminated,2024-06-24,TU,Retail,Initial record
+CLEVC003,CUST003,Terminated,2024-09-13,NR,App,Initial record
+CLEVC004,CUST004,Suspended,2024-03-09,TU,Online,Initial record
+CLEVC005,CUST005,New,2023-08-05,SP,Online,Initial record
+CLEVC006,CUST006,Suspended,2024-07-06,SP,Online,Initial record
+CLEVC007,CUST007,Suspended,2024-12-07,NR,Retail,Initial record
+CLEVC008,CUST008,Terminated,2023-07-25,NR,Retail,Initial record
+CLEVC009,CUST009,Suspended,2024-12-31,NR,Retail,Initial record
+CLEVC010,CUST010,Terminated,2023-11-16,TU,Retail,Initial record

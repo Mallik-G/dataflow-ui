@@ -1,0 +1,11 @@
+account_id,customer_id,acct_type,billing_cycle,currency,status,created_at,effective_start_date,effective_end_date,is_current,source_system,ingestion_timestamp
+ACCT000,CUST000,Business,sample_0,sample_0,Active,sample_0,2024-01-01,,True,salesforce,2025-07-13
+ACCT001,CUST001,Postpaid,sample_1,sample_1,Pending,sample_1,2024-01-01,,True,salesforce,2025-07-13
+ACCT002,CUST002,Postpaid,sample_2,sample_2,Pending,sample_2,2024-01-01,,True,salesforce,2025-07-13
+ACCT003,CUST003,Personal,sample_3,sample_3,Active,sample_3,2024-01-01,,True,salesforce,2025-07-13
+ACCT004,CUST004,Personal,sample_4,sample_4,Inactive,sample_4,2024-01-01,,True,salesforce,2025-07-13
+ACCT005,CUST005,Business,sample_5,sample_5,Inactive,sample_5,2024-01-01,,True,salesforce,2025-07-13
+ACCT006,CUST006,Prepaid,sample_6,sample_6,Active,sample_6,2024-01-01,,True,salesforce,2025-07-13
+ACCT007,CUST007,Personal,sample_7,sample_7,Active,sample_7,2024-01-01,,True,salesforce,2025-07-13
+ACCT008,CUST008,Business,sample_8,sample_8,Pending,sample_8,2024-01-01,,True,salesforce,2025-07-13
+ACCT009,CUST009,Business,sample_9,sample_9,Active,sample_9,2024-01-01,,True,salesforce,2025-07-13

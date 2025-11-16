@@ -1,0 +1,11 @@
+prod_id,service_id,prod_name,prod_type,bundle,plan,discount,effective_start_date,effective_end_date,is_current,source_system,ingestion_timestamp
+sample_0,SRV000,Karen Maldonado,Prepaid,sample_0,sample_0,sample_0,2024-01-01,,True,catalogdb,2025-07-13
+sample_1,SRV001,Frank Dorsey,Business,sample_1,sample_1,sample_1,2024-01-01,,True,catalogdb,2025-07-13
+sample_2,SRV002,Mason Conrad,Postpaid,sample_2,sample_2,sample_2,2024-01-01,,True,catalogdb,2025-07-13
+sample_3,SRV003,Wendy Rice,Personal,sample_3,sample_3,sample_3,2024-01-01,,True,catalogdb,2025-07-13
+sample_4,SRV004,Rebecca Ward,Prepaid,sample_4,sample_4,sample_4,2024-01-01,,True,catalogdb,2025-07-13
+sample_5,SRV005,Karen Alexander,Business,sample_5,sample_5,sample_5,2024-01-01,,True,catalogdb,2025-07-13
+sample_6,SRV006,William Burnett,Prepaid,sample_6,sample_6,sample_6,2024-01-01,,True,catalogdb,2025-07-13
+sample_7,SRV007,Tiffany Compton,Prepaid,sample_7,sample_7,sample_7,2024-01-01,,True,catalogdb,2025-07-13
+sample_8,SRV008,Amanda Bass,Prepaid,sample_8,sample_8,sample_8,2024-01-01,,True,catalogdb,2025-07-13
+sample_9,SRV009,Frederick Gibson,Business,sample_9,sample_9,sample_9,2024-01-01,,True,catalogdb,2025-07-13

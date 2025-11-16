@@ -1,0 +1,11 @@
+contract_id,account_id,contracttype,startdate,enddate,status,renewalterms,effective_start_date,effective_end_date,is_current,source_system,ingestion_timestamp
+CONT000,ACCT000,Prepaid,2025-05-19,2025-01-01,Inactive,sample_0,2024-01-01,,True,billingsystem,2025-07-13
+CONT001,ACCT001,Postpaid,2025-03-15,2025-02-09,Inactive,sample_1,2024-01-01,,True,billingsystem,2025-07-13
+CONT002,ACCT002,Postpaid,2025-07-08,2025-06-08,Pending,sample_2,2024-01-01,,True,billingsystem,2025-07-13
+CONT003,ACCT003,Personal,2025-06-07,2025-06-04,Inactive,sample_3,2024-01-01,,True,billingsystem,2025-07-13
+CONT004,ACCT004,Prepaid,2025-06-09,2025-01-24,Active,sample_4,2024-01-01,,True,billingsystem,2025-07-13
+CONT005,ACCT005,Personal,2025-04-22,2025-03-08,Active,sample_5,2024-01-01,,True,billingsystem,2025-07-13
+CONT006,ACCT006,Postpaid,2025-06-24,2025-01-31,Inactive,sample_6,2024-01-01,,True,billingsystem,2025-07-13
+CONT007,ACCT007,Personal,2025-03-04,2025-02-11,Active,sample_7,2024-01-01,,True,billingsystem,2025-07-13
+CONT008,ACCT008,Business,2025-03-21,2025-01-05,Inactive,sample_8,2024-01-01,,True,billingsystem,2025-07-13
+CONT009,ACCT009,Postpaid,2025-02-11,2025-02-19,Inactive,sample_9,2024-01-01,,True,billingsystem,2025-07-13

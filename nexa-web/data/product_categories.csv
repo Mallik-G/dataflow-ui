@@ -1,0 +1,16 @@
+category_id,category_name,parent_category_id,description,is_active,created_date,updated_date
+CAT001,Electronics,null,Electronic devices and accessories,true,2023-01-01,2023-01-01
+CAT002,Clothing,null,Apparel and fashion items,true,2023-01-01,2023-01-01
+CAT003,Home & Garden,null,Home improvement and garden products,true,2023-01-01,2023-01-01
+CAT004,Accessories,null,Personal accessories and small items,true,2023-01-01,2023-01-01
+CAT005,Sports,null,Sports equipment and athletic gear,true,2023-01-01,2023-01-01
+CAT006,Audio Equipment,CAT001,Headphones, speakers, and audio devices,true,2023-01-01,2023-01-01
+CAT007,Wearable Technology,CAT001,Smartwatches and fitness trackers,true,2023-01-01,2023-01-01
+CAT008,Computer Accessories,CAT001,Mice, keyboards, and computer peripherals,true,2023-01-01,2023-01-01
+CAT009,Lighting,CAT001,LED lamps and lighting solutions,true,2023-01-01,2023-01-01
+CAT010,Men's Clothing,CAT002,Clothing items for men,true,2023-01-01,2023-01-01
+CAT011,Women's Clothing,CAT002,Clothing items for women,true,2023-01-01,2023-01-01
+CAT012,Kitchen & Dining,CAT003,Kitchen appliances and dining accessories,true,2023-01-01,2023-01-01
+CAT013,Outdoor & Garden,CAT003,Garden tools and outdoor equipment,true,2023-01-01,2023-01-01
+CAT014,Bags & Wallets,CAT004,Handbags, backpacks, and wallets,true,2023-01-01,2023-01-01
+CAT015,Fitness Equipment,CAT005,Exercise and fitness gear,true,2023-01-01,2023-01-01 

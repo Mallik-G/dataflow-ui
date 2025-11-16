@@ -1,0 +1,11 @@
+custom,name,birth_date,sex,kyc,plan,created_on,effective_start_date,effective_end_date,is_current,source_system,ingestion_timestamp
+sample_0,Tamara Mills,2025-05-23,sample_0,sample_0,sample_0,sample_0,2024-01-01,,True,billingsystem,2025-07-13
+sample_1,Shane Boyle,2025-03-05,sample_1,sample_1,sample_1,sample_1,2024-01-01,,True,billingsystem,2025-07-13
+sample_2,Brady Coleman,2025-04-13,sample_2,sample_2,sample_2,sample_2,2024-01-01,,True,billingsystem,2025-07-13
+sample_3,Brandon Dorsey,2025-04-15,sample_3,sample_3,sample_3,sample_3,2024-01-01,,True,billingsystem,2025-07-13
+sample_4,Angela Robbins,2025-04-19,sample_4,sample_4,sample_4,sample_4,2024-01-01,,True,billingsystem,2025-07-13
+sample_5,Lisa Cohen,2025-02-15,sample_5,sample_5,sample_5,sample_5,2024-01-01,,True,billingsystem,2025-07-13
+sample_6,Sarah Nichols,2025-01-19,sample_6,sample_6,sample_6,sample_6,2024-01-01,,True,billingsystem,2025-07-13
+sample_7,Kevin Mcdonald,2025-06-14,sample_7,sample_7,sample_7,sample_7,2024-01-01,,True,billingsystem,2025-07-13
+sample_8,Thomas Rodriguez,2025-05-19,sample_8,sample_8,sample_8,sample_8,2024-01-01,,True,billingsystem,2025-07-13
+sample_9,Christine Garcia,2025-03-14,sample_9,sample_9,sample_9,sample_9,2024-01-01,,True,billingsystem,2025-07-13

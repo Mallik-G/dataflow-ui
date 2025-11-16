@@ -1,0 +1,11 @@
+OrderID,CustomerID,OrderDate,OrderStatus,OrderType,Channel,TotalAmount,LastUpdated
+ORD001,CUST001,2024-06-03,Submitted,New,Online,58.13,2023-11-28
+ORD002,CUST002,2024-09-15,Submitted,Termination,Retail,272.25,2024-05-15
+ORD003,CUST003,2023-07-23,Cancelled,New,Retail,130.47,2023-01-20
+ORD004,CUST004,2023-06-06,Cancelled,Upgrade,Retail,214.91,2023-04-25
+ORD005,CUST005,2024-01-18,Submitted,Upgrade,Retail,384.88,2024-01-07
+ORD006,CUST006,2023-06-15,Submitted,Termination,Retail,374.42,2023-11-11
+ORD007,CUST007,2024-07-06,Cancelled,Upgrade,App,188.63,2023-09-03
+ORD008,CUST008,2024-06-27,Cancelled,New,Online,294.14,2023-03-01
+ORD009,CUST009,2023-01-01,Cancelled,Termination,Online,278.97,2023-09-04
+ORD010,CUST010,2024-09-05,Fulfilled,New,Online,336.35,2024-08-03

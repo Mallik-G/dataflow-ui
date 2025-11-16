@@ -1,0 +1,11 @@
+payment_method_id,account_id,paymenttype,cardtype,maskedcardnumber,expirydate,preferred,effective_start_date,effective_end_date,is_current,source_system,ingestion_timestamp
+sample_0,ACCT000,Business,Personal,sample_0,2025-02-09,sample_0,2024-01-01,,True,billingsystem,2025-07-13
+sample_1,ACCT001,Business,Prepaid,sample_1,2025-01-27,sample_1,2024-01-01,,True,billingsystem,2025-07-13
+sample_2,ACCT002,Postpaid,Business,sample_2,2025-05-11,sample_2,2024-01-01,,True,billingsystem,2025-07-13
+sample_3,ACCT003,Business,Prepaid,sample_3,2025-01-11,sample_3,2024-01-01,,True,billingsystem,2025-07-13
+sample_4,ACCT004,Business,Personal,sample_4,2025-01-10,sample_4,2024-01-01,,True,billingsystem,2025-07-13
+sample_5,ACCT005,Prepaid,Personal,sample_5,2025-04-25,sample_5,2024-01-01,,True,billingsystem,2025-07-13
+sample_6,ACCT006,Personal,Business,sample_6,2025-06-11,sample_6,2024-01-01,,True,billingsystem,2025-07-13
+sample_7,ACCT007,Prepaid,Business,sample_7,2025-06-08,sample_7,2024-01-01,,True,billingsystem,2025-07-13
+sample_8,ACCT008,Postpaid,Postpaid,sample_8,2025-03-27,sample_8,2024-01-01,,True,billingsystem,2025-07-13
+sample_9,ACCT009,Postpaid,Prepaid,sample_9,2025-03-05,sample_9,2024-01-01,,True,billingsystem,2025-07-13

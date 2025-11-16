@@ -1,0 +1,11 @@
+subscriber_id,contract_ref,msisdn,sim,device_ref,sub_type,sub_status,activated,effective_start_date,effective_end_date,is_current,source_system,ingestion_timestamp
+SUB000,sample_0,sample_0,sample_0,sample_0,Prepaid,Active,sample_0,2024-01-01,,True,provisioning,2025-07-13
+SUB001,sample_1,sample_1,sample_1,sample_1,Postpaid,Inactive,sample_1,2024-01-01,,True,provisioning,2025-07-13
+SUB002,sample_2,sample_2,sample_2,sample_2,Postpaid,Pending,sample_2,2024-01-01,,True,provisioning,2025-07-13
+SUB003,sample_3,sample_3,sample_3,sample_3,Prepaid,Active,sample_3,2024-01-01,,True,provisioning,2025-07-13
+SUB004,sample_4,sample_4,sample_4,sample_4,Postpaid,Inactive,sample_4,2024-01-01,,True,provisioning,2025-07-13
+SUB005,sample_5,sample_5,sample_5,sample_5,Postpaid,Pending,sample_5,2024-01-01,,True,provisioning,2025-07-13
+SUB006,sample_6,sample_6,sample_6,sample_6,Prepaid,Pending,sample_6,2024-01-01,,True,provisioning,2025-07-13
+SUB007,sample_7,sample_7,sample_7,sample_7,Prepaid,Pending,sample_7,2024-01-01,,True,provisioning,2025-07-13
+SUB008,sample_8,sample_8,sample_8,sample_8,Personal,Active,sample_8,2024-01-01,,True,provisioning,2025-07-13
+SUB009,sample_9,sample_9,sample_9,sample_9,Postpaid,Active,sample_9,2024-01-01,,True,provisioning,2025-07-13

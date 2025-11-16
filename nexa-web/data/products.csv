@@ -1,0 +1,16 @@
+product_id,product_name,category,brand,description,price,weight_kg,dimensions,sku,is_active,created_date
+PROD001,Wireless Bluetooth Headphones,Electronics,SoundMax,High-quality wireless headphones with noise cancellation,89.99,0.25,15x8x3 cm,SKU-ELEC-001,true,2023-01-10
+PROD002,Organic Cotton T-Shirt,Clothing,EcoWear,Comfortable organic cotton t-shirt,24.99,0.15,30x25x2 cm,SKU-CLOTH-001,true,2023-01-15
+PROD003,Stainless Steel Water Bottle,Home & Garden,HydroLife,Insulated stainless steel water bottle,34.99,0.5,25x8x8 cm,SKU-HOME-001,true,2023-01-20
+PROD004,Smart Fitness Watch,Electronics,TechFit,Advanced fitness tracking smartwatch,199.99,0.08,4x4x1 cm,SKU-ELEC-002,true,2023-02-01
+PROD005,Leather Wallet,Accessories,LeatherCraft,Genuine leather wallet with card slots,49.99,0.1,12x9x2 cm,SKU-ACC-001,true,2023-02-05
+PROD006,Ceramic Coffee Mug Set,Home & Garden,KitchenPro,Set of 4 ceramic coffee mugs,29.99,1.2,10x10x12 cm,SKU-HOME-002,true,2023-02-10
+PROD007,Running Shoes,Sports,AthleticPro,Professional running shoes with cushioning,79.99,0.8,30x12x15 cm,SKU-SPORT-001,true,2023-02-15
+PROD008,LED Desk Lamp,Electronics,LightTech,Adjustable LED desk lamp with USB port,44.99,0.6,20x15x45 cm,SKU-ELEC-003,true,2023-02-20
+PROD009,Denim Jeans,Clothing,DenimStyle,Classic fit denim jeans,59.99,0.4,35x30x3 cm,SKU-CLOTH-002,true,2023-03-01
+PROD010,Yoga Mat,Sports,FlexFit,Non-slip yoga mat with carrying strap,39.99,1.5,180x60x0.5 cm,SKU-SPORT-002,true,2023-03-05
+PROD011,Bluetooth Speaker,Electronics,SoundWave,Portable Bluetooth speaker with bass,69.99,0.3,12x8x8 cm,SKU-ELEC-004,true,2023-03-10
+PROD012,Winter Jacket,Clothing,WarmStyle,Insulated winter jacket with hood,129.99,0.8,40x35x5 cm,SKU-CLOTH-003,true,2023-03-15
+PROD013,Kitchen Knife Set,Home & Garden,ChefPro,Professional kitchen knife set with block,89.99,2.0,30x20x15 cm,SKU-HOME-003,true,2023-03-20
+PROD014,Backpack,Accessories,TravelGear,Waterproof backpack with laptop compartment,54.99,0.7,45x30x15 cm,SKU-ACC-002,true,2023-04-01
+PROD015,Wireless Mouse,Electronics,ClickTech,Ergonomic wireless mouse with precision,24.99,0.1,12x6x4 cm,SKU-ELEC-005,true,2023-04-05 

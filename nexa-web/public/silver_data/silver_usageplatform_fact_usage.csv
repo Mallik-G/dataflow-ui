@@ -1,0 +1,11 @@
+usage_id,subscriber_id,usage_date,type,volume,minutes,sms,region,roaming,effective_start_date,effective_end_date,is_current,source_system,ingestion_timestamp
+sample_0,SUB000,2025-01-15,Personal,473.15,891.18,51,Torresborough,True,2024-01-01,,True,usageplatform,2025-07-13
+sample_1,SUB001,2025-05-07,Personal,222.76,602.83,96,New Nicholasport,True,2024-01-01,,True,usageplatform,2025-07-13
+sample_2,SUB002,2025-06-22,Postpaid,793.56,488.08,73,New Ricky,True,2024-01-01,,True,usageplatform,2025-07-13
+sample_3,SUB003,2025-03-06,Business,465.53,544.05,111,East Shannon,True,2024-01-01,,True,usageplatform,2025-07-13
+sample_4,SUB004,2025-02-13,Personal,927.39,303.67,151,West Patrickberg,False,2024-01-01,,True,usageplatform,2025-07-13
+sample_5,SUB005,2025-04-30,Prepaid,864.39,720.98,16,Ronaldborough,True,2024-01-01,,True,usageplatform,2025-07-13
+sample_6,SUB006,2025-04-03,Postpaid,159.55,679.61,104,East Shawn,False,2024-01-01,,True,usageplatform,2025-07-13
+sample_7,SUB007,2025-02-23,Business,68.0,535.49,178,Burtonville,False,2024-01-01,,True,usageplatform,2025-07-13
+sample_8,SUB008,2025-04-20,Postpaid,783.61,120.5,90,Davidview,False,2024-01-01,,True,usageplatform,2025-07-13
+sample_9,SUB009,2025-02-05,Prepaid,579.55,341.2,159,Williamville,True,2024-01-01,,True,usageplatform,2025-07-13

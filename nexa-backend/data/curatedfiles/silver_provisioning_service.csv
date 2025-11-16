@@ -1,0 +1,11 @@
+service_id,sub_ref,svc_type,svc_status,start,end,qos,effective_start_date,effective_end_date,is_current,source_system,ingestion_timestamp
+SRV000,sample_0,Postpaid,Active,sample_0,sample_0,sample_0,2024-01-01,,True,provisioning,2025-07-13
+SRV001,sample_1,Prepaid,Inactive,sample_1,sample_1,sample_1,2024-01-01,,True,provisioning,2025-07-13
+SRV002,sample_2,Business,Active,sample_2,sample_2,sample_2,2024-01-01,,True,provisioning,2025-07-13
+SRV003,sample_3,Prepaid,Active,sample_3,sample_3,sample_3,2024-01-01,,True,provisioning,2025-07-13
+SRV004,sample_4,Personal,Inactive,sample_4,sample_4,sample_4,2024-01-01,,True,provisioning,2025-07-13
+SRV005,sample_5,Business,Inactive,sample_5,sample_5,sample_5,2024-01-01,,True,provisioning,2025-07-13
+SRV006,sample_6,Business,Active,sample_6,sample_6,sample_6,2024-01-01,,True,provisioning,2025-07-13
+SRV007,sample_7,Personal,Pending,sample_7,sample_7,sample_7,2024-01-01,,True,provisioning,2025-07-13
+SRV008,sample_8,Postpaid,Active,sample_8,sample_8,sample_8,2024-01-01,,True,provisioning,2025-07-13
+SRV009,sample_9,Personal,Pending,sample_9,sample_9,sample_9,2024-01-01,,True,provisioning,2025-07-13

@@ -1,0 +1,183 @@
+.app-login {
+  @include wh100;
+  position: relative;
+  &-logo {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: $black;
+    width: 200px;
+  }
+  &-left {
+    width: 40%;
+    flex: 0 0 auto;
+    background: $light-gray;
+    padding: 2rem 5rem;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &-intro {
+    & li + li {
+      margin-top: 0.5rem;
+    }
+  }
+  &-right {
+    flex: 1 1 auto;
+    padding: 2rem 5rem;
+  }
+  &-form {
+    max-width: 550px;
+    flex: 0 0 auto;
+  }
+
+  & .or-seprator {
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+    &:before,
+    &:after {
+      content: "";
+      width: 70%;
+      height: 1px;
+      background-color: lighten($black, 80%);
+    }
+  }
+}
+
+/* Azure Login Button Styles */
+.azure-login-container {
+  width: 100%;
+}
+
+.azure-login-container .btn {
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.azure-login-container .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.azure-login-container .btn-outline-primary {
+  border-color: #0078d4;
+  color: #0078d4;
+}
+
+.azure-login-container .btn-outline-primary:hover {
+  background-color: #0078d4;
+  border-color: #0078d4;
+  color: white;
+}
+
+.azure-login-container .btn-outline-danger {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.azure-login-container .btn-outline-danger:hover {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: white;
+}
+
+/* Azure User Info Styles */
+.azure-user-info {
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.azure-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #0078d4;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* Loading Spinner Styles */
+.azure-login-container .spinner-border-sm {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Alert Styles */
+.azure-login-container .alert {
+  border-radius: 8px;
+  border: none;
+  font-size: 0.875rem;
+}
+
+/* Microsoft Icon Styles */
+.azure-login-container .fa-microsoft {
+  font-size: 1.2em;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .azure-login-container .btn {
+    font-size: 0.9rem;
+    padding: 0.75rem 1rem;
+  }
+  
+  .azure-user-info {
+    padding: 0.75rem;
+  }
+  
+  .azure-avatar {
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
+  }
+}
+
+/* Animation for login success */
+@keyframes loginSuccess {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.azure-login-success {
+  animation: loginSuccess 0.5s ease-in-out;
+}
+
+/* Error animation */
+@keyframes loginError {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.azure-login-error {
+  animation: loginError 0.5s ease-in-out;
+}

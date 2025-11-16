@@ -1,0 +1,11 @@
+cust_id,arpu,ltv,churn_risk_score,nps_score,customer_tenure,last_updated,effective_start_date,effective_end_date,is_current,source_system,ingestion_timestamp
+sample_0,458.16,95.25,0.38,25,42,2025-01-31,2024-01-01,,True,analyticsengine,2025-07-13
+sample_1,111.86,942.43,0.21,71,17,2025-07-08,2024-01-01,,True,analyticsengine,2025-07-13
+sample_2,998.53,287.38,0.89,-2,3,2025-05-26,2024-01-01,,True,analyticsengine,2025-07-13
+sample_3,97.04,209.07,0.21,91,35,2025-05-28,2024-01-01,,True,analyticsengine,2025-07-13
+sample_4,48.57,350.86,0.58,59,7,2025-04-07,2024-01-01,,True,analyticsengine,2025-07-13
+sample_5,836.4,644.82,0.16,52,4,2025-02-07,2024-01-01,,True,analyticsengine,2025-07-13
+sample_6,261.92,131.6,0.09,-45,30,2025-06-12,2024-01-01,,True,analyticsengine,2025-07-13
+sample_7,582.32,96.52,0.95,51,18,2025-04-15,2024-01-01,,True,analyticsengine,2025-07-13
+sample_8,29.41,288.41,0.52,100,34,2025-02-28,2024-01-01,,True,analyticsengine,2025-07-13
+sample_9,966.25,789.82,0.99,-47,3,2025-07-03,2024-01-01,,True,analyticsengine,2025-07-13

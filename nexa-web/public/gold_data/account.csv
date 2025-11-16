@@ -1,0 +1,11 @@
+AccountID,CustomerID,AccountType,BillingCycle,Currency,AccountStatus,CreatedDate
+ACC001,CUST001,Prepaid,Quarterly,AUD,Suspended,2023-03-31
+ACC002,CUST002,Postpaid,Quarterly,AUD,Suspended,2024-08-27
+ACC003,CUST003,Prepaid,Quarterly,AUD,Suspended,2024-03-08
+ACC004,CUST004,Postpaid,Quarterly,AUD,Suspended,2023-02-02
+ACC005,CUST005,Postpaid,Quarterly,AUD,Suspended,2023-01-31
+ACC006,CUST006,Prepaid,Quarterly,AUD,Suspended,2023-04-06
+ACC007,CUST007,Postpaid,Quarterly,AUD,Suspended,2023-08-12
+ACC008,CUST008,Prepaid,Quarterly,AUD,Suspended,2023-08-27
+ACC009,CUST009,Prepaid,Monthly,AUD,Active,2024-06-01
+ACC010,CUST010,Prepaid,Monthly,AUD,Suspended,2024-09-08

@@ -1,0 +1,21 @@
+order_id,customer_id,order_date,order_status,total_amount,shipping_address,billing_address,payment_method,shipping_method,order_notes
+ORD001,CUST001,2023-12-01,Delivered,89.99,123 Main St New York NY 10001,123 Main St New York NY 10001,Credit Card,Express,Handle with care
+ORD002,CUST002,2023-12-02,Shipped,54.98,456 Oak Ave Los Angeles CA 90210,456 Oak Ave Los Angeles CA 90210,PayPal,Standard,Leave at front door
+ORD003,CUST003,2023-12-03,Processing,199.99,789 Pine Rd Chicago IL 60601,789 Pine Rd Chicago IL 60601,Credit Card,Express,Signature required
+ORD004,CUST001,2023-12-04,Delivered,34.99,123 Main St New York NY 10001,123 Main St New York NY 10001,Credit Card,Standard,No special instructions
+ORD005,CUST004,2023-12-05,Cancelled,79.99,321 Elm St Houston TX 77001,321 Elm St Houston TX 77001,Credit Card,Express,Customer requested cancellation
+ORD006,CUST005,2023-12-06,Shipped,129.99,654 Maple Dr Phoenix AZ 85001,654 Maple Dr Phoenix AZ 85001,PayPal,Standard,Deliver to back entrance
+ORD007,CUST006,2023-12-07,Delivered,44.99,987 Cedar Ln Philadelphia PA 19101,987 Cedar Ln Philadelphia PA 19101,Credit Card,Express,Call before delivery
+ORD008,CUST007,2023-12-08,Processing,89.99,147 Birch Way San Antonio TX 78201,147 Birch Way San Antonio TX 78201,Credit Card,Standard,No special instructions
+ORD009,CUST002,2023-12-09,Shipped,69.99,456 Oak Ave Los Angeles CA 90210,456 Oak Ave Los Angeles CA 90210,PayPal,Express,Leave with doorman
+ORD010,CUST008,2023-12-10,Delivered,39.99,258 Spruce St San Diego CA 92101,258 Spruce St San Diego CA 92101,Credit Card,Standard,No special instructions
+ORD011,CUST009,2023-12-11,Cancelled,54.99,369 Willow Ave Dallas TX 75201,369 Willow Ave Dallas TX 75201,Credit Card,Express,Out of stock
+ORD012,CUST010,2023-12-12,Shipped,24.99,741 Aspen Rd San Jose CA 95101,741 Aspen Rd San Jose CA 95101,PayPal,Standard,No special instructions
+ORD013,CUST011,2023-12-13,Delivered,159.98,852 Poplar St Austin TX 73301,852 Poplar St Austin TX 73301,Credit Card,Express,Handle fragile items carefully
+ORD014,CUST003,2023-12-14,Processing,89.99,789 Pine Rd Chicago IL 60601,789 Pine Rd Chicago IL 60601,Credit Card,Standard,No special instructions
+ORD015,CUST012,2023-12-15,Shipped,129.99,963 Sycamore Dr Jacksonville FL 32201,963 Sycamore Dr Jacksonville FL 32201,PayPal,Express,Deliver to office
+ORD016,CUST013,2023-12-16,Delivered,44.99,159 Chestnut Ln Fort Worth TX 76101,159 Chestnut Ln Fort Worth TX 76101,Credit Card,Standard,No special instructions
+ORD017,CUST014,2023-12-17,Processing,79.99,357 Dogwood Way Columbus OH 43201,357 Dogwood Way Columbus OH 43201,Credit Card,Express,Call upon arrival
+ORD018,CUST015,2023-12-18,Shipped,199.99,486 Magnolia Ave Charlotte NC 28201,486 Magnolia Ave Charlotte NC 28201,PayPal,Standard,No special instructions
+ORD019,CUST001,2023-12-19,Delivered,49.99,123 Main St New York NY 10001,123 Main St New York NY 10001,Credit Card,Standard,No special instructions
+ORD020,CUST005,2023-12-20,Processing,34.99,654 Maple Dr Phoenix AZ 85001,654 Maple Dr Phoenix AZ 85001,Credit Card,Express,No special instructions 

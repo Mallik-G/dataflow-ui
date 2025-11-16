@@ -1,0 +1,6 @@
+warehouse_id,warehouse_name,address,city,state,zip_code,country,phone,email,manager_name,capacity_sqft,is_active
+WH001,Main Distribution Center,1000 Industrial Blvd,New York,NY,10001,USA,+1-555-1001,warehouse1@company.com,John Manager,50000,true
+WH002,West Coast Hub,2000 Logistics Way,Los Angeles,CA,90210,USA,+1-555-1002,warehouse2@company.com,Sarah Director,45000,true
+WH003,Texas Regional Center,3000 Storage Ave,Dallas,TX,75201,USA,+1-555-1003,warehouse3@company.com,Mike Supervisor,35000,true
+WH004,Florida Distribution,4000 Warehouse Dr,Miami,FL,33101,USA,+1-555-1004,warehouse4@company.com,Lisa Coordinator,30000,true
+WH005,Chicago Hub,5000 Industrial Park,Chicago,IL,60601,USA,+1-555-1005,warehouse5@company.com,David Lead,40000,true 

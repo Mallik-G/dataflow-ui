@@ -1,0 +1,16 @@
+customer_id,customer_name,email,phone,address,city,state,zip_code,country,registration_date,membership_level,is_active
+CUST001,John Smith,john.smith@email.com,+1-555-0101,123 Main St,New York,NY,10001,USA,2023-01-15,Premium,true
+CUST002,Sarah Johnson,sarah.j@email.com,+1-555-0102,456 Oak Ave,Los Angeles,CA,90210,USA,2023-02-20,Standard,true
+CUST003,Mike Davis,mike.davis@email.com,+1-555-0103,789 Pine Rd,Chicago,IL,60601,USA,2023-03-10,Premium,true
+CUST004,Emily Wilson,emily.w@email.com,+1-555-0104,321 Elm St,Houston,TX,77001,USA,2023-01-25,Standard,false
+CUST005,David Brown,david.b@email.com,+1-555-0105,654 Maple Dr,Phoenix,AZ,85001,USA,2023-04-05,Premium,true
+CUST006,Lisa Anderson,lisa.a@email.com,+1-555-0106,987 Cedar Ln,Philadelphia,PA,19101,USA,2023-02-15,Standard,true
+CUST007,Robert Taylor,robert.t@email.com,+1-555-0107,147 Birch Way,San Antonio,TX,78201,USA,2023-03-20,Premium,true
+CUST008,Jennifer Lee,jennifer.l@email.com,+1-555-0108,258 Spruce St,San Diego,CA,92101,USA,2023-01-30,Standard,true
+CUST009,Michael Garcia,michael.g@email.com,+1-555-0109,369 Willow Ave,Dallas,TX,75201,USA,2023-04-10,Premium,false
+CUST010,Amanda Martinez,amanda.m@email.com,+1-555-0110,741 Aspen Rd,San Jose,CA,95101,USA,2023-02-25,Standard,true
+CUST011,Christopher Rodriguez,chris.r@email.com,+1-555-0111,852 Poplar St,Austin,TX,73301,USA,2023-03-15,Premium,true
+CUST012,Jessica Lopez,jessica.l@email.com,+1-555-0112,963 Sycamore Dr,Jacksonville,FL,32201,USA,2023-01-20,Standard,true
+CUST013,Daniel White,daniel.w@email.com,+1-555-0113,159 Chestnut Ln,Fort Worth,TX,76101,USA,2023-04-12,Premium,true
+CUST014,Ashley Thompson,ashley.t@email.com,+1-555-0114,357 Dogwood Way,Columbus,OH,43201,USA,2023-02-18,Standard,true
+CUST015,Matthew Harris,matthew.h@email.com,+1-555-0115,486 Magnolia Ave,Charlotte,NC,28201,USA,2023-03-25,Premium,true 

@@ -1,0 +1,11 @@
+PaymentMethodID,AccountID,PaymentType,CardType,MaskedCardNumber,ExpiryDate,Preferred
+PAY001,ACC001,Bank Transfer,MasterCard,**** **** **** 3287,08/26,Yes
+PAY002,ACC002,Bank Transfer,Visa,**** **** **** 5040,02/26,No
+PAY003,ACC003,Bank Transfer,MasterCard,**** **** **** 9830,01/26,Yes
+PAY004,ACC004,Bank Transfer,MasterCard,**** **** **** 5304,02/26,Yes
+PAY005,ACC005,Credit Card,Visa,**** **** **** 8019,03/26,Yes
+PAY006,ACC006,Credit Card,Visa,**** **** **** 7543,11/26,No
+PAY007,ACC007,Bank Transfer,MasterCard,**** **** **** 6930,03/26,No
+PAY008,ACC008,Bank Transfer,MasterCard,**** **** **** 4593,11/26,Yes
+PAY009,ACC009,Credit Card,Visa,**** **** **** 3266,07/26,No
+PAY010,ACC010,Credit Card,MasterCard,**** **** **** 9348,10/26,Yes

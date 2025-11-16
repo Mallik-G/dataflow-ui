@@ -1,0 +1,183 @@
+.chatbot {
+  &-fab {
+    border-radius: 0.5rem 0.5rem 0 0.5rem;
+    border: 2px solid transparent;
+    background-clip: padding-box, border-box;
+    background-origin: border-box;
+    background-image: linear-gradient(white, white),
+      linear-gradient(90deg, #2563eb, #ec4899);
+    cursor: pointer;
+    user-select: none;
+    &-bg {
+      font-family: "Comfortaa", sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #1f1f1f;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.35rem 1rem;
+      background: linear-gradient(
+        130deg,
+        rgba(37, 99, 235, 0.1) 0%,
+        rgba(245, 247, 250, 0) 100%
+      );
+    }
+    & .fab-icon {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      background: $black;
+      color: $white;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
+      position: relative;
+      transition-duration: 0.3s;
+      & .presence-badge {
+        width: 0.7rem;
+        height: 0.7rem;
+        border-radius: 50%;
+        position: absolute;
+        top: -0.25rem;
+        right: -0.25rem;
+        &[aria-label="busy"] {
+          background: #ef4444;
+        }
+        &[aria-label="online"] {
+          background: #13a10e;
+        }
+      }
+    }
+    &:hover .fab-icon {
+      font-size: 1.65rem;
+      background: lighten($black, 30%);
+    }
+    & .fab-text {
+      transition-duration: 0.3s;
+    }
+  }
+  &-window {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 450px;
+    max-width: 95vw;
+    height: 100%;
+    background: #fff;
+    border-radius: 1.25rem 0 0 1.25rem;
+    border: solid 1px #e5e7eb;
+    box-shadow: 0 8px 32px 0 rgba(115, 102, 255, 0.18);
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: chatbot-pop 0.2s;
+  }
+  &-header {
+    background: $white;
+    font-size: 1.15rem;
+    padding: 1rem 1.5rem;
+    border-bottom: solid 1px #e5e7eb;
+    position: relative;
+  }
+  &-close {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    opacity: 0.7;
+    cursor: pointer;
+    padding: 0;
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &-messages {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    background: $white;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    height: 100%;
+  }
+  &-input-row {
+    display: flex;
+    border-top: 1px solid #eee;
+    background: #fff;
+    padding: 0.7rem 1rem;
+    gap: 0.5rem;
+    & .form-control {
+      height: 48px;
+      font-size: 0.875rem;
+      outline: none;
+      transition: border 0.2s;
+      &:focus {
+        border-color: $primary;
+      }
+    }
+    & .btn {
+      height: 48px;
+    }
+  }
+  &-msg {
+    padding: 0.7rem 1rem;
+    max-width: 80%;
+    font-size: 0.875rem;
+    word-break: break-word;
+    box-shadow: 0 2px 8px 0 #7366ff11;
+    position: relative;
+    &.user {
+      background: $primary;
+      color: #fff;
+      align-self: flex-end;
+      border-radius: 0.75rem 0 0.75rem 0.75rem;
+    }
+    &.nexa {
+      align-self: flex-start;
+      padding-left: 45px;
+      color: $black;
+
+      &:before {
+        content: "";
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: url(../assets/ai-icon.svg) #dbeafe no-repeat center;
+        background-size: 1rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+}
+
+@keyframes chatbot-pop {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .chatbot-window {
+    right: 0.5rem;
+    width: 98vw;
+    min-width: 0;
+  }
+  .chatbot-fab {
+    right: 0.5rem;
+  }
+}

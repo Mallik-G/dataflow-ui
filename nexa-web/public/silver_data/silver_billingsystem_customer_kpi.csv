@@ -1,0 +1,11 @@
+customer_id,arpu,ltv,churn_risk_score,nps_score,customer_tenure,lastupdated,effective_start_date,effective_end_date,is_current,source_system,ingestion_timestamp
+CUST000,404.23,274.49,0.86,18,50,2025-03-16,2024-01-01,,True,billingsystem,2025-07-13
+CUST001,177.73,492.79,0.38,63,36,2025-05-11,2024-01-01,,True,billingsystem,2025-07-13
+CUST002,521.67,426.1,0.15,-22,46,2025-05-08,2024-01-01,,True,billingsystem,2025-07-13
+CUST003,761.79,764.56,0.68,57,38,2025-03-20,2024-01-01,,True,billingsystem,2025-07-13
+CUST004,88.73,529.37,0.01,-19,12,2025-02-05,2024-01-01,,True,billingsystem,2025-07-13
+CUST005,295.76,487.69,0.2,-7,60,2025-02-21,2024-01-01,,True,billingsystem,2025-07-13
+CUST006,611.21,196.97,0.78,9,36,2025-05-29,2024-01-01,,True,billingsystem,2025-07-13
+CUST007,283.04,516.41,0.12,-26,27,2025-01-13,2024-01-01,,True,billingsystem,2025-07-13
+CUST008,610.13,983.9,0.78,95,4,2025-02-07,2024-01-01,,True,billingsystem,2025-07-13
+CUST009,19.2,338.44,0.39,98,18,2025-03-26,2024-01-01,,True,billingsystem,2025-07-13

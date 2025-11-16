@@ -1,0 +1,21 @@
+review_id,customer_id,product_id,order_id,rating,review_title,review_text,review_date,is_verified_purchase,helpful_votes,is_approved
+REV001,CUST001,PROD001,ORD001,5,Excellent Sound Quality,These headphones are amazing! Great sound quality and comfortable to wear for hours.,2023-12-05,true,12,true
+REV002,CUST002,PROD002,ORD002,4,Comfortable and Eco-friendly,Love the organic cotton feel. Very comfortable and good for the environment.,2023-12-06,true,8,true
+REV003,CUST003,PROD004,ORD003,5,Perfect Fitness Companion,This smartwatch tracks everything I need. Battery life is impressive and the app is user-friendly.,2023-12-07,true,15,true
+REV004,CUST001,PROD003,ORD004,4,Great Water Bottle,Keeps drinks cold for hours. Perfect size for daily use. Highly recommend!,2023-12-08,true,6,true
+REV005,CUST005,PROD012,ORD006,5,Warm and Stylish,Perfect winter jacket! Very warm and looks great. Worth every penny.,2023-12-09,true,10,true
+REV006,CUST006,PROD008,ORD007,4,Good Desk Lamp,Adjustable brightness and USB port are very convenient. Good value for money.,2023-12-10,true,4,true
+REV007,CUST007,PROD013,ORD008,5,Professional Quality,These knives are sharp and well-made. The block is sturdy and looks great in my kitchen.,2023-12-11,true,7,true
+REV008,CUST002,PROD011,ORD009,4,Great Portable Speaker,Good sound quality for its size. Perfect for outdoor activities and parties.,2023-12-12,true,9,true
+REV009,CUST008,PROD010,ORD010,3,Decent Yoga Mat,Good thickness and non-slip surface. Could be a bit longer for taller people.,2023-12-13,true,3,true
+REV010,CUST010,PROD015,ORD012,4,Comfortable Mouse,Ergonomic design is great for long work sessions. Wireless connection is reliable.,2023-12-14,true,5,true
+REV011,CUST011,PROD004,ORD013,5,Outstanding Smartwatch,Exceeded my expectations! The fitness tracking is accurate and the notifications work perfectly.,2023-12-15,true,18,true
+REV012,CUST003,PROD013,ORD014,4,Quality Knife Set,Sharp knives that stay sharp. The block is well-organized and saves counter space.,2023-12-16,true,6,true
+REV013,CUST012,PROD012,ORD015,5,Excellent Winter Jacket,Very warm and waterproof. Perfect for cold weather. Great quality construction.,2023-12-17,true,11,true
+REV014,CUST013,PROD008,ORD016,3,Okay Desk Lamp,Works fine but could be brighter. USB port is useful though.,2023-12-18,true,2,true
+REV015,CUST014,PROD007,ORD017,4,Good Running Shoes,Comfortable and supportive. Great for daily runs and gym workouts.,2023-12-19,true,8,true
+REV016,CUST015,PROD004,ORD018,5,Amazing Smartwatch,Best fitness tracker I've owned. The heart rate monitor is very accurate.,2023-12-20,true,14,true
+REV017,CUST001,PROD005,ORD019,4,Quality Leather Wallet,Well-made leather wallet with plenty of card slots. Good value for money.,2023-12-21,true,4,true
+REV018,CUST005,PROD003,ORD020,5,Perfect Water Bottle,Love this bottle! Keeps drinks cold all day and doesn't leak. Great design.,2023-12-22,true,7,true
+REV019,CUST002,PROD009,ORD009,3,Average Jeans,Decent quality but runs a bit small. Would recommend sizing up.,2023-12-23,true,1,true
+REV020,CUST006,PROD014,ORD006,4,Good Backpack,Waterproof and spacious. Perfect for commuting and travel. Laptop compartment fits well.,2023-12-24,true,6,true 

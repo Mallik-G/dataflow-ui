@@ -1,0 +1,11 @@
+device_id,dev_type,make,model,imei,os,activated,warranty,effective_start_date,effective_end_date,is_current,source_system,ingestion_timestamp
+DEV000,Prepaid,sample_0,sample_0,sample_0,sample_0,sample_0,sample_0,2024-01-01,,True,provisioning,2025-07-13
+DEV001,Postpaid,sample_1,sample_1,sample_1,sample_1,sample_1,sample_1,2024-01-01,,True,provisioning,2025-07-13
+DEV002,Personal,sample_2,sample_2,sample_2,sample_2,sample_2,sample_2,2024-01-01,,True,provisioning,2025-07-13
+DEV003,Personal,sample_3,sample_3,sample_3,sample_3,sample_3,sample_3,2024-01-01,,True,provisioning,2025-07-13
+DEV004,Prepaid,sample_4,sample_4,sample_4,sample_4,sample_4,sample_4,2024-01-01,,True,provisioning,2025-07-13
+DEV005,Postpaid,sample_5,sample_5,sample_5,sample_5,sample_5,sample_5,2024-01-01,,True,provisioning,2025-07-13
+DEV006,Business,sample_6,sample_6,sample_6,sample_6,sample_6,sample_6,2024-01-01,,True,provisioning,2025-07-13
+DEV007,Prepaid,sample_7,sample_7,sample_7,sample_7,sample_7,sample_7,2024-01-01,,True,provisioning,2025-07-13
+DEV008,Prepaid,sample_8,sample_8,sample_8,sample_8,sample_8,sample_8,2024-01-01,,True,provisioning,2025-07-13
+DEV009,Business,sample_9,sample_9,sample_9,sample_9,sample_9,sample_9,2024-01-01,,True,provisioning,2025-07-13

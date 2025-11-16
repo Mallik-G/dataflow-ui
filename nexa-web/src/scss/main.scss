@@ -1,0 +1,22 @@
+// import font
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+// import Bootstrap UI scss
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+// import abstracts
+@import "abstracts/variables";
+@import "abstracts/mixins";
+
+// import global
+@import "global/global";
+
+// import components
+@import "components/sidebar";
+@import "components/header";
+@import "components/table";
+@import "components/login";
+@import "components/chatboat";
+@import "components/canvas";
+@import "components/theme";
+@import "components/ai";

@@ -1,0 +1,11 @@
+customer_id,full_name,dob,gender,kyc_status,segment,created_at,effective_start_date,effective_end_date,is_current,source_system,ingestion_timestamp
+CUST000,Diane Chavez,1965-09-01,sample_0,Pending,sample_0,sample_0,2024-01-01,,True,salesforce,2025-07-13
+CUST001,George Marshall,2006-03-17,sample_1,Inactive,sample_1,sample_1,2024-01-01,,True,salesforce,2025-07-13
+CUST002,Patrick Leblanc,1987-10-30,sample_2,Pending,sample_2,sample_2,2024-01-01,,True,salesforce,2025-07-13
+CUST003,Sarah Whitaker,1986-09-22,sample_3,Pending,sample_3,sample_3,2024-01-01,,True,salesforce,2025-07-13
+CUST004,Michele Perry,1980-02-14,sample_4,Inactive,sample_4,sample_4,2024-01-01,,True,salesforce,2025-07-13
+CUST005,Julia Walker,1968-02-16,sample_5,Inactive,sample_5,sample_5,2024-01-01,,True,salesforce,2025-07-13
+CUST006,Taylor Sharp,1985-05-10,sample_6,Active,sample_6,sample_6,2024-01-01,,True,salesforce,2025-07-13
+CUST007,Nathaniel Carlson,2000-07-26,sample_7,Pending,sample_7,sample_7,2024-01-01,,True,salesforce,2025-07-13
+CUST008,Christopher Davis,1997-05-21,sample_8,Pending,sample_8,sample_8,2024-01-01,,True,salesforce,2025-07-13
+CUST009,Matthew Wilson,2004-07-22,sample_9,Pending,sample_9,sample_9,2024-01-01,,True,salesforce,2025-07-13

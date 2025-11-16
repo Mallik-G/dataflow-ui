@@ -1,0 +1,11 @@
+AddressID,CustomerID,Street,City,State,Postcode,Country,AddressType
+ADDR001,CUST001,1 Main Street,Sydney,VIC,2000,Australia,Billing
+ADDR002,CUST002,2 Main Street,Sydney,QLD,4000,Australia,Residential
+ADDR003,CUST003,3 Main Street,Melbourne,VIC,4000,Australia,Billing
+ADDR004,CUST004,4 Main Street,Melbourne,VIC,2000,Australia,Residential
+ADDR005,CUST005,5 Main Street,Sydney,QLD,2000,Australia,Billing
+ADDR006,CUST006,6 Main Street,Sydney,VIC,4000,Australia,Billing
+ADDR007,CUST007,7 Main Street,Sydney,QLD,3000,Australia,Billing
+ADDR008,CUST008,8 Main Street,Brisbane,QLD,2000,Australia,Residential
+ADDR009,CUST009,9 Main Street,Brisbane,NSW,3000,Australia,Billing
+ADDR010,CUST010,10 Main Street,Brisbane,QLD,3000,Australia,Residential

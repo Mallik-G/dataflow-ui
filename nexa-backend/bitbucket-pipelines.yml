@@ -1,0 +1,33 @@
+image: atlassian/default-image:3
+
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Deploy Backend
+          services:
+            - docker
+          caches:
+            - docker
+          script:
+            - echo "Setting up SSH key..."
+            - mkdir -p ~/.ssh
+            - echo "$SSH_PRIVATE_KEY_B64" | base64 -d | tr -d '\r' > ~/.ssh/dr-ai.pem
+            - chmod 600 ~/.ssh/dr-ai.pem
+            - echo "SSH key permissions:"
+            - ls -la ~/.ssh/dr-ai.pem
+            - echo "SSH key first line:"
+            - head -1 ~/.ssh/dr-ai.pem
+            - ssh-keyscan $EC2_HOST >> ~/.ssh/known_hosts
+            - echo "Testing SSH connection..."
+            - ssh -i ~/.ssh/dr-ai.pem -o StrictHostKeyChecking=no $SSH_USER@$EC2_HOST "echo 'SSH connection successful'"
+            - echo "Deploying backend to EC2..."
+            - |
+              ssh -i ~/.ssh/dr-ai.pem $SSH_USER@$EC2_HOST << 'EOF'
+              sudo su
+              cd /home/ubuntu/dr-ai/drai-nexa-backend
+              git pull origin main
+              chmod +x build-and-run.sh
+              ./build-and-run.sh
+              echo "Backend deployment completed!"
+              EOF

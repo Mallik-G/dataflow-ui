@@ -1,0 +1,11 @@
+invoice_id,account_id,invoicedate,duedate,totalamount,status,paiddate,effective_start_date,effective_end_date,is_current,source_system,ingestion_timestamp
+sample_0,ACCT000,2025-03-20,2025-04-04,sample_0,Active,2025-06-11,2024-01-01,,True,billingsystem,2025-07-13
+sample_1,ACCT001,2025-04-22,2025-01-13,sample_1,Active,2025-06-09,2024-01-01,,True,billingsystem,2025-07-13
+sample_2,ACCT002,2025-06-16,2025-07-03,sample_2,Active,2025-03-19,2024-01-01,,True,billingsystem,2025-07-13
+sample_3,ACCT003,2025-01-11,2025-02-11,sample_3,Active,2025-02-13,2024-01-01,,True,billingsystem,2025-07-13
+sample_4,ACCT004,2025-06-03,2025-01-17,sample_4,Pending,2025-05-25,2024-01-01,,True,billingsystem,2025-07-13
+sample_5,ACCT005,2025-01-13,2025-04-10,sample_5,Inactive,2025-02-08,2024-01-01,,True,billingsystem,2025-07-13
+sample_6,ACCT006,2025-03-07,2025-05-28,sample_6,Pending,2025-02-20,2024-01-01,,True,billingsystem,2025-07-13
+sample_7,ACCT007,2025-04-28,2025-03-29,sample_7,Active,2025-01-30,2024-01-01,,True,billingsystem,2025-07-13
+sample_8,ACCT008,2025-03-07,2025-06-29,sample_8,Inactive,2025-05-14,2024-01-01,,True,billingsystem,2025-07-13
+sample_9,ACCT009,2025-03-05,2025-01-28,sample_9,Inactive,2025-06-23,2024-01-01,,True,billingsystem,2025-07-13

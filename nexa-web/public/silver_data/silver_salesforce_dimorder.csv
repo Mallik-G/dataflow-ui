@@ -1,0 +1,11 @@
+order_id,customer_id,order_date,order_status,order_type,channel,amount,last_updated,effective_start_date,effective_end_date,is_current,source_system,ingestion_timestamp
+ORD000,CUST000,2025-03-27,Active,Business,sample_0,sample_0,2025-04-18,2024-01-01,,True,salesforce,2025-07-13
+ORD001,CUST001,2025-02-20,Pending,Business,sample_1,sample_1,2025-06-10,2024-01-01,,True,salesforce,2025-07-13
+ORD002,CUST002,2025-05-27,Pending,Personal,sample_2,sample_2,2025-02-03,2024-01-01,,True,salesforce,2025-07-13
+ORD003,CUST003,2025-03-17,Active,Business,sample_3,sample_3,2025-01-28,2024-01-01,,True,salesforce,2025-07-13
+ORD004,CUST004,2025-03-04,Pending,Postpaid,sample_4,sample_4,2025-01-02,2024-01-01,,True,salesforce,2025-07-13
+ORD005,CUST005,2025-03-22,Pending,Postpaid,sample_5,sample_5,2025-02-09,2024-01-01,,True,salesforce,2025-07-13
+ORD006,CUST006,2025-03-02,Pending,Postpaid,sample_6,sample_6,2025-02-01,2024-01-01,,True,salesforce,2025-07-13
+ORD007,CUST007,2025-03-28,Active,Postpaid,sample_7,sample_7,2025-07-05,2024-01-01,,True,salesforce,2025-07-13
+ORD008,CUST008,2025-01-21,Pending,Prepaid,sample_8,sample_8,2025-03-07,2024-01-01,,True,salesforce,2025-07-13
+ORD009,CUST009,2025-01-08,Inactive,Business,sample_9,sample_9,2025-02-13,2024-01-01,,True,salesforce,2025-07-13

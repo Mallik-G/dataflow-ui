@@ -1,0 +1,11 @@
+ContactPointID,CustomerID,ContactType,Value,Preferred,Verified,LastUpdated
+CP001,CUST001,Email,user0@example.com,No,No,2024-06-30
+CP002,CUST002,Email,6140000001,No,No,2023-09-08
+CP003,CUST003,Phone,user2@example.com,Yes,No,2023-06-17
+CP004,CUST004,Email,6140000003,No,No,2024-04-18
+CP005,CUST005,Phone,user4@example.com,Yes,Yes,2024-01-24
+CP006,CUST006,Email,6140000005,Yes,No,2023-10-04
+CP007,CUST007,Email,user6@example.com,No,No,2024-10-17
+CP008,CUST008,Email,6140000007,No,Yes,2024-12-05
+CP009,CUST009,Phone,user8@example.com,No,No,2024-07-24
+CP010,CUST010,Phone,6140000009,No,Yes,2023-08-13
