@@ -15,6 +15,7 @@ const Layout = ({ children }: LayoutProps) => {
     { path: '/canvas', icon: '🎨', label: 'Canvas' },
     { path: '/observe', icon: '👁️', label: 'Observe' },
     { path: '/deploy', icon: '🚀', label: 'Deploy' },
+    { path: '/promotions', icon: '🔄', label: 'Promotions' },
     { path: '/connections', icon: '🔌', label: 'Connections' },
     { path: '/glossary', icon: '📚', label: 'Glossary' },
     { path: '/settings', icon: '⚙️', label: 'Settings' },

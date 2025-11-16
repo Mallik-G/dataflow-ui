@@ -4,6 +4,7 @@ import Dashboard from './pages/Dashboard';
 import Canvas from './pages/Canvas';
 import Observe from './pages/Observe';
 import Deploy from './pages/Deploy';
+import Promotions from './pages/Promotions';
 import Connections from './pages/Connections';
 import Glossary from './pages/Glossary';
 import Settings from './pages/Settings';
@@ -17,6 +18,7 @@ function App() {
           <Route path="/canvas" element={<Canvas />} />
           <Route path="/observe" element={<Observe />} />
           <Route path="/deploy" element={<Deploy />} />
+          <Route path="/promotions" element={<Promotions />} />
           <Route path="/connections" element={<Connections />} />
           <Route path="/glossary" element={<Glossary />} />
           <Route path="/settings" element={<Settings />} />
