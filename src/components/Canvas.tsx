@@ -70,7 +70,7 @@ const CanvasContent = () => {
   );
 
   return (
-    <div style={{ width: '100vw', height: '100vh', display: 'flex', backgroundColor: '#fafbfc', position: 'relative' }}>
+    <div style={{ width: '100%', height: '100%', display: 'flex', backgroundColor: '#fafbfc', position: 'relative' }}>
       {/* Left Browser Panel */}
       <BrowserPanel />
 
