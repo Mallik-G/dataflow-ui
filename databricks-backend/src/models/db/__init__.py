@@ -18,6 +18,7 @@ from . import (
     pipelines,  # noqa: F401
     usage_tracking,  # noqa: F401
     usage_star_schema,  # noqa: F401
+    user_sessions,  # noqa: F401
 )
 
 # Import specific models to be exposed at the package level for convenience.
@@ -71,6 +72,11 @@ from .usage_star_schema import (
     DimCluster,
     DimEndpoint,
     UsageFact,
+)
+from .user_sessions import (
+    UserSession,
+    EphemeralEnvironment,
+    FileConflict,
 )
 
 __all__ = [
@@ -130,4 +136,8 @@ __all__ = [
     "DimCluster",
     "DimEndpoint",
     "UsageFact",
+    # Exported from user_sessions
+    "UserSession",
+    "EphemeralEnvironment",
+    "FileConflict",
 ]
