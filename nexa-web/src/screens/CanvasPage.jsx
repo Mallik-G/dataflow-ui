@@ -13,6 +13,9 @@ import ReactFlow, {
 } from "react-flow-renderer";
 import { Button } from "react-bootstrap";
 import { BiPlus, BiCategory, BiBarChartAlt2 } from "react-icons/bi";
+import PresenceIndicator from "../components/PresenceIndicator";
+import CollaborationBanner from "../components/CollaborationBanner";
+import { usePresence } from "../hooks/usePresence";
 
 // Custom node for editable entity
 function EntityNode({ id, data, selected, isConnectable }) {
@@ -1649,6 +1652,16 @@ function CanvasPage() {
   const [viewMode, setViewMode] = useState("canvas");
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+
+  // Get flow ID from URL or generate one
+  const flowId = useMemo(() => {
+    const params = new URLSearchParams(location.search);
+    return params.get('flowId') || params.get('id') || 'bronze-canvas';
+  }, [location.search]);
+
+  // Presence tracking for collaborative editing
+  const { activeUsers, updateStatus } = usePresence('dataflow', flowId);
+  const currentUserId = 'current-user-id'; // TODO: Get from auth context
 
   // File integration state
   const [uploadedFiles, setUploadedFiles] = useState([]);
@@ -3407,6 +3420,14 @@ function CanvasPage() {
         <h1 className="h3 fw-medium mb-0">DR.ai Canvas</h1>
 
         <div className="d-flex gap-2 align-items-center">
+          {/* Collaborative Presence Indicator */}
+          <PresenceIndicator
+            activeUsers={activeUsers}
+            currentUserId={currentUserId}
+            maxVisible={5}
+            showCount={true}
+          />
+
           <Button
             variant="outline-secondary btn-icon"
             title="New Entity"
@@ -3434,6 +3455,13 @@ function CanvasPage() {
           </div>
         </div>
       </header>
+
+      {/* Collaboration Warning Banner */}
+      <CollaborationBanner
+        activeUsers={activeUsers}
+        currentUserId={currentUserId}
+        onRefresh={() => window.location.reload()}
+      />
       <div style={{ height: 700 }}>
         <div
           style={{

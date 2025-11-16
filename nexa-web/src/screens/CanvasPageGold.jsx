@@ -11,6 +11,10 @@ import ReactFlow, {
   Position,
 } from "react-flow-renderer";
 
+import PresenceIndicator from "../components/PresenceIndicator";
+import CollaborationBanner from "../components/CollaborationBanner";
+import { usePresence } from "../hooks/usePresence";
+
 // Add CSS for spinner animation
 const spinnerStyles = `
   @keyframes spin {
@@ -2389,6 +2393,15 @@ function CanvasPageGold({
   const [isLoadingFiles, setIsLoadingFiles] = useState(false);
   const [fileProcessingStatus, setFileProcessingStatus] = useState("");
 
+  // Collaborative presence tracking
+  const flowId = useMemo(() => {
+    const params = new URLSearchParams(location.search);
+    return params.get('flowId') || params.get('id') || 'gold-canvas';
+  }, [location.search]);
+
+  const { activeUsers, updateStatus } = usePresence('dataflow', flowId);
+  const currentUserId = 'current-user-id'; // TODO: Get from auth context
+
   // State for hierarchical view
   const [expandedConsumptionEntities, setExpandedConsumptionEntities] =
     useState(new Set());
@@ -4169,8 +4182,17 @@ function CanvasPageGold({
           top: "10px",
           right: "10px",
           zIndex: 1001,
+          display: "flex",
+          gap: "12px",
+          alignItems: "center",
         }}
       >
+      <PresenceIndicator
+        activeUsers={activeUsers}
+        currentUserId={currentUserId}
+        maxVisible={5}
+        showCount={true}
+      />
       <RelationshipControls
         onClearAll={deleteAllRelationships}
         onCleanDuplicates={cleanupDuplicateEdges}
@@ -4182,7 +4204,26 @@ function CanvasPageGold({
         showNewEntity={false}
       />
       </div>
-      
+
+      {/* Collaborative editing banner */}
+      <div
+        style={{
+          position: "absolute",
+          top: "80px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          zIndex: 1001,
+          width: "calc(100% - 40px)",
+          maxWidth: "1200px",
+        }}
+      >
+        <CollaborationBanner
+          activeUsers={activeUsers}
+          currentUserId={currentUserId}
+          onRefresh={() => window.location.reload()}
+        />
+      </div>
+
       {/* Loading indicator for file processing */}
       {isLoadingFiles && (
         <div

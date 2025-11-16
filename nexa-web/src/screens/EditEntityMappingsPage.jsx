@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import curatedAi from "../assets/curatedAi-icon.svg";
 import curatedFile from "../assets/curatedFile-icon.svg";
@@ -25,6 +25,9 @@ import {
   Image,
 } from "react-bootstrap";
 import LoadingOverlay from "../components/LoadingOverlay";
+import PresenceIndicator from "../components/PresenceIndicator";
+import CollaborationBanner from "../components/CollaborationBanner";
+import { usePresence } from "../hooks/usePresence";
 
 function EditEntityMappingsPage({
   entityName: propEntityName,
@@ -84,6 +87,14 @@ function EditEntityMappingsPage({
     new Set()
   );
   const [savedNewColumns, setSavedNewColumns] = useState(new Set());
+
+  // Collaborative presence tracking
+  const flowId = useMemo(() => {
+    return `entity-mapping-${entityName || 'unknown'}`;
+  }, [entityName]);
+
+  const { activeUsers, updateStatus } = usePresence('entity-mapping', flowId);
+  const currentUserId = 'current-user-id'; // TODO: Get from auth context
 
   // Fetch schema from database
   useEffect(() => {
@@ -682,6 +693,23 @@ function EditEntityMappingsPage({
 
   return (
     <>
+      {/* Collaborative editing presence */}
+      <div style={{ marginBottom: '16px', display: 'flex', gap: '12px', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ flex: 1 }}>
+          <CollaborationBanner
+            activeUsers={activeUsers}
+            currentUserId={currentUserId}
+            onRefresh={() => window.location.reload()}
+          />
+        </div>
+        <PresenceIndicator
+          activeUsers={activeUsers}
+          currentUserId={currentUserId}
+          maxVisible={5}
+          showCount={true}
+        />
+      </div>
+
       {/* Mappings Table */}
       <div className="bg-light rounded p-3">
         {mappings.map((row, idx) => (

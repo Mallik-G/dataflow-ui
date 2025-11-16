@@ -1,7 +1,10 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import ColumnETLModal from "../components/ColumnETLModal";
+import PresenceIndicator from "../components/PresenceIndicator";
+import CollaborationBanner from "../components/CollaborationBanner";
+import { usePresence } from "../hooks/usePresence";
 import curatedAi from "../assets/curatedAi-icon.svg";
 import curatedFile from "../assets/curatedFile-icon.svg";
 import aiIcon from "../assets/ai-icon.svg";
@@ -80,6 +83,14 @@ function EditConsumptionEntityMappingsPage({
   // State for schema data types and descriptions
   const [schemaDataTypes, setSchemaDataTypes] = useState({});
   const [schemaDescriptions, setSchemaDescriptions] = useState({});
+
+  // Collaborative presence tracking
+  const flowId = useMemo(() => {
+    return `gold-entity-mapping-${entityName || 'unknown'}`;
+  }, [entityName]);
+
+  const { activeUsers, updateStatus } = usePresence('entity-mapping', flowId);
+  const currentUserId = 'current-user-id'; // TODO: Get from auth context
 
   // LLM-like data type generation function (simulates LLM service)
   const generateLLMDataType = (columnName, sampleData) => {
@@ -1569,6 +1580,23 @@ function EditConsumptionEntityMappingsPage({
 
   return (
     <>
+      {/* Collaborative editing presence */}
+      <div style={{ marginBottom: '16px', display: 'flex', gap: '12px', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ flex: 1 }}>
+          <CollaborationBanner
+            activeUsers={activeUsers}
+            currentUserId={currentUserId}
+            onRefresh={() => window.location.reload()}
+          />
+        </div>
+        <PresenceIndicator
+          activeUsers={activeUsers}
+          currentUserId={currentUserId}
+          maxVisible={5}
+          showCount={true}
+        />
+      </div>
+
       <div className="bg-light rounded p-3">
         <ColumnETLModal
           open={etlModal.open}
