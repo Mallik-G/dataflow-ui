@@ -15,6 +15,7 @@ from .artifacts import router as artifacts_router
 from .lineage import router as lineage_router
 from .connectors import router as connectors_router
 from .sessions import router as sessions_router
+from .promotions import router as promotions_router
 from .tags import router as tags_router
 from .iam import router as iam_router
 
@@ -43,6 +44,7 @@ api_v1_router.include_router(pipelines_router)
 api_v1_router.include_router(lineage_router)
 api_v1_router.include_router(connectors_router)
 api_v1_router.include_router(sessions_router)
+api_v1_router.include_router(promotions_router)
 # api_v1_router.include_router(observability_router)
 api_v1_router.include_router(dbu_usage_router)
 api_v1_router.include_router(warehouses_router)
@@ -67,6 +69,7 @@ __all__ = [
     # "observability_router",
     # "permissions_router",
     "pipelines_router",
+    "promotions_router",
     "repos_router",
     "statements_router",
     "warehouses_router",
