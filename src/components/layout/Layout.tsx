@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { colors, borderRadius } from '../../theme/colors';
 
@@ -8,12 +8,14 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   const location = useLocation();
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   const menuItems = [
     { path: '/', icon: '🏠', label: 'Dashboard' },
     { path: '/canvas', icon: '🎨', label: 'Canvas' },
     { path: '/observe', icon: '👁️', label: 'Observe' },
     { path: '/deploy', icon: '🚀', label: 'Deploy' },
+    { path: '/connections', icon: '🔌', label: 'Connections' },
     { path: '/glossary', icon: '📚', label: 'Glossary' },
     { path: '/settings', icon: '⚙️', label: 'Settings' },
   ];
@@ -30,43 +32,61 @@ const Layout = ({ children }: LayoutProps) => {
       {/* Sidebar */}
       <div
         style={{
-          width: '240px',
+          width: isCollapsed ? '72px' : '240px',
           backgroundColor: colors.background.secondary,
           borderRight: `1px solid ${colors.border.main}`,
           display: 'flex',
           flexDirection: 'column',
+          transition: 'width 0.3s ease',
+          flexShrink: 0,
         }}
       >
         {/* Logo */}
         <div
           style={{
-            padding: '24px 20px',
+            padding: isCollapsed ? '24px 12px' : '24px 20px',
             borderBottom: `1px solid ${colors.border.main}`,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            minHeight: '88px',
           }}
         >
-          <div
-            style={{
-              fontSize: '20px',
-              fontWeight: '700',
-              color: colors.primary.main,
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-            }}
-          >
-            <span style={{ fontSize: '24px' }}>⚡</span>
-            <span>DataFlow UI</span>
-          </div>
-          <div
-            style={{
-              fontSize: '11px',
-              color: colors.text.muted,
-              marginTop: '4px',
-              marginLeft: '34px',
-            }}
-          >
-            Zero-Touch Data Engineering
-          </div>
+          {isCollapsed ? (
+            <div
+              style={{
+                fontSize: '24px',
+              }}
+            >
+              ⚡
+            </div>
+          ) : (
+            <div>
+              <div
+                style={{
+                  fontSize: '20px',
+                  fontWeight: '700',
+                  color: colors.primary.main,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                }}
+              >
+                <span style={{ fontSize: '24px' }}>⚡</span>
+                <span>DataFlow UI</span>
+              </div>
+              <div
+                style={{
+                  fontSize: '11px',
+                  color: colors.text.muted,
+                  marginTop: '4px',
+                  marginLeft: '34px',
+                }}
+              >
+                Zero-Touch Data Engineering
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Navigation */}
@@ -75,11 +95,13 @@ const Layout = ({ children }: LayoutProps) => {
             <Link
               key={item.path}
               to={item.path}
+              title={isCollapsed ? item.label : undefined}
               style={{
                 display: 'flex',
                 alignItems: 'center',
+                justifyContent: isCollapsed ? 'center' : 'flex-start',
                 gap: '12px',
-                padding: '12px 16px',
+                padding: isCollapsed ? '12px 0' : '12px 16px',
                 marginBottom: '4px',
                 borderRadius: borderRadius.md,
                 textDecoration: 'none',
@@ -95,6 +117,7 @@ const Layout = ({ children }: LayoutProps) => {
                 border: isActive(item.path)
                   ? `1px solid ${colors.primary.main}`
                   : '1px solid transparent',
+                position: 'relative',
               }}
               onMouseEnter={(e) => {
                 if (!isActive(item.path)) {
@@ -108,23 +131,64 @@ const Layout = ({ children }: LayoutProps) => {
               }}
             >
               <span style={{ fontSize: '18px' }}>{item.icon}</span>
-              <span>{item.label}</span>
+              {!isCollapsed && <span>{item.label}</span>}
             </Link>
           ))}
         </nav>
 
-        {/* Footer */}
+        {/* Toggle Button */}
         <div
           style={{
-            padding: '16px',
+            padding: '12px',
             borderTop: `1px solid ${colors.border.main}`,
-            fontSize: '11px',
-            color: colors.text.muted,
+            display: 'flex',
+            justifyContent: 'center',
           }}
         >
-          <div>v1.0.0</div>
-          <div style={{ marginTop: '4px' }}>© 2024 DataFlow UI</div>
+          <button
+            onClick={() => setIsCollapsed(!isCollapsed)}
+            title={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            style={{
+              width: isCollapsed ? '40px' : '100%',
+              padding: '8px',
+              border: `1px solid ${colors.border.main}`,
+              borderRadius: borderRadius.md,
+              backgroundColor: colors.background.tertiary,
+              color: colors.text.secondary,
+              cursor: 'pointer',
+              fontSize: '14px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              transition: 'all 0.2s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = colors.background.hover;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = colors.background.tertiary;
+            }}
+          >
+            <span style={{ fontSize: '16px' }}>{isCollapsed ? '→' : '←'}</span>
+            {!isCollapsed && <span style={{ fontSize: '12px', fontWeight: '600' }}>Collapse</span>}
+          </button>
         </div>
+
+        {/* Footer */}
+        {!isCollapsed && (
+          <div
+            style={{
+              padding: '16px',
+              borderTop: `1px solid ${colors.border.main}`,
+              fontSize: '11px',
+              color: colors.text.muted,
+            }}
+          >
+            <div>v1.0.0</div>
+            <div style={{ marginTop: '4px' }}>© 2024 DataFlow UI</div>
+          </div>
+        )}
       </div>
 
       {/* Main Content */}
