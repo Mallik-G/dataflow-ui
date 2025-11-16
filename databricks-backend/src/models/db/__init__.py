@@ -10,6 +10,7 @@ from . import (
     compute_tracking,  # noqa: F401
     connectors,  # noqa: F401
     deployment_details,  # noqa: F401
+    deployment_promotions,  # noqa: F401
     deployment_queue,  # noqa: F401
     deployments,  # noqa: F401
     jobs,  # noqa: F401
@@ -34,6 +35,11 @@ from .compute_tracking import (
 )
 from .connectors import Connector, ConnectorDataset, ConnectorRun
 from .deployment_details import DeploymentDetail
+from .deployment_promotions import (
+    DeploymentPromotion,
+    PromotionApproval,
+    EnvironmentPromotionRule,
+)
 from .deployment_queue import DeploymentQueue
 from .deployments import (
     Deployment,
@@ -100,6 +106,9 @@ __all__ = [
     # Exported from deployments
     "Deployment",
     "DeploymentDetail",
+    "DeploymentPromotion",
+    "PromotionApproval",
+    "EnvironmentPromotionRule",
     "DeploymentQueue",
     "Environment",
     "EnvironmentDeploymentState",
