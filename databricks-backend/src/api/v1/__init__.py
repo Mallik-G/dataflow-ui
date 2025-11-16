@@ -5,6 +5,7 @@ from fastapi import APIRouter
 from .apps import router as apps_router
 from .auth import router as auth_router
 from .catalog import router as catalog_router
+from .codegen import router as codegen_router
 from .usage import router as dbu_usage_router
 from .deployments import router as deployments_router
 from .environments import router as environments_router
@@ -30,6 +31,7 @@ api_v1_router = APIRouter(prefix="/api/v1")
 # Include all v1 routers
 api_v1_router.include_router(auth_router)
 api_v1_router.include_router(apps_router)
+api_v1_router.include_router(codegen_router)
 api_v1_router.include_router(deployments_router)
 api_v1_router.include_router(git_router)
 api_v1_router.include_router(catalog_router)
