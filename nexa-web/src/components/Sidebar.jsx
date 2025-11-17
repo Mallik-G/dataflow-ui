@@ -23,6 +23,8 @@ import {
   BiTransfer,
   BiShow,
   BiGitMerge,
+  BiCog,
+  BiLink,
 } from "react-icons/bi";
 
 const Sidebar = () => {
@@ -118,6 +120,15 @@ const Sidebar = () => {
               <span className="nav-link-text">Canvas</span>
             </Link>
             <Link
+              to="/pipelines"
+              className={`nav-link ${isActive("/pipelines") ? "active" : ""}`}
+            >
+              <span className="nav-link-icon">
+                <BiGitMerge />
+              </span>
+              <span className="nav-link-text">Pipelines</span>
+            </Link>
+            <Link
               to="/jobs"
               className={`nav-link ${isActive("/jobs") ? "active" : ""}`}
             >
@@ -127,22 +138,13 @@ const Sidebar = () => {
               <span className="nav-link-text">Jobs</span>
             </Link>
             <Link
-              to="/connectors"
-              className={`nav-link ${isActive("/connectors") ? "active" : ""}`}
+              to="/observe"
+              className={`nav-link ${isActive("/observe") ? "active" : ""}`}
             >
               <span className="nav-link-icon">
-                <BiData />
+                <BiShow />
               </span>
-              <span className="nav-link-text">Connectors</span>
-            </Link>
-            <Link
-              to="/projections"
-              className={`nav-link ${isActive("/projections") ? "active" : ""}`}
-            >
-              <span className="nav-link-icon">
-                <BiBarChartSquare />
-              </span>
-              <span className="nav-link-text">Projections</span>
+              <span className="nav-link-text">Observe</span>
             </Link>
             <Link
               to="/deploy"
@@ -163,24 +165,32 @@ const Sidebar = () => {
               <span className="nav-link-text">Promotions</span>
             </Link>
             <Link
-              to="/observe"
-              className={`nav-link ${isActive("/observe") ? "active" : ""}`}
+              to="/connections"
+              className={`nav-link ${isActive("/connections") ? "active" : ""}`}
             >
               <span className="nav-link-icon">
-                <BiShow />
+                <BiLink />
               </span>
-              <span className="nav-link-text">Observe</span>
+              <span className="nav-link-text">Connections</span>
             </Link>
             <Link
-              to="/pipelines"
-              className={`nav-link ${isActive("/pipelines") ? "active" : ""}`}
+              to="/connectors"
+              className={`nav-link ${isActive("/connectors") ? "active" : ""}`}
             >
               <span className="nav-link-icon">
-                <BiGitMerge />
+                <BiData />
               </span>
-              <span className="nav-link-text">Pipelines</span>
+              <span className="nav-link-text">Connectors</span>
             </Link>
-
+            <Link
+              to="/projections"
+              className={`nav-link ${isActive("/projections") ? "active" : ""}`}
+            >
+              <span className="nav-link-icon">
+                <BiBarChartSquare />
+              </span>
+              <span className="nav-link-text">Projections</span>
+            </Link>
             <Link
               to="/business-glossary"
               className={`nav-link ${
@@ -201,7 +211,6 @@ const Sidebar = () => {
               </span>
               <span className="nav-link-text">Agents</span>
             </Link>
-
             <Link
               to="/apps"
               className={`nav-link ${isActive("/apps") ? "active" : ""}`}
@@ -219,6 +228,15 @@ const Sidebar = () => {
                 <BiBarChart />
               </span>
               <span className="nav-link-text">Usage &amp; Costs</span>
+            </Link>
+            <Link
+              to="/settings"
+              className={`nav-link ${isActive("/settings") ? "active" : ""}`}
+            >
+              <span className="nav-link-icon">
+                <BiCog />
+              </span>
+              <span className="nav-link-text">Settings</span>
             </Link>
             {/* <Link
               to="/alerts"

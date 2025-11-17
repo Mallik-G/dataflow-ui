@@ -1,18 +1,18 @@
-// Atlan-inspired color palette
+// Nexa-web unified color palette
 export const colors = {
-  // Primary colors
+  // Primary colors (matching nexa-web SCSS variables)
   primary: {
-    main: '#5B4AE1',
-    light: '#7C66EA',
-    lighter: '#E5E1FC',
-    dark: '#4A3BC7',
+    main: '#2563eb',      // matches $primary in _variables.scss
+    light: '#60a5fa',     // lighter blue
+    lighter: '#dbeafe',   // very light blue
+    dark: '#1e40af',      // darker blue
   },
 
   // Backgrounds
   background: {
     primary: '#FAFBFC',
-    secondary: '#F7F8FA',
-    tertiary: '#FFFFFF',
+    secondary: '#f3f4f6',  // matches $light-gray
+    tertiary: '#FFFFFF',   // matches $white
     hover: '#F3F4F6',
   },
 
@@ -25,8 +25,8 @@ export const colors = {
 
   // Text
   text: {
-    primary: '#1F2937',
-    secondary: '#6B7280',
+    primary: '#111827',    // matches $black
+    secondary: '#6B7280',  // matches $primary-light
     muted: '#9CA3AF',
     disabled: '#D1D5DB',
   },
@@ -43,27 +43,27 @@ export const colors = {
     infoLight: '#DBEAFE',
   },
 
-  // Node type colors (soft palette)
+  // Node type colors (soft palette - aligned with nexa-web)
   node: {
     source: {
-      main: '#06B6D4',
+      main: '#06B6D4',      // cyan for source
       light: '#E0F2FE',
       border: '#67E8F9',
     },
     silver: {
-      main: '#8B5CF6',
+      main: '#8B5CF6',      // purple for silver/curated
       light: '#F5F3FF',
       border: '#C4B5FD',
     },
     gold: {
-      main: '#F59E0B',
+      main: '#F59E0B',      // amber for gold/consumption
       light: '#FEF3C7',
       border: '#FCD34D',
     },
     transform: {
-      main: '#5B4AE1',
-      light: '#E5E1FC',
-      border: '#A78BFA',
+      main: '#2563eb',      // nexa-web blue for transformations
+      light: '#dbeafe',
+      border: '#93c5fd',
     },
   },
 
